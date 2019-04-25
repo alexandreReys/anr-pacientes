@@ -1,0 +1,218 @@
+<section>
+    <h1><i class="fa fa-laptop-medical text-danger my-3" aria-hidden="true"></i> Pacientes</h1>
+
+    <form [formGroup]="orderForm" autocomplete="off">
+      <input class="form-control" type="hidden" formControlName="codigo" [(ngModel)]="contato.codigo">
+
+      <div class="row">
+        <div class="col-sm-8 col-xl-9">
+          <app-input-container errorMessage="Campo Obrigatório" label="Nome">
+            <label for="nome">Nome</label>
+            <input class="form-control small" formControlName="nome" [(ngModel)]="contato.nome" autocomplete="off">
+          </app-input-container>
+        </div>
+        <div class="col-sm-4 col-xl-3">      
+          <app-input-container errorMessage="Campo Obrigatório" label="Telefone">
+            <label for="telefone">Telefone</label>
+            <input class="form-control small" formControlName="telefone" [(ngModel)]="contato.telefone" autocomplete="off">
+          </app-input-container>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-8 col-xl-9">
+          <app-input-container errorMessage="Campo Obrigatório" label="Endereço">
+            <label for="endereco">Endereço</label>
+            <input class="form-control small" formControlName="endereco" [(ngModel)]="contato.endereco" autocomplete="off">
+          </app-input-container>
+        </div>
+        <div class="col-sm-4 col-xl-3">      
+          <app-input-container errorMessage="Campo Obrigatório" label="Numero">
+            <label for="numero">Numero</label>
+            <input class="form-control small" formControlName="numero" [(ngModel)]="contato.numero" autocomplete="off">
+          </app-input-container>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-8 col-xl-9">
+          <app-input-container errorMessage="Campo Obrigatório" label="Complemento">
+            <label for="complemento">Complemento</label>
+            <input class="form-control small" formControlName="complemento" [(ngModel)]="contato.complemento" autocomplete="off">
+          </app-input-container>
+        </div>
+        <div class="col-sm-4 col-xl-3">      
+          <app-input-container errorMessage="Campo Obrigatório" label="Bairro">
+            <label for="bairro">Bairro</label>
+            <input class="form-control small" formControlName="bairro" [(ngModel)]="contato.bairro" autocomplete="off">
+          </app-input-container>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-7 col-md-7 col-lg-7 col-xl-8">
+          <app-input-container errorMessage="Campo Obrigatório" label="Cidade">
+            <label for="cidade">Cidade</label>
+            <input class="form-control small" formControlName="cidade" [(ngModel)]="contato.cidade" autocomplete="off">
+          </app-input-container>
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2"> 
+          <app-input-container errorMessage="Campo Obrigatório" label="Estado">
+            <label for="estado">Estado</label>
+            <input class="form-control small" formControlName="estado" [(ngModel)]="contato.estado" autocomplete="off">
+          </app-input-container>
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3 col-xl-2">
+            <app-input-container errorMessage="Campo Obrigatório" label="CEP">
+              <label for="cep">CEP</label>
+              <input class="form-control small" formControlName="cep" [(ngModel)]="contato.cep" autocomplete="off">
+            </app-input-container>
+          </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-5">
+          <app-input-container errorMessage="Campo Obrigatório" label="Nome do Pai">
+            <label for="paiNome">Pai - Nome</label>
+            <input class="form-control small" formControlName="paiNome" [(ngModel)]="contato.paiNome" autocomplete="off">
+          </app-input-container>
+        </div>
+        <div class="col-sm-4"> 
+          <app-input-container errorMessage="Campo Obrigatório" label="Telefone do Pai">
+            <label for="paiTelefone">Telefone</label>
+            <input class="form-control small" formControlName="paiTelefone" [(ngModel)]="contato.paiTelefone" autocomplete="off">
+          </app-input-container>
+        </div>
+        <div class="col-sm-3">
+            <app-input-container errorMessage="Campo Obrigatório" label="Profissão do Pai">
+              <label for="paiProfissao">Profissão</label>
+              <input class="form-control small" formControlName="paiProfissao" [(ngModel)]="contato.paiProfissao" autocomplete="off">
+            </app-input-container>
+          </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-sm-5">
+          <app-input-container errorMessage="Campo Obrigatório" label="Nome da Mãe">
+            <label for="maeNome">Mãe - Nome</label>
+            <input class="form-control small" formControlName="maeNome" [(ngModel)]="contato.maeNome" autocomplete="off">
+          </app-input-container>
+        </div>
+        <div class="col-sm-4"> 
+          <app-input-container errorMessage="Campo Obrigatório" label="Telefone Mãe">
+            <label for="maeTelefone">Telefone</label>
+            <input class="form-control small" formControlName="maeTelefone" [(ngModel)]="contato.maeTelefone" autocomplete="off">
+          </app-input-container>
+        </div>
+        <div class="col-sm-3">
+          <app-input-container errorMessage="Campo Obrigatório" label="Profissão Mãe">
+            <label for="maeProfissao">Profissão</label>
+            <input class="form-control small" formControlName="maeProfissao" [(ngModel)]="contato.maeProfissao" autocomplete="off">
+          </app-input-container>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-sm-6">
+          <button class="btn btn-primary btn-block" (click)="save()"
+          [disabled]="!orderForm.valid">
+              <i class="fa fa-save"></i> Salvar
+          </button>
+        </div>
+
+        <div class="col-sm-6">
+          <button class="btn btn-danger btn-block" (click)="cancel()">
+              <i class="fa fa-cancel"></i> Cancelar
+          </button>
+        </div>
+      </div>
+
+    </form>
+</section>
+
+
+<!-- <div class="col-md-8 order-md-1">
+  <h4 class="mb-3">Endereço de cobrança</h4>
+  <form class="needs-validation" novalidate>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="primeiroendereco">Nome</label>
+        <input type="text" class="form-control" id="primeiroNome" placeholder="" value="" required>
+        <div class="invalid-feedback">
+          É obrigatório inserir um nome válido.
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="sobrenome">Sobrenome</label>
+        <input type="text" class="form-control" id="sobrenome" placeholder="" value="" required>
+        <div class="invalid-feedback">
+          É obrigatório inserir um sobre nome válido.
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="nickname">Nickname</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">@</span>
+        </div>
+        <input type="text" class="form-control" id="nickname" placeholder="Nickname" required>
+        <div class="invalid-feedback" style="width: 100%;">
+          Seu nickname é obrigatório.
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="email">Email <span class="text-muted">(Opcional)</span></label>
+      <input type="email" class="form-control" id="email" placeholder="fulano@exemplo.com">
+      <div class="invalid-feedback">
+        Por favor, insira um endereço de e-mail válido, para atualizações de entrega.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="endereco">Endereço</label>
+      <input type="text" class="form-control" id="endereco" placeholder="Rua dos bobos, nº 0" required>
+      <div class="invalid-feedback">
+        Por favor, insira seu endereço de entrega.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="endereco2">Endereço 2 <span class="text-muted">(Opcional)</span></label>
+      <input type="text" class="form-control" id="endereco2" placeholder="Apartamento ou casa">
+    </div>
+
+    <div class="row">
+      <div class="col-md-5 mb-3">
+        <label for="pais">País</label>
+        <select class="custom-select d-block w-100" id="pais" required>
+          <option value="">Escolha...</option>
+          <option>Brasil</option>
+        </select>
+        <div class="invalid-feedback">
+          Por favor, escolha um país válido.
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="estado">Estado</label>
+        <select class="custom-select d-block w-100" id="estado" required>
+          <option value="">Escolha...</option>
+          <option>Acre</option>
+        </select>
+        <div class="invalid-feedback">
+          Por favor, insira um estado válido.
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="cep">CEP</label>
+        <input type="text" class="form-control" id="cep" placeholder="" required>
+        <div class="invalid-feedback">
+          É obrigatório inserir um CEP.
+        </div>
+      </div>
+    </div>    
+  </form>
+</div> -->

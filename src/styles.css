@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body {
+     height: 100%; 
+    }
+
+body { 
+    margin: 0; font-family: 'Roboto', sans-serif;
+}
+
+.search-link {
+    cursor: pointer;
+    color: #555;
+}
+
+.search-link:hover {
+    color: #dd4b39;
+}
+
+.search-bar {
+    opacity: 0;
+    max-height: 0px;
+}
+
+/* .bg-hospital {
+    background: url(./images/bg-hospital.jpg);
+    background-size: cover;
+    background-repeat: no-repeat; 
+} */

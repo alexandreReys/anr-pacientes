@@ -1,0 +1,10 @@
+<ul class="navbar-nav mr-1">
+    <li class="nav-item">
+        <span *ngIf="isLoggedIn(); else notLoggedIn">
+            <a class="nav-link" (click)="logout()">Olá, {{user().name}}  |   Sair</a> 
+        </span>
+        <ng-template #notLoggedIn>
+            <a class="nav-link" (click)="login()">Entrar</a>
+        </ng-template>
+    </li>
+</ul>

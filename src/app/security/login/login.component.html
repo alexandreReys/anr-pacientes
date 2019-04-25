@@ -1,0 +1,38 @@
+<div id="login">
+    <div class="container">
+        <div id="login-row" class="row justify-content-center align-items-center">
+            <div id="login-column" class="col-md-6 col-lg-4">
+                <div id="login-box" class="col">
+                    
+                    <form [formGroup]="loginForm" novalidate>
+                        
+                        <!-- Valid: {{loginForm.valid}}
+                        <br>
+                        Valores: {{loginForm.value | json}} -->
+
+                        <h4 class="text-center text-dark my-3">Efetue o Login para continuar</h4>
+
+                        <app-input-container errorMessage="Digite um E-mail válido ..." label="Email">
+                            <input type="text" class="form-control" formControlName="email" placeholder="Email" autocomplete="off" style="font-size:12px;">
+                            <span class="form-control-feedback"></span>
+                        </app-input-container>
+                    
+                        <app-input-container errorMessage="O Password deve ter no minimo 5 posições" label="Password">
+                            <input type="password" class="form-control" formControlName="password" placeholder="Password" autocomplete="off" style="font-size:12px;">
+                            <span class="form-control-feedback"></span>
+                        </app-input-container>
+                
+                        <button class="btn btn-primary mt-3"
+                            (click)="login()" 
+                            [disabled]="!loginForm.valid">
+                            <i class="fa fa-credit-card"></i>
+                            Confirma
+                        </button>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

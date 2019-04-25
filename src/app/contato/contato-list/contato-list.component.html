@@ -1,0 +1,39 @@
+<section class="content-header">
+    <h5 class="my-2">
+        Lista de Pacientes 
+        <a (click)="toggleSearch()" class="search-link" style="float:right;"><i class="fa fa-search"></i></a>
+    </h5>
+
+    <!-- barra de busca -->
+    <div class="search-bar" [@toggleSearch]="searchBarState">
+        <form [formGroup]="searchForm">
+            <div class="form-group">
+                <input type="text" formControlName="searchControl" class="form-control" 
+                       placeholder="O que voce esta procurando ?" style="font-size: 12px;">
+            </div>
+        </form>
+    </div>
+
+</section>
+
+
+<table class="table table-striped fs-table">
+
+    <tr class="table-primary">
+        <th class="h-tr-td">Nome</th>
+        <th class="h-tr-td w120">Telefone</th>
+        <th class="h-tr-td w90">Ações</th>
+    </tr>
+  
+    <tr *ngFor="let contato of contatos">
+        <td class="h-tr-td">{{contato.nome}}</td>
+        <td class="h-tr-td w120">{{contato.telefone}}</td>
+        <td class="h-tr-td w90">
+            <a (click)="edit(contato)" class="text-primary mr-4">
+                <i class="fa fa-edit pointer fs-bt-acoes" data-toggle="tooltip" data-placement="top" title="Editar Contato"></i></a>
+            <a (click)="delete(contato)" class="text-danger">
+                <i class="fa fa-trash-alt pointer fs-bt-acoes" data-toggle="tooltip" data-placement="top" title="Excluir Contato"></i></a>
+        </td>
+    </tr>
+
+  </table>

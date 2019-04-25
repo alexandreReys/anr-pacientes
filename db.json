@@ -1,0 +1,103 @@
+{
+  "contatos": [
+    {
+      "id": "1",
+      "nome": "alexandre nunes reys",
+      "telefone": "11-9933-3444",
+      "endereco": "Rua dos Bobocas",
+      "numero": "163",
+      "complemento": "Fundos",
+      "bairro": "Olimpico",
+      "cidade": "São Caetano do Sul",
+      "estado": "SP",
+      "cep": "09570-080",
+      "paiNome": "Manoel Reys",
+      "paiTelefone": "11 98757-3102",
+      "paiProfissao": "Motorista",
+      "maeNome": "Maria Josefa Nunes Reys",
+      "maeTelefone": "11 98866-4433",
+      "maeProfissao": "Enfermeira"
+    },
+    {
+      "id": "2",
+      "nome": "alberto nunes reys",
+      "telefone": "11-9933-3423",
+      "endereco": "Rua dos Bobocas",
+      "numero": "365",
+      "complemento": "apartamento 33",
+      "bairro": "Rudge Ramos",
+      "cidade": "São Bernardo do Campo",
+      "estado": "MG",
+      "cep": "09675-321"
+    },
+    {
+      "id": "1554653279560",
+      "nome": "vinicinhus reys",
+      "telefone": "11 99883-3322",
+      "endereco": "Avenida dos Vinis",
+      "numero": "232",
+      "complemento": "Frente",
+      "bairro": "Santa Paula",
+      "cidade": "Alphaville",
+      "estado": "RS",
+      "cep": "09999-765"
+    },
+    {
+      "id": "1554655414955",
+      "nome": "dieguito reys",
+      "telefone": "(11) 9-8876-4432",
+      "endereco": "Rua dos Dieguitos Patetas",
+      "numero": "216",
+      "complemento": "",
+      "bairro": "Aclimação",
+      "cidade": "São Paulo",
+      "estado": "SP",
+      "cep": "09765-456"
+    },
+    {
+      "id": "1554655948958",
+      "nome": "lukinhas reys",
+      "telefone": "11 98765-2316",
+      "endereco": "Rua Amador Bueno da Veiga",
+      "numero": "501",
+      "complemento": null,
+      "bairro": "Vila Matilde",
+      "cidade": "São Paulo",
+      "estado": "SP",
+      "cep": "09554-123"
+    },
+    {
+      "id": "1554659423031",
+      "nome": "bruna",
+      "telefone": "11 98765-2254",
+      "endereco": "Rua das Brunas",
+      "numero": "998",
+      "complemento": "sem compl",
+      "bairro": "Barcelona",
+      "cidade": "SCSul",
+      "estado": "SP",
+      "cep": "09999-888"
+    },
+    {
+      "id": "1554810731668",
+      "nome": "João da Silva Sauro",
+      "telefone": "11 98765-8383",
+      "endereco": "Rua dos Dinssauros ",
+      "numero": "123",
+      "complemento": "",
+      "bairro": "Jurassic Park",
+      "cidade": "São José dos Campos",
+      "estado": "SC",
+      "cep": "09445-333"
+    }
+  ],
+  "products": [
+    {
+      "id": "001",
+      "imagePath": "assets/img/products/001.png",
+      "name": "CASSIO SPORT GS847",
+      "description": "Relogio Casio G-Shock SKY COCKPIT",
+      "price": 860.7
+    }
+  ]
+}
