@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/Forms';
+import { NgForm } from '@angular/forms';
 
 import { Contato } from './../models/contato.model';
 import { ContatoService } from './../services/contato.service';
