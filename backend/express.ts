@@ -8,14 +8,14 @@ import * as normalizePort from 'normalize-port';
 
 import { handleAuthentication } from './auth';
 import { handleAuthorization } from './authz';
-
+const connection = require('./mysql-connection');
 // const routesContatos = require('./routes-contatos');
 
 const server = express();
 server.use(bodyParser.json());
 server.use(cors());
 
-server.get('/contatos', (req, res, next) => {
+server.get('/', (req, res, next) => {
 	try {
 		res.status(200).send({
 			status: "API OK",
@@ -24,6 +24,13 @@ server.get('/contatos', (req, res, next) => {
 	} catch(e) {
 		res.status(400).send(e)
 	};
+});
+
+server.get('/contatos', (req, res, next) => {
+	connection.query('select * from contatos order by nome', function(err, rows, fields) {
+		if (err) throw err;
+		res.json(rows);
+	});
 });
 
 server.post('/login', handleAuthentication);

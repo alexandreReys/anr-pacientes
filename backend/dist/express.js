@@ -7,11 +7,12 @@ var http = require("http");
 //import * as https from 'https';
 var normalizePort = require("normalize-port");
 var auth_1 = require("./auth");
+var connection = require('./mysql-connection');
 // const routesContatos = require('./routes-contatos');
 var server = express();
 server.use(bodyParser.json());
 server.use(cors());
-server.get('/contatos', function (req, res, next) {
+server.get('/', function (req, res, next) {
     try {
         res.status(200).send({
             status: "API OK",
@@ -22,6 +23,13 @@ server.get('/contatos', function (req, res, next) {
         res.status(400).send(e);
     }
     ;
+});
+server.get('/contatos', function (req, res, next) {
+    connection.query('select * from contatos order by nome', function (err, rows, fields) {
+        if (err)
+            throw err;
+        res.json(rows);
+    });
 });
 server.post('/login', auth_1.handleAuthentication);
 // server.use('/contatos', handleAuthorization);
