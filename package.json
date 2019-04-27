@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node backend/dist/express.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -27,6 +27,7 @@
     "angular-2-local-storage": "^3.0.2",
     "core-js": "^2.5.4",
     "mysql": "^2.17.1",
+    "normalize-port": "^1.0.0",
     "rxjs": "~6.2.0",
     "web-animations-js": "^2.3.1",
     "zone.js": "~0.8.26"

@@ -5,6 +5,7 @@ var cors = require("cors");
 var bodyParser = require("body-parser");
 var fs = require("fs");
 var https = require("https");
+var normalizePort = require("normalize-port");
 var auth_1 = require("./auth");
 var authz_1 = require("./authz");
 var routesContatos = require('./routes-contatos');
@@ -18,6 +19,8 @@ var options = {
     cert: fs.readFileSync('./backend/keys/cert.pem'),
     key: fs.readFileSync('./backend/keys/key.pem')
 };
-https.createServer(options, server).listen(3001, function () {
-    console.log('Server is running on https://localhost:3001');
+var port = normalizePort(process.env.server_port || '3000'); // Variavel Ambiental
+server.set('port', port);
+https.createServer(options, server).listen(port, function () {
+    console.log("Server is running on port " + port);
 });

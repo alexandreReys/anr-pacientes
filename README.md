@@ -8,7 +8,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Run backend
 
 npm run-script start2
-nodemon --watch backend backend/dist/server.js
+nodemon --watch backend backend/dist/express.js
 https://localhost:3001
 
 
