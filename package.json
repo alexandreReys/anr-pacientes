@@ -1,6 +1,7 @@
 {
   "name": "anr-pacientes",
   "version": "0.0.0",
+  "main": "backend/dist/express.js",
   "scripts": {
     "ng": "ng",
     "start": "node backend/dist/express.js",

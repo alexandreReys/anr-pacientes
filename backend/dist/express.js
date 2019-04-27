@@ -12,6 +12,18 @@ var routesContatos = require('./routes-contatos');
 var server = express();
 server.use(bodyParser.json());
 server.use(cors());
+server.get('/', function (req, res, next) {
+    try {
+        res.status(200).send({
+            status: "API OK",
+            version: "1.0.1"
+        });
+    }
+    catch (e) {
+        res.status(400).send(e);
+    }
+    ;
+});
 server.post('/login', auth_1.handleAuthentication);
 server.use('/contatos', authz_1.handleAuthorization);
 server.use('/contatos', routesContatos);
@@ -19,7 +31,7 @@ var options = {
     cert: fs.readFileSync('./backend/keys/cert.pem'),
     key: fs.readFileSync('./backend/keys/key.pem')
 };
-var port = normalizePort(process.env.server_port || '3000'); // Variavel Ambiental
+var port = normalizePort(process.env.atendWeb_port || '3000'); // Variavel Ambiental
 server.set('port', port);
 https.createServer(options, server).listen(port, function () {
     console.log("Server is running on port " + port);

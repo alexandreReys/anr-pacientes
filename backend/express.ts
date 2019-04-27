@@ -17,8 +17,8 @@ server.use(cors());
 server.get('/', (req, res, next) => {
 	try {
 		res.status(200).send({
-			title: "API OK",
-			version: "0.0.1"
+			status: "API OK",
+			version: "1.0.1"
 		})
 	} catch(e) {
 		res.status(400).send(e)
@@ -33,7 +33,7 @@ const options = {
   cert: fs.readFileSync('./backend/keys/cert.pem'),
   key: fs.readFileSync('./backend/keys/key.pem')
 };
-const port = normalizePort(process.env.server_port || '3000');  // Variavel Ambiental
+const port = normalizePort(process.env.atendWeb_port || '3000');  // Variavel Ambiental
 server.set('port', port);
 
 https.createServer(options, server).listen(port, () => {
