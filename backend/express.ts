@@ -9,13 +9,13 @@ import * as normalizePort from 'normalize-port';
 import { handleAuthentication } from './auth';
 import { handleAuthorization } from './authz';
 
-const routesContatos = require('./routes-contatos');
+// const routesContatos = require('./routes-contatos');
 
 const server = express();
 server.use(bodyParser.json());
 server.use(cors());
 
-server.get('/', (req, res, next) => {
+server.get('/contatos', (req, res, next) => {
 	try {
 		res.status(200).send({
 			status: "API OK",
@@ -28,7 +28,7 @@ server.get('/', (req, res, next) => {
 
 server.post('/login', handleAuthentication);
 // server.use('/contatos', handleAuthorization);
-server.use('/contatos', routesContatos);
+// server.use('/contatos', routesContatos);
 
 //const options = {
 //   cert: fs.readFileSync('./backend/keys/cert.pem'),

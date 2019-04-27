@@ -7,11 +7,11 @@ var http = require("http");
 //import * as https from 'https';
 var normalizePort = require("normalize-port");
 var auth_1 = require("./auth");
-var routesContatos = require('./routes-contatos');
+// const routesContatos = require('./routes-contatos');
 var server = express();
 server.use(bodyParser.json());
 server.use(cors());
-server.get('/', function (req, res, next) {
+server.get('/contatos', function (req, res, next) {
     try {
         res.status(200).send({
             status: "API OK",
@@ -25,7 +25,7 @@ server.get('/', function (req, res, next) {
 });
 server.post('/login', auth_1.handleAuthentication);
 // server.use('/contatos', handleAuthorization);
-server.use('/contatos', routesContatos);
+// server.use('/contatos', routesContatos);
 //const options = {
 //   cert: fs.readFileSync('./backend/keys/cert.pem'),
 //   key: fs.readFileSync('./backend/keys/key.pem')
