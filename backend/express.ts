@@ -14,6 +14,17 @@ const server = express();
 server.use(bodyParser.json());
 server.use(cors());
 
+server.get('/', (req, res, next) => {
+	try {
+		res.status(200).send({
+			title: "API OK",
+			version: "0.0.1"
+		})
+	} catch(e) {
+		res.status(400).send(e)
+	};
+});
+
 server.post('/login', handleAuthentication);
 server.use('/contatos', handleAuthorization);
 server.use('/contatos', routesContatos);
