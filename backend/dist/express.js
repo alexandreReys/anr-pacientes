@@ -4,11 +4,13 @@ var express = require("express");
 var cors = require("cors");
 var bodyParser = require("body-parser");
 var http = require("http");
-//import * as https from 'https';
 var normalizePort = require("normalize-port");
 var auth_1 = require("./auth");
-var connection = require('./mysql-connection');
-// const routesContatos = require('./routes-contatos');
+// import { handleAuthorization } from './authz';
+// const connection = require('./mysql-connection');
+var routesContatos = require('./routes-contatos');
+//import * as fs from 'fs';
+//import * as https from 'https';
 var server = express();
 server.use(bodyParser.json());
 server.use(cors());
@@ -24,16 +26,10 @@ server.get('/', function (req, res, next) {
     }
     ;
 });
-server.get('/contatos', function (req, res, next) {
-    connection.query('select * from contatos order by nome', function (err, rows, fields) {
-        if (err)
-            throw err;
-        res.json(rows);
-    });
-});
 server.post('/login', auth_1.handleAuthentication);
 // server.use('/contatos', handleAuthorization);
-// server.use('/contatos', routesContatos);
+server.use('/contatos', routesContatos);
+//
 //const options = {
 //   cert: fs.readFileSync('./backend/keys/cert.pem'),
 //   key: fs.readFileSync('./backend/keys/key.pem')
