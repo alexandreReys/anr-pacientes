@@ -15,17 +15,18 @@ export const handleAuthentication = (req: Request, resp: Response)=>{
       console.log(`isValid para ${dbUser.name}`);
       resp.json({name: dbUser.name, email: dbUser.email});
   } else {
+      console.log(`not isValid - message: Dados invalidos !!`);
       resp.status(403).json({message: 'Dados invalidos !!'});
   }
 };
 
 function isValid(user: User): boolean {
   if(!user) {
-    console.log(`return false para ${User.name}`);
+    console.log(`isValid return false para ${User.name}`);
     return false
   }
 
   const dbUser = users[user.email];
-  console.log({name: dbUser.name, email: dbUser.email});
+  console.log(`isValid return true para name: ${dbUser.name} , email: ${dbUser.email}`);
   return dbUser !== undefined && dbUser.matches(user);
 }
