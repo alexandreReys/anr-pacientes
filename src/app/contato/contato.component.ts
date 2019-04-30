@@ -53,8 +53,11 @@ export class ContatoComponent implements OnInit {
     } else {
       this.contatoService.updateContato(this.contato);
     };
-      
+    
     this.contato = new Contato;
     form.reset();
+
+    this.contatoService.getContatos()
+    .subscribe(contatos => this.contatos = contatos);
   };
 }
