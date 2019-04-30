@@ -48,12 +48,11 @@ export class ContatoComponent implements OnInit {
 
     if (inclusao) {
       this.contatoService.addContato(this.contato);
+      this.contatoService.getContatos()
+        .subscribe(contatos => this.contatos = contatos);
     } else {
       this.contatoService.updateContato(this.contato);
     };
-
-    this.contatoService.getContatos()
-      .subscribe(contatos => this.contatos = contatos);
       
     this.contato = new Contato;
     form.reset();
