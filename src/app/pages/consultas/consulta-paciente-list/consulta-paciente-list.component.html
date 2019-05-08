@@ -6,16 +6,36 @@
         </ol>
     </nav>
 
-    <div class="row my-3">
+    <div class="row mt-3">
         <div class="col-md-8">
             <h1><i class="fa fa-laptop-medical text-danger" aria-hidden="true"></i> 
                 Consultas
             </h1>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <a routerLink="/contato" class="btn btn-success bt-sm float-right mt-2">
                 + Novo Paciente
             </a>
+        </div>
+        <div class="col-md-1">
+            <h4><a (click)="toggleSearch()" class="search-link" style="float:right;">
+                <i class="fa fa-search float-right mt-3 mr-3"></i></a></h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+        </div>
+        <div class="col-md-4">
+            <!-- barra de busca -->
+            <div class="search-bar" [@toggleSearch]="searchBarState">
+                <form [formGroup]="searchForm">
+                    <div class="form-group">
+                        <input type="text" formControlName="searchControl" class="form-control" 
+                                placeholder="O que voce esta procurando ?" style="font-size: 12px;">
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
