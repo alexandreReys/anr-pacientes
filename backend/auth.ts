@@ -6,27 +6,22 @@ import { User, users } from "./users";
 
 export const handleAuthentication = (req: Request, resp: Response)=>{
   const user: User = req.body;
-  console.log(`handleAuthentication com ${User.name}`);
 
   if(isValid(user)) {
       const dbUser: User = users[user.email];
       // const token = jwt.sign({sub: dbUser.email, iss: 'anr-pacientes'}, apiConfig.secret);
       // resp.json({name: dbUser.name, email: dbUser.email, accessToken: token});
-      console.log(`isValid para ${dbUser.name}`);
       resp.json({name: dbUser.name, email: dbUser.email});
   } else {
-      console.log(`not isValid - message: Dados invalidos !!`);
       resp.status(403).json({message: 'Dados invalidos !!'});
   }
 };
 
 function isValid(user: User): boolean {
   if(!user) {
-    console.log(`isValid return false para ${User.name}`);
     return false
   }
 
   const dbUser = users[user.email];
-  console.log(`isValid return true para name: ${dbUser.name} , email: ${dbUser.email}`);
   return dbUser !== undefined && dbUser.matches(user);
 }

@@ -1,0 +1,47 @@
+<div class="container">
+    <nav class="mt-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+            <li class="breadcrumb-item active">Consultas</li>
+        </ol>
+    </nav>
+
+    <div class="row my-3">
+        <div class="col-md-8">
+            <h1><i class="fa fa-laptop-medical text-danger" aria-hidden="true"></i> 
+                Consultas
+            </h1>
+        </div>
+        <div class="col-md-4">
+            <a routerLink="/contato" class="btn btn-success bt-sm float-right mt-2">
+                + Novo Paciente
+            </a>
+        </div>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+            <tr class="bg-primary text-light">
+                <th>Selecione o Paciente</th>
+                <th>Telefone</th>
+                <th>Pai</th>
+                <th>Mãe</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let contato of contatos">
+                <td><strong>{{contato.nome}}</strong></td>
+                <td>{{contato.telefone}}</td>
+                <td>{{contato.paiNome}}</td>
+                <td>{{contato.maeNome}}</td>
+                <td>
+                    <a [routerLink]="[contato.codigo,'new']" class="btn btn-outline-primary btn-sm mr-3">Selecionar</a>
+                    <a routerLink="/contato/6" class="btn btn-outline-info btn-sm">Editar</a>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>

@@ -1,6 +1,7 @@
 {
    "compileOnSave": true,
    "compilerOptions": {
-       "outDir" : "dist"
+       "outDir" : "dist",
+       "lib": ["es5", "es6", "dom"]
    }
 }

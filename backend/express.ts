@@ -8,6 +8,7 @@ import { handleAuthentication } from './auth';
 
 // const connection = require('./mysql-connection');
 const routesContatos = require('./routes-contatos');
+const routesConsultas = require('./routes-consultas');
 
 //import * as fs from 'fs';
 //import * as https from 'https';
@@ -20,7 +21,7 @@ server.get('/', (req, res, next) => {
 	try {
 		res.status(200).send({
 			status: "API OK",
-			version: "1.0.1"
+			version: "1.0.2"
 		})
 	} catch(e) {
 		res.status(400).send(e)
@@ -30,11 +31,12 @@ server.get('/', (req, res, next) => {
 server.post('/login', handleAuthentication);
 // server.use('/contatos', handleAuthorization);
 server.use('/contatos', routesContatos);
+server.use('/consultas', routesConsultas);
 //
 //const options = {
 //   cert: fs.readFileSync('./backend/keys/cert.pem'),
-//   key: fs.readFileSync('./backend/keys/key.pem')
-// };
+//   key: fs.readFileSync('./backend/keys/key.pem')  };
+//
 const port = normalizePort(process.env.atendWeb_port || '3000');  // Variavel Ambiental
 server.set('port', port);
 

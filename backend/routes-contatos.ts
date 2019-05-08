@@ -15,7 +15,18 @@ router.get('/:nome', (req, res) => {
     let sNome: string = req.params.nome;
     let sql = "SELECT * FROM contatos WHERE nome LIKE " + "'%" + sNome + "%'" + " ORDER BY nome";
     connection.query(sql, 
-      function(err, rows, fields) {
+      function(err, rows) {
+        if (err) throw err;
+        res.json(rows);
+      }
+    );
+});
+
+router.get('/codigo/:codigo', (req, res) => {
+    let sCodigo: string = req.params.codigo;
+    let sql = "SELECT * FROM contatos WHERE codigo = " + "'" + sCodigo + "'";
+    connection.query(sql, 
+      function(err, rows) {
         if (err) throw err;
         res.json(rows);
       }

@@ -13,6 +13,9 @@ const APP_ROUTES: Routes = [
         loadChildren: './about/about.module#AboutModule' },
     { path: 'contato', 
         loadChildren: './contato/contato.module#ContatoModule',    
+        canLoad: [LoggedInGuard], canActivate: [LoggedInGuard] },
+    { path: 'consulta', 
+        loadChildren: './pages/consultas/consultas.module#ConsultasModule',
         canLoad: [LoggedInGuard], canActivate: [LoggedInGuard] }
 ];
 

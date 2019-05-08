@@ -8,12 +8,14 @@ import { Contato } from '../../models/contato.model';
   templateUrl: './contato-form.component.html',
   styleUrls: ['./contato-form.component.css']
 })
+
 export class ContatoFormComponent implements OnInit {
 
   orderForm: FormGroup;
 
   @Input() contato: Contato;
   @Output() saveContato = new EventEmitter();   //saveContato => contato.component.ts
+  @Output() cancelContato = new EventEmitter();   //cancelContato => contato.component.ts
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -37,17 +39,16 @@ export class ContatoFormComponent implements OnInit {
       maeTelefone: this.formBuilder.control('', Validators.required),
       maeProfissao: this.formBuilder.control('')
     })
-   }
+  };
 
   onSubmit() {}
 
   save() {
       this.saveContato.emit(this.orderForm);   //saveContato => contato.component.ts
-  }
+  };
 
   cancel() {
-    this.contato = new Contato;
-    this.orderForm.reset;
-  }
+    this.cancelContato.emit(this.orderForm);   //cancelContato => contato.component.ts
+  };
    
 }

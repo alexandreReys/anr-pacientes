@@ -17,9 +17,15 @@
             Pacientes
           </a>
             <div class=" dropdown dropdown-menu">
-              <a class="dropdown-item menu-item" [routerLink]="['/contato']" >Cadastro</a>
-              <a class="dropdown-item menu-item" [routerLink]="['/contato']" >Histórico</a>
-              <a class="dropdown-item menu-item" [routerLink]="['/contato']" >Imprimir Receita</a>
+              <a class="dropdown-item menu-item" [routerLink]="['/contato']">Cadastro</a>
+            </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link menu-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            Consultas
+          </a>
+            <div class=" dropdown dropdown-menu">
+              <a class="dropdown-item menu-item" [routerLink]="['/consulta']">Marcação de Consulta</a>
             </div>
         </li>
         <li class="nav-item">

@@ -9,6 +9,7 @@ import { ContatoService } from './../services/contato.service';
   templateUrl: './contato.component.html',
   styleUrls: ['./contato.component.css']
 })
+
 export class ContatoComponent implements OnInit {
 
   id: number;
@@ -21,9 +22,7 @@ export class ContatoComponent implements OnInit {
   ngOnInit() {
     this.contato = new Contato();
     this.contatoService.getContatos()
-      .subscribe( contatos => { 
-        this.contatos = contatos;
-      });
+      .subscribe( contatos => { this.contatos = contatos; });
   };
 
   edit(contato: Contato) {
@@ -36,7 +35,18 @@ export class ContatoComponent implements OnInit {
     this.contatos.splice(index,1);
   };
 
+  cancelContato(form: NgForm) {
+    // Chamado por contato-form
+    this.contato = new Contato;
+    form.reset();
+
+    this.contatoService.getContatos()
+    .subscribe(contatos => this.contatos = contatos);
+  };
+
   saveContato(form: NgForm) {
+    // Chamado por contato-form
+
     let inclusao: boolean = false;
     
     this.contato = form.value;  // Pega os dados do form
@@ -48,8 +58,6 @@ export class ContatoComponent implements OnInit {
 
     if (inclusao) {
       this.contatoService.addContato(this.contato);
-      this.contatoService.getContatos()
-        .subscribe(contatos => this.contatos = contatos);
     } else {
       this.contatoService.updateContato(this.contato);
     };

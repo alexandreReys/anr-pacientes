@@ -13,7 +13,16 @@ router.get('/', function (req, res) {
 router.get('/:nome', function (req, res) {
     var sNome = req.params.nome;
     var sql = "SELECT * FROM contatos WHERE nome LIKE " + "'%" + sNome + "%'" + " ORDER BY nome";
-    connection.query(sql, function (err, rows, fields) {
+    connection.query(sql, function (err, rows) {
+        if (err)
+            throw err;
+        res.json(rows);
+    });
+});
+router.get('/codigo/:codigo', function (req, res) {
+    var sCodigo = req.params.codigo;
+    var sql = "SELECT * FROM contatos WHERE codigo = " + "'" + sCodigo + "'";
+    connection.query(sql, function (err, rows) {
         if (err)
             throw err;
         res.json(rows);

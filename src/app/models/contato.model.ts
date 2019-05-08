@@ -1,5 +1,5 @@
 export class Contato{
-    id: string;
+    id: number;
     codigo: string;
     nome: string;
     telefone: string;

@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/internal/operators';
 
 import { APP_API } from 'src/app/app.api';
-import { Contato } from 'src/app/models/contato.model';
+import { Consulta } from 'src/app/models/consulta.model';
 import { LoginService } from 'src/app/security/login/login.service';
 import { ErrorHandler } from '../app.error-handler';
 
@@ -12,50 +12,41 @@ import { ErrorHandler } from '../app.error-handler';
   providedIn: 'root'
 })
 
-export class ContatoService {
+export class ConsultaService {
 
-  url: string = `${APP_API}/contatos`;
+  url: string = `${APP_API}/consultas`;
 
   constructor( private httpClient: HttpClient, private loginService: LoginService ) { }
     
-  getContatos(search?: string): Observable<Contato[]> {
-    if(search){ 
-      let urlGet: string = `${APP_API}/contatos/${search}`;
+  getConsultas(): Observable<Consulta[]> {
       return this.httpClient
-        .get<Contato[]>( urlGet, { headers: this.getHeaders() } )
-        .pipe( catchError( error => ErrorHandler.handleError(error) ) );
-
-    } else {
-      return this.httpClient
-        .get<Contato[]>( this.url, { headers: this.getHeaders() })
-        .pipe( catchError( error => ErrorHandler.handleError(error) ) );
-    }
-  };
-
-  getContatosCodigo(codigoPaciente?: string): Observable<Contato[]> {
-      let urlGet: string = `${APP_API}/contatos/codigo/${codigoPaciente}`;
-      return this.httpClient
-        .get<Contato[]>( urlGet, { headers: this.getHeaders() } )
+        .get<Consulta[]>( this.url, { headers: this.getHeaders() })
         .pipe( catchError( error => ErrorHandler.handleError(error) ) );
   };
 
-  addContato(contato: Contato){
+  getConsultasPaciente(idPaciente?: string): Observable<Consulta[]> {
+      let urlGet: string = `${APP_API}/consultas/paciente/${idPaciente}`;
+      return this.httpClient
+        .get<Consulta[]>( urlGet, { headers: this.getHeaders() } )
+        .pipe( catchError( error => ErrorHandler.handleError(error) ) );
+  };
+
+  addConsulta(consulta: Consulta){
     return this.httpClient
-      .post<Contato>( this.url, contato, this.getHttpOptions() )
+      .post<Consulta>( this.url, consulta, this.getHttpOptions() )
       .pipe( catchError( error => ErrorHandler.handleError(error) ) )
       .subscribe();
   };
 
-  updateContato(contato: Contato){
+  updateConsulta(consulta: Consulta){
     return this.httpClient
-      .put<Contato>( this.url, contato, this.getHttpOptions() )
+      .put<Consulta>( this.url, consulta, this.getHttpOptions() )
       .pipe( catchError( error => ErrorHandler.handleError(error) ) )
       .subscribe();
   }
   
-
-  deleteContato(contato: Contato){
-    let url: string = `${APP_API}/contatos/${contato.codigo}`;
+  deleteConsulta(consulta: Consulta){
+    let url: string = `${APP_API}/consultas/${consulta.idConsulta}`;
     return this.httpClient
       .delete( url, this.getHttpOptions() )
       .pipe( catchError( error => ErrorHandler.handleError(error) ) )
