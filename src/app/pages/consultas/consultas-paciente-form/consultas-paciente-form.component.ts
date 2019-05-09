@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { switchMap, debounceTime, distinctUntilChanged, catchError } from 'rxjs/internal/operators';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Contato } from 'src/app/models/contato.model';
 import { ContatoService } from './../../../services/contato.service';
@@ -9,10 +8,9 @@ import { ContatoService } from './../../../services/contato.service';
 import { Consulta } from 'src/app/models/consulta.model';
 import { ConsultaService } from './../../../services/consulta.service';
 
-import {CalendarModule} from 'primeng/calendar';
-
-import toaster from "toastr";
-import { ConsultasModule } from '../consultas.module';
+// import {CalendarModule} from 'primeng/calendar';
+// import toaster from "toastr";
+// import { ConsultasModule } from '../consultas.module';
 
 @Component({
   selector: 'app-consultas-paciente-form',
