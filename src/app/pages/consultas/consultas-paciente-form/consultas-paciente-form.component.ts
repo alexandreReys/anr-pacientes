@@ -25,6 +25,15 @@ export class ConsultasPacienteFormComponent implements OnInit {
   contato: Contato;
   contatos: Contato[];
   submittingForm: boolean = false;
+  
+  imaskConfig = {
+    mask: Number,
+    scale: 2,
+    thousandsSeparator: '',
+    padFractionalZeros: true,
+    normalizeZeros: true,
+    radix: ','
+  };
 
   constructor( private contatoService: ContatoService,
                private consultaService: ConsultaService,

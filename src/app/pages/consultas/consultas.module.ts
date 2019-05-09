@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {CalendarModule} from 'primeng/calendar';
+import {IMaskModule} from 'angular-imask';
 
 import { ConsultasRoutingModule } from './consultas-routing.module';
 import { ConsultaPacienteListComponent } from './consulta-paciente-list/consulta-paciente-list.component';
@@ -14,7 +15,8 @@ import { ConsultasPacienteFormComponent } from './consultas-paciente-form/consul
     ConsultasRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    CalendarModule
+    CalendarModule,
+    IMaskModule
   ],
   declarations: [ConsultaPacienteListComponent, ConsultasPacienteFormComponent]
 })

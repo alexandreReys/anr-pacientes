@@ -63,7 +63,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">KG</div>
                         </div>
-                        <input type="text" class="form-control text-center" formControlName="pesoConsulta" id="pesoConsulta">
+                        <input [imask]="imaskConfig" type="text" class="form-control text-center" formControlName="pesoConsulta" id="pesoConsulta">
                     </div>
                 </div>
                 <div class="form-group col-md-2">
@@ -72,7 +72,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">MT</div>
                         </div>
-                        <input type="text" class="form-control text-center" formControlName="alturaConsulta" id="alturaConsulta">
+                        <input [imask]="imaskConfig" type="text" class="form-control text-center" formControlName="alturaConsulta" id="alturaConsulta">
                     </div>
                 </div>
                 <div class="form-group col-md-2">
@@ -81,7 +81,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">CM</div>
                         </div>
-                        <input type="text" class="form-control text-center" formControlName="cabecaConsulta" id="cabecaConsulta">
+                        <input [imask]="imaskConfig" type="text" class="form-control text-center" formControlName="cabecaConsulta" id="cabecaConsulta">
                     </div>
                 </div>
 
