@@ -15,10 +15,10 @@ import { ContatoService } from 'src/app/services/contato.service';
   styleUrls: ['./consulta-paciente-list.component.css'],
   animations: [
     trigger('toggleSearch', [
-      state('hidden', style({
+      state('hidden', style( {
         opacity: 0,
         'max-height': '0px'
-      })),
+      } )),
       state('visible', style({
         opacity: 1,
         'max-height': '70px',

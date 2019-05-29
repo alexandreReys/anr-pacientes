@@ -96,7 +96,9 @@ export class ConsultasPacienteFormComponent implements OnInit {
 
   createConsulta() {
     // const consulta: Consulta = Object.assign(new Consulta(), this.form.value);
-    this.consulta = Object.assign(new Consulta(), this.form.value);
+    this.consulta = Object.assign(
+      new Consulta(), this.form.value
+    );
 
     let data = this.consulta.dataConsulta;
     this.consulta.dataConsulta = data.substr(6,4)+'/'+data.substr(3,2)+'/'+data.substr(0,2);
