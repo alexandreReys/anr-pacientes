@@ -1,0 +1,27 @@
+label {
+    font-size:12px;
+    margin-bottom: 0;
+    margin-left: 5px;
+}
+
+input {
+    /* font-size:12px; */
+    padding: .375rem .45rem;
+}
+
+.validation-error {
+    font-size:10px;
+}
+
+.icone-size {
+    font-size: 24px;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.input-group-text {
+    font-size: 0.7rem;
+    line-height: 1.0;
+}

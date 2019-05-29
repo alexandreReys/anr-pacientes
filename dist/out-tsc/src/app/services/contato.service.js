@@ -8,51 +8,88 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Injectable } from '@angular/core';
-import { LocalStorageService } from 'angular-2-local-storage';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError } from 'rxjs/internal/operators';
+import { APP_API } from 'src/app/app.api';
 import { LoginService } from 'src/app/security/login/login.service';
-import { APP_API } from './../app.api';
+import { ErrorHandler } from '../app.error-handler';
 var ContatoService = /** @class */ (function () {
-    function ContatoService(httpClient, loginService, localStorage) {
+    function ContatoService(httpClient, loginService) {
         this.httpClient = httpClient;
         this.loginService = loginService;
-        this.localStorage = localStorage;
+        this.url = APP_API + "/contatos";
     }
-    ContatoService.prototype.save = function (contato) {
-        this.localStorage.set(contato.id, contato);
-    };
-    ContatoService.prototype.getContato = function (id) {
-        return this.localStorage.get(id);
-    };
-    // getAll(): Contato[]{ return this.localStorage.keys().map(id => this.getContato(id)); }
-    ContatoService.prototype.contatos = function () {
-        var headers = new HttpHeaders();
-        if (this.loginService.isLoggedIn()) {
-            headers = headers.set('Authorization', "Bearer " + this.loginService.user.accessToken);
+    ContatoService.prototype.getContatos = function (search) {
+        if (search) {
+            var urlGet = APP_API + "/contatos/" + search;
+            return this.httpClient
+                .get(urlGet, { headers: this.getHeaders() })
+                .pipe(catchError(function (error) { return ErrorHandler.handleError(error); }));
         }
-        ;
-        return this.httpClient
-            .get(APP_API + "/contatos", { headers: headers });
+        else {
+            return this.httpClient
+                .get(this.url, { headers: this.getHeaders() })
+                .pipe(catchError(function (error) { return ErrorHandler.handleError(error); }));
+        }
     };
     ;
-    ContatoService.prototype.delete = function (contato) {
-        // this.localStorage.remove(contato.id);
+    ContatoService.prototype.getContatosCodigo = function (codigoPaciente) {
+        var urlGet = APP_API + "/contatos/codigo/" + codigoPaciente;
+        return this.httpClient
+            .get(urlGet, { headers: this.getHeaders() })
+            .pipe(catchError(function (error) { return ErrorHandler.handleError(error); }));
+    };
+    ;
+    ContatoService.prototype.addContato = function (contato) {
+        return this.httpClient
+            .post(this.url, contato, this.getHttpOptions())
+            .pipe(catchError(function (error) { return ErrorHandler.handleError(error); }))
+            .subscribe();
+    };
+    ;
+    ContatoService.prototype.updateContato = function (contato) {
+        return this.httpClient
+            .put(this.url, contato, this.getHttpOptions())
+            .pipe(catchError(function (error) { return ErrorHandler.handleError(error); }))
+            .subscribe();
+    };
+    ContatoService.prototype.deleteContato = function (contato) {
+        var url = APP_API + "/contatos/" + contato.codigo;
+        return this.httpClient
+            .delete(url, this.getHttpOptions())
+            .pipe(catchError(function (error) { return ErrorHandler.handleError(error); }))
+            .subscribe();
+    };
+    // FUNÇOES AUXILIARES - FUNÇOES AUXILIARES - FUNÇOES AUXILIARES - FUNÇOES AUXILIARES      
+    ContatoService.prototype.getHttpOptions = function () {
+        var httpOptions;
+        if (this.loginService.isLoggedIn()) {
+            httpOptions = {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    'Authorization': "Bearer " + this.loginService.user.accessToken
+                })
+            };
+        }
+        else {
+            httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        }
+        ;
+        return httpOptions;
+    };
+    ContatoService.prototype.getHeaders = function () {
         var headers = new HttpHeaders();
         if (this.loginService.isLoggedIn()) {
             headers = headers.set('Authorization', "Bearer " + this.loginService.user.accessToken);
+            return headers;
         }
         ;
-        var url = APP_API + "/contatos/" + contato.id;
-        console.log("URL = " + url);
-        // return this.httpClient.delete(url, {headers: headers});
     };
     ContatoService = __decorate([
         Injectable({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [HttpClient,
-            LoginService,
-            LocalStorageService])
+        __metadata("design:paramtypes", [HttpClient, LoginService])
     ], ContatoService);
     return ContatoService;
 }());

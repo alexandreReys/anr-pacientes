@@ -22,6 +22,18 @@ body {
     max-height: 0px;
 }
 
+.widthAcoes {
+    width: 90px;
+}
+
+.fs-bt-acoes {
+    font-size: 12px;
+}
+
+.pointer {
+     cursor: pointer;
+}
+
 /* .bg-hospital {
     background: url(./images/bg-hospital.jpg);
     background-size: cover;

@@ -13,11 +13,13 @@ import { Router, NavigationEnd } from "@angular/router";
 import { tap } from 'rxjs/internal/operators';
 import { filter } from 'rxjs/internal/operators';
 import { APP_API } from "../../app.api";
+import { NotificationService } from "src/app/shared/messages/notification.service";
 var LoginService = /** @class */ (function () {
-    function LoginService(http, router) {
+    function LoginService(http, router, notificationService) {
         var _this = this;
         this.http = http;
         this.router = router;
+        this.notificationService = notificationService;
         this.router.events.pipe(filter(function (e) { return e instanceof NavigationEnd; }))
             .subscribe(function (e) { return _this.lastUrl = e.url; });
     }
@@ -32,6 +34,7 @@ var LoginService = /** @class */ (function () {
     };
     ;
     LoginService.prototype.logout = function () {
+        this.notificationService.notify(this.user.name + " logout !!");
         this.user = undefined;
         this.router.navigate(['/']);
     };
@@ -41,7 +44,9 @@ var LoginService = /** @class */ (function () {
     };
     LoginService = __decorate([
         Injectable(),
-        __metadata("design:paramtypes", [HttpClient, Router])
+        __metadata("design:paramtypes", [HttpClient,
+            Router,
+            NotificationService])
     ], LoginService);
     return LoginService;
 }());

@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark" id="navbarSite">
+  <div class="container">
+
+    <a class="navbar-brand" [routerLink]="['/']">
+        <a>AtendWeb</a>
+    </a>
+
+    <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
+      <ul class="navbar-nav mr-auto">
+ 
+        <li class="nav-item dropdown">
+          <a class="nav-link menu-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            Opções 
+          </a>
+ 
+          <div class=" dropdown dropdown-menu">
+            <a class="dropdown-item menu-item" [routerLink]="['/medico']">Cadastro de Médicos</a>
+            <!-- <a class="dropdown-item menu-item" [routerLink]="['/contato']">Cadastro de Pacientes</a> -->
+            <a class="dropdown-item menu-item" [routerLink]="['/paciente']">Cadastro de Pacientes</a>
+            <a class="dropdown-item menu-item" [routerLink]="['/consulta']">Marcação de Consulta</a>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/about']">
+            Sobre 
+          </a>
+        </li>
+
+      </ul>
+      <app-user-datails></app-user-datails>
+    </div>
+  </div>
+</nav>

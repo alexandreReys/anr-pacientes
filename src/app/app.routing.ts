@@ -1,7 +1,7 @@
 import { Routes, RouterModule } from "@angular/router";
 import { ModuleWithProviders } from "@angular/compiler/src/core";
 
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './security/login/login.component';
 import { LoggedInGuard } from './security/loggedIn.guard';
 
@@ -10,9 +10,15 @@ const APP_ROUTES: Routes = [
     { path: 'login/:to', component: LoginComponent },
     { path: 'login', component: LoginComponent },
     { path: 'about', 
-        loadChildren: './about/about.module#AboutModule' },
+        loadChildren: './pages/about/about.module#AboutModule' },
     { path: 'contato', 
-        loadChildren: './contato/contato.module#ContatoModule',    
+        loadChildren: './pages/contato/contato.module#ContatoModule',    
+        canLoad: [LoggedInGuard], canActivate: [LoggedInGuard] },
+    { path: 'medico', 
+        loadChildren: './pages/medicos/medicos.module#MedicosModule',    
+        canLoad: [LoggedInGuard], canActivate: [LoggedInGuard] },
+    { path: 'paciente', 
+        loadChildren: './pages/pacientes/pacientes.module#PacientesModule',    
         canLoad: [LoggedInGuard], canActivate: [LoggedInGuard] },
     { path: 'consulta', 
         loadChildren: './pages/consultas/consultas.module#ConsultasModule',

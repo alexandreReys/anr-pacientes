@@ -5,17 +5,19 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { LocalStorageModule } from 'angular-2-local-storage';
 
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './home/header/header.component';
-import { HomeComponent } from './home/home.component';
 import { routing } from './app.routing';
+import { AppComponent } from './app.component';
+import { HeaderComponent } from './pages/home/header/header.component';
+import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './security/login/login.component';
 import { LoginService } from './security/login/login.service';
 import { LoggedInGuard } from './security/loggedIn.guard';
-import { UserDatailsComponent } from './home/header/user-datails/user-datails.component';
+import { UserDatailsComponent } from './pages/home/header/user-datails/user-datails.component';
 import { NotificationService } from './shared/messages/notification.service';
 import { SnackbarComponent } from './shared/messages/snackbar/snackbar.component';
 import { SharedModule } from './shared/shared.module';
+
+import { ConsultasPacienteFormComponent } from './pages/consultas/consulta-form/consulta-form.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { SharedModule } from './shared/shared.module';
   providers: [
     NotificationService,
     LoginService, 
-    LoggedInGuard 
+    LoggedInGuard,
+    ConsultasPacienteFormComponent
   ],
   bootstrap: [AppComponent]
 })

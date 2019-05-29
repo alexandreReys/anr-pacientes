@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { catchError } from 'rxjs/internal/operators';
 
 import { APP_API } from 'src/app/app.api';
 import { Contato } from 'src/app/models/contato.model';
+
 import { LoginService } from 'src/app/security/login/login.service';
 import { ErrorHandler } from '../app.error-handler';
 
@@ -15,9 +16,14 @@ import { ErrorHandler } from '../app.error-handler';
 export class ContatoService {
 
   url: string = `${APP_API}/contatos`;
+  contato: Contato;
+  public subject = new BehaviorSubject(this.contato);
 
   constructor( private httpClient: HttpClient, private loginService: LoginService ) { }
-    
+  
+  setDados(contato: Contato) {
+    this.subject.next(contato);
+  }  
   getContatos(search?: string): Observable<Contato[]> {
     if(search){ 
       let urlGet: string = `${APP_API}/contatos/${search}`;
@@ -53,7 +59,6 @@ export class ContatoService {
       .subscribe();
   }
   
-
   deleteContato(contato: Contato){
     let url: string = `${APP_API}/contatos/${contato.codigo}`;
     return this.httpClient

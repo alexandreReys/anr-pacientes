@@ -4,6 +4,7 @@ import { apiConfig } from './api-config';
 
 export const handleAuthorization = (req: Request, resp: Response, next) => {
   const token = extractToken(req);
+
   if(!token){
     resp.setHeader('www-Authenticate', 'Bearer token_type="JWT"');
     resp.status(401).json({message: 'Você precisa se autenticar'});

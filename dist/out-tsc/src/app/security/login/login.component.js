@@ -11,12 +11,14 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from './login.service';
+import { NotificationService } from './../../shared/messages/notification.service';
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(formBuilder, loginService, activatedRoute, router) {
+    function LoginComponent(formBuilder, loginService, activatedRoute, router, notificationService) {
         this.formBuilder = formBuilder;
         this.loginService = loginService;
         this.activatedRoute = activatedRoute;
         this.router = router;
+        this.notificationService = notificationService;
         this.emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     }
     ;
@@ -30,8 +32,16 @@ var LoginComponent = /** @class */ (function () {
     ;
     LoginComponent.prototype.login = function () {
         var _this = this;
-        this.loginService.login(this.loginForm.value.email, this.loginForm.value.password)
-            .subscribe(function (user) { return alert("Bem vindo, " + user.name); }, function (response) { return alert(response.error.message); }, function () {
+        this.loginService
+            .login(this.loginForm.value.email, this.loginForm.value.password)
+            .subscribe(function (user) { return _this.notificationService.notify("Bem vindo, " + user.name); }, function (response) {
+            if (!response.error.message) {
+                _this.notificationService.notify('Erro ao tentar logar !!');
+            }
+            else {
+                _this.notificationService.notify(response.error.message);
+            }
+        }, function () {
             _this.router.navigate([atob(_this.navigateTo)]);
         });
     };
@@ -50,7 +60,8 @@ var LoginComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [FormBuilder,
             LoginService,
             ActivatedRoute,
-            Router])
+            Router,
+            NotificationService])
     ], LoginComponent);
     return LoginComponent;
 }());

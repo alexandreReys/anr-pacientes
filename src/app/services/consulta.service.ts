@@ -1,23 +1,37 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { Observable, BehaviorSubject } from 'rxjs';
 import { catchError } from 'rxjs/internal/operators';
 
 import { APP_API } from 'src/app/app.api';
-import { Consulta } from 'src/app/models/consulta.model';
+
 import { LoginService } from 'src/app/security/login/login.service';
-import { ErrorHandler } from '../app.error-handler';
+import { ErrorHandler } from 'src/app/app.error-handler';
+
+import { Consulta } from 'src/app/models/consulta.model';
 
 @Injectable({
   providedIn: 'root'
 })
 
+@Injectable()
 export class ConsultaService {
 
   url: string = `${APP_API}/consultas`;
 
-  constructor( private httpClient: HttpClient, private loginService: LoginService ) { }
-    
+  consulta: Consulta;
+
+  public subject = new BehaviorSubject(this.consulta);
+
+  constructor( 
+    private httpClient: HttpClient, 
+    private loginService: LoginService ) { }
+
+  setDados(consulta: Consulta) {
+    this.subject.next(consulta);
+  }
+
   getConsultas(): Observable<Consulta[]> {
       return this.httpClient
         .get<Consulta[]>( this.url, { headers: this.getHeaders() })

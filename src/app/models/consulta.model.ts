@@ -9,4 +9,6 @@ export class Consulta{
     cabecaConsulta: Number;
     infoConsulta: String;
     prescricaoConsulta: String;
+    prescricao2Consulta: String;
+    prescricao3Consulta: String;
   }

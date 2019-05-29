@@ -1,0 +1,115 @@
+<div class="container">
+  <nav class="mt-3">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+          <li class="breadcrumb-item"><a routerLink="/medico">Lista</a></li>
+          <li class="breadcrumb-item active">Cadastro de Médicos</li>
+      </ol>
+  </nav>
+  
+  <div class="row my-3">
+      <div class="col-md-8">
+          <h1><i class="fa fa-laptop-medical text-danger" aria-hidden="true"></i> 
+              Médicos
+          </h1>
+      </div>
+      <div class="col-md-3">
+          <a routerLink="/medico" class="btn btn-success bt-sm float-right mt-2">
+            << Voltar
+          </a>
+      </div>
+      <div class="col-md-1">
+          <h4>
+            <a href="javascript:window.print()" class="fa fa-print text-primary float-right mt-3 mr-3" aria-hidden="true"></a>
+          </h4>
+      </div>
+  </div>
+
+  <form [formGroup]="form">
+
+    <div class="card">
+        <div class="card-header">
+            <h4> <strong class="text-primary">{{pageTitle}}</strong> </h4>
+        </div>
+        <div class="card-body">
+            <input type="hidden" class="form-control" formControlName="idMedico" id="idMedico">
+
+            <div class="form-row">
+              <div class="form-group col-md-8">
+                <label for="motivoConsulta">Nome</label>
+                <input type="text" class="form-control" formControlName="nomeMedico" id="nomeMedico">
+              </div>
+
+              <div class="form-group col-md-4">
+                <label for="infoConsulta">Telefone</label>
+                <input type="text" class="form-control" formControlName="telefoneMedico" id="telefoneMedico">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="motivoConsulta">CRM</label>
+                <input type="text" class="form-control" formControlName="crmMedico" id="crmMedico">
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="infoConsulta">Especialidade</label>
+                <input type="text" class="form-control" formControlName="especialidadeMedico" id="especialidadeMedico">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-8">
+                <label for="motivoConsulta">Endereço</label>
+                <input type="text" class="form-control" formControlName="enderecoMedico" id="enderecoMedico">
+              </div>
+
+              <div class="form-group col-md-4">
+                <label for="infoConsulta">Numero</label>
+                <input type="text" class="form-control" formControlName="numeroMedico" id="numeroMedico">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="motivoConsulta">Complemento</label>
+                <input type="text" class="form-control" formControlName="complementoMedico" id="complementoMedico">
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="infoConsulta">Bairro</label>
+                <input type="text" class="form-control" formControlName="bairroMedico" id="bairroMedico">
+              </div>
+            </div>            
+
+            <div class="form-row">
+              <div class="form-group col-md-8">
+                <label for="motivoConsulta">Cidade</label>
+                <input type="text" class="form-control" formControlName="cidadeMedico" id="cidadeMedico">
+              </div>
+
+              <div class="form-group col-md-2">
+                <label for="infoConsulta">Estado</label>
+                <input type="text" class="form-control" formControlName="estadoMedico" id="estadoMedico">
+              </div>
+
+              <div class="form-group col-md-2">
+                <label for="infoConsulta">Cep</label>
+                <input type="text" class="form-control" formControlName="cepMedico" id="cepMedico">
+              </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <button type="button" 
+        [disabled]="!form.valid"
+        (click)="submitForm()" 
+        class="btn btn-primary btn-lg float-right mt-2">
+        Salvar
+    </button>
+
+  </form>
+</div>

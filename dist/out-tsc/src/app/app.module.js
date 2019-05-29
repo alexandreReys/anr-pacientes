@@ -5,47 +5,56 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LocalStorageModule } from 'angular-2-local-storage';
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './home/header/header.component';
-import { HomeComponent } from './home/home.component';
 import { routing } from './app.routing';
-import { InputComponent } from './shared/input/input.component';
+import { AppComponent } from './app.component';
+import { HeaderComponent } from './pages/home/header/header.component';
+import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './security/login/login.component';
 import { LoginService } from './security/login/login.service';
 import { LoggedInGuard } from './security/loggedIn.guard';
-import { UserDatailsComponent } from './home/header/user-datails/user-datails.component';
+import { UserDatailsComponent } from './pages/home/header/user-datails/user-datails.component';
+import { NotificationService } from './shared/messages/notification.service';
+import { SnackbarComponent } from './shared/messages/snackbar/snackbar.component';
+import { SharedModule } from './shared/shared.module';
+import { ConsultasPacienteFormComponent } from './pages/consultas/consulta-form/consulta-form.component';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         NgModule({
             declarations: [
+                SnackbarComponent,
                 AppComponent,
                 HeaderComponent,
                 HomeComponent,
                 LoginComponent,
-                InputComponent,
                 UserDatailsComponent
             ],
             imports: [
+                SharedModule,
                 HttpModule,
                 HttpClientModule,
                 BrowserModule,
-                FormsModule,
-                ReactiveFormsModule,
                 BrowserAnimationsModule,
                 routing,
                 LocalStorageModule.forRoot({
                     storageType: 'localStorage'
                 })
             ],
-            providers: [LoginService, LoggedInGuard],
+            exports: [
+                SnackbarComponent
+            ],
+            providers: [
+                NotificationService,
+                LoginService,
+                LoggedInGuard,
+                ConsultasPacienteFormComponent
+            ],
             bootstrap: [AppComponent]
         })
     ], AppModule);

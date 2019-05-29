@@ -13,8 +13,8 @@
             </h1>
         </div>
         <div class="col-md-3">
-            <a routerLink="/contato" class="btn btn-success bt-sm float-right mt-2">
-                + Novo Paciente
+            <a routerLink="/paciente/new/consulta" class="btn btn-success bt-sm float-right mt-2">
+                + Paciente
             </a>
         </div>
         <div class="col-md-1">
@@ -42,11 +42,11 @@
     <table class="table table-hover">
         <thead>
             <tr class="bg-primary text-light">
-                <th>Selecione o Paciente</th>
+                <th>Paciente</th>
                 <th>Telefone</th>
                 <th>Pai</th>
                 <th>Mãe</th>
-                <th>Ações</th>
+                <th class="widthAcoes">Ações</th>
             </tr>
         </thead>
 
@@ -56,12 +56,20 @@
                 <td>{{contato.telefone}}</td>
                 <td>{{contato.paiNome}}</td>
                 <td>{{contato.maeNome}}</td>
-                <td>
-                    <a [routerLink]="[contato.codigo,'new']" class="btn btn-outline-primary btn-sm mr-3">Selecionar</a>
-                    <a routerLink="/contato/6" class="btn btn-outline-info btn-sm">Editar</a>
+                <td class="widthAcoes">
+                    <h5>
+                        <a class="fa fa-plus pointer mr-3 text-primary"
+                            [routerLink]="[contato.codigo,'new']">
+                        </a> 
+                            
+                        <a class="fa fa-edit pointer text-success ml-3"
+                            (click)="editarPaciente(contato)">
+                            <!-- [routerLink]="['/paciente']">  -->
+                            <!-- [routerLink]="['/paciente', contato.id, 'edit']">  -->
+                        </a>
+                    </h5>
                 </td>
             </tr>
-            
         </tbody>
     </table>
 </div>

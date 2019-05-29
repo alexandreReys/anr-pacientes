@@ -6,12 +6,20 @@ export class ErrorHandler {
         let errorMessage: string;
 
         if(error instanceof HttpErrorResponse){
-            errorMessage = `Error ${error.status} ao obter a URL ${error.url} - ${error.statusText}`
-        } else {
+            if (error.status == 200)
+                errorMessage = 'OK'
+            else
+                errorMessage = `Error ${error.status} ao obter a URL ${error.url} - ${error.statusText}`
+        }
+        else {
             errorMessage = error.toString();
         }
 
-        console.log('Erro : ' + errorMessage);
+        if (errorMessage == 'OK')
+            errorMessage = 'Operação realizada com sucesso !!'
+        else
+            console.log('Erro : ' + errorMessage);
+
         return throwError(errorMessage);
     }
 }
