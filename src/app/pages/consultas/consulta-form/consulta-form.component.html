@@ -32,28 +32,43 @@
         </div>
         <div class="card-body">
             <input type="hidden" class="form-control" formControlName="idPaciente" id="idPaciente">
+
             <div class="form-row">
-                <div class="form-group col-md-2">
+
+                <!-- <div class="form-group col-md-2">
                     <label for="dataConsulta">Data</label><br>
                     <p-calendar
                         id="dataConsulta"
                         formControlName="dataConsulta"
                         inputStyleClass="form-control"
                         dataType="string"
-                        dateFormat="dd/mm/yy"
-                    >
+                        dateFormat="dd/mm/yy">
                     </p-calendar>
                 </div>
-
                 <div class="form-group col-md-3">
                     <label for="horaConsulta">Hora</label><br>
-                    <!-- <input type="text" class="form-control" formControlName="horaConsulta" id="horaConsulta"> -->
                     <p-calendar 
                         id="horaConsulta" 
                         formControlName="horaConsulta" 
                         timeOnly="true" 
                         hourFormat="24">
                     </p-calendar>
+                </div> -->
+
+                <!-- <div class="form-group col-md-3">
+                    <label for="horaConsulta">Hora</label><br>
+                    <input type="text" class="form-control" formControlName="horaConsulta" id="horaConsulta">
+                </div> -->
+
+
+                <div class="form-group col-md-3">
+                    <label for="dataConsulta">Data</label><br>
+                    <input type="date" class="form-control" formControlName="dataConsulta" id="dataConsulta">
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="horaConsulta">Hora</label><br>
+                    <input type="time" class="form-control" formControlName="horaConsulta" id="horaConsulta">
                 </div>
 
                 <div class="form-group col-md-7">

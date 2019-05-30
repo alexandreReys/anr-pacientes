@@ -74,7 +74,7 @@ export class ConsultasPacienteFormComponent implements OnInit {
         this.contatos = contatos;
         this.contato = contatos[0];
         this.form.controls['idPaciente'].setValue(this.contato.id);
-        this.form.controls['dataConsulta'].setValue('10/05/2019');
+        this.form.controls['dataConsulta'].setValue('2019-05-17');
         this.form.controls['horaConsulta'].setValue('10:00');
         this.form.controls['motivoConsulta'].setValue('Tosse e Febre alta');
         this.form.controls['pesoConsulta'].setValue('20');
