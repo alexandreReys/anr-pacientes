@@ -15,14 +15,10 @@ import { ContatoService } from 'src/app/services/contato.service';
 
 @NgModule({
   imports: [
-    CommonModule,
-    ConsultasRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-    // CalendarModule,
-    IMaskModule
+    CommonModule, ConsultasRoutingModule, ReactiveFormsModule, FormsModule, IMaskModule  // CalendarModule
   ],
-  declarations: [ConsultaPacienteListComponent, ConsultasPacienteFormComponent, ConsultasReceitaPrintComponent],
-  providers: [ContatoService]
+  declarations: [
+    ConsultaPacienteListComponent, ConsultasPacienteFormComponent, ConsultasReceitaPrintComponent
+  ]
 })
 export class ConsultasModule { }

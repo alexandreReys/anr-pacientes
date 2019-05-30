@@ -17,6 +17,7 @@ import { NotificationService } from './shared/messages/notification.service';
 import { SnackbarComponent } from './shared/messages/snackbar/snackbar.component';
 import { SharedModule } from './shared/shared.module';
 
+import { ContatoService } from './services/contato.service';
 import { ConsultasPacienteFormComponent } from './pages/consultas/consulta-form/consulta-form.component';
 
 @NgModule({
@@ -46,7 +47,8 @@ import { ConsultasPacienteFormComponent } from './pages/consultas/consulta-form/
     NotificationService,
     LoginService, 
     LoggedInGuard,
-    ConsultasPacienteFormComponent
+    ConsultasPacienteFormComponent,
+    ContatoService
   ],
   bootstrap: [AppComponent]
 })
