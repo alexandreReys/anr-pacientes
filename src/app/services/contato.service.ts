@@ -23,7 +23,8 @@ export class ContatoService {
   
   setDados(contato: Contato) {
     this.subject.next(contato);
-  }  
+  }
+    
   getContatos(search?: string): Observable<Contato[]> {
     if(search){ 
       let urlGet: string = `${APP_API}/contatos/${search}`;
