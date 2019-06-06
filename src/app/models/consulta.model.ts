@@ -11,4 +11,5 @@ export class Consulta{
     prescricaoConsulta: String;
     prescricao2Consulta: String;
     prescricao3Consulta: String;
+    dataNascConsulta: String;
   }

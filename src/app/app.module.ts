@@ -17,9 +17,10 @@ import { NotificationService } from './shared/messages/notification.service';
 import { SnackbarComponent } from './shared/messages/snackbar/snackbar.component';
 import { SharedModule } from './shared/shared.module';
 
+import { MedicoService } from 'src/app/services/medico.service';
 import { ContatoService } from './services/contato.service';
 import { ConsultaService } from './services/consulta.service';
-import { ConsultasPacienteFormComponent } from './pages/consultas/consulta-form/consulta-form.component';
+// import { ConsultasPacienteFormComponent } from './pages/consultas/consulta-form/consulta-form.component';
 
 @NgModule({
   declarations: [
@@ -48,9 +49,10 @@ import { ConsultasPacienteFormComponent } from './pages/consultas/consulta-form/
     NotificationService,
     LoginService, 
     LoggedInGuard,
-    ConsultasPacienteFormComponent,
     ContatoService,
-    ConsultaService
+    ConsultaService,
+    MedicoService
+    // ConsultasPacienteFormComponent,
   ],
   bootstrap: [AppComponent]
 })

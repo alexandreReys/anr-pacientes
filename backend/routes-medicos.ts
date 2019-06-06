@@ -5,7 +5,7 @@ const connection = require('./mysql-connection');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    connection.query('select * from medicos order by nomeMedico', function(err, rows, fields) {
+    connection.query('select * from awMedicos order by nomeMedico', function(err, rows, fields) {
         if (err) throw err;
         res.json(rows);
     });
@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 router.get('/:nomeMedico', (req, res) => {
     let nomeMedico: string = req.params.nomeMedico;
 
-    let sql = "SELECT * FROM medicos WHERE nomeMedico LIKE " + "'%" + nomeMedico + "%'" + " ORDER BY nomeMedico";
+    let sql = "SELECT * FROM awMedicos WHERE nomeMedico LIKE " + "'%" + nomeMedico + "%'" + " ORDER BY nomeMedico";
     connection.query(sql, 
         function(err, rows) {
             if (err) throw err;
@@ -24,7 +24,7 @@ router.get('/:nomeMedico', (req, res) => {
 });
 router.get('/id/:idMedico', (req, res) => {
     let idMedico: string = req.params.idMedico;
-    let sql = "select * from medicos WHERE idMedico = " + idMedico;
+    let sql = "select * from awMedicos WHERE idMedico = " + idMedico;
     connection.query(sql, 
         function(err, rows) {
             if (err) throw err;
@@ -36,7 +36,7 @@ router.get('/id/:idMedico', (req, res) => {
 router.post('/', (req, res) => {
     var c = req.body;
     var sql = 'insert into '   +
-                    'medicos (' + 
+                    'awMedicos (' + 
                         'nomeMedico, telefoneMedico, enderecoMedico, numeroMedico, complementoMedico, ' +
                         'bairroMedico, cidadeMedico, estadoMedico, cepMedico, crmMedico, especialidadeMedico )'  +
                     'values (' +
@@ -52,7 +52,7 @@ router.post('/', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-    connection.query('DELETE FROM medicos WHERE idMedico = ?',[req.params.id], function(err, rows, fields) {
+    connection.query('DELETE FROM awMedicos WHERE idMedico = ?',[req.params.id], function(err, rows, fields) {
         if (err) throw err;
         res.end('Deletado')
     });
@@ -60,7 +60,7 @@ router.delete('/:id', (req, res) => {
 
 router.put('/', (req, res) => {
     var c = req.body;
-    var sql = 'update medicos set ' + 
+    var sql = 'update awMedicos set ' + 
                 'nomeMedico=?, telefoneMedico=?, enderecoMedico=?, numeroMedico=?, complementoMedico=?, bairroMedico=?, ' +
                 'cidadeMedico=?, estadoMedico=?, cepMedico=?, crmMedico=?, especialidadeMedico=? '  +
                 'where idMedico=?';

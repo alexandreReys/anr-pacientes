@@ -5,7 +5,7 @@ const connection = require('./mysql-connection');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    connection.query('select * from contatos order by nome', function(err, rows, fields) {
+    connection.query('select * from awContatos order by nome', function(err, rows, fields) {
         if (err) throw err;
         res.json(rows);
     });
@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 
 router.get('/:nome', (req, res) => {
     let sNome: string = req.params.nome;
-    let sql = "SELECT * FROM contatos WHERE nome LIKE " + "'%" + sNome + "%'" + " ORDER BY nome";
+    let sql = "SELECT * FROM awContatos WHERE nome LIKE " + "'%" + sNome + "%'" + " ORDER BY nome";
     connection.query(sql, 
       function(err, rows) {
         if (err) throw err;
@@ -24,7 +24,7 @@ router.get('/:nome', (req, res) => {
 
 router.get('/codigo/:codigo', (req, res) => {
     let sCodigo: string = req.params.codigo;
-    let sql = "SELECT * FROM contatos WHERE codigo = " + "'" + sCodigo + "'";
+    let sql = "SELECT * FROM awContatos WHERE codigo = " + "'" + sCodigo + "'";
     connection.query(sql, 
       function(err, rows) {
         if (err) throw err;
@@ -36,7 +36,7 @@ router.get('/codigo/:codigo', (req, res) => {
 router.post('/', (req, res) => {
     var c = req.body;
     var sql = 'insert into '   +
-                    'contatos (' + 
+                    'awContatos (' + 
                         'codigo, nome, telefone, endereco, numero, complemento, ' +
                         'bairro, cidade, estado, cep, paiNome, paiTelefone, ' +
                         'paiProfissao, maeNome, maeTelefone, maeProfissao )'  +
@@ -54,7 +54,7 @@ router.post('/', (req, res) => {
 });
 
 router.delete('/:codigo', (req, res) => {
-    connection.query('delete from contatos where codigo = ?',[req.params.codigo], function(err, rows, fields) {
+    connection.query('delete from awContatos where codigo = ?',[req.params.codigo], function(err, rows, fields) {
         if (err) throw err;
         res.end('Deletado')
     });
@@ -62,7 +62,7 @@ router.delete('/:codigo', (req, res) => {
 
 router.put('/', (req, res) => {
     var c = req.body;
-    var sql = 'update contatos set ' + 
+    var sql = 'update awContatos set ' + 
                 'nome=?, telefone=?, endereco=?, numero=?, complemento=?, ' +
                 'bairro=?, cidade=?, estado=?, cep=?, paiNome=?, paiTelefone=?, ' +
                 'paiProfissao=?, maeNome=?, maeTelefone=?, maeProfissao=? '  +

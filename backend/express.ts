@@ -14,8 +14,8 @@ const routesMedicos = require('./routes-medicos');
 //import * as https from 'https';
 
 const server = express();
-server.use(bodyParser.json());
-server.use(cors());
+server.use( bodyParser.json() );
+server.use( cors() );
 
 server.get('/', (req, res, next) => {
 	try {
