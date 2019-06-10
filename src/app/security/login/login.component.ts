@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
             this.notificationService.notify(response.error.message);
           }
         },
-        () => {
+        () => {  // next
           this.router.navigate([ atob(this.navigateTo)])
         } 
       );

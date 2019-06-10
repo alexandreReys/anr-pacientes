@@ -1,27 +1,35 @@
 import { Request, Response } from 'express';
-import { User, users } from "./users";
 
 import * as jwt from 'jsonwebtoken';
+
 import { apiConfig } from './api-config';
+import { User } from "./users";
 
-export const handleAuthentication = (req: Request, resp: Response)=>{
-  const user: User = req.body;
+const connection = require('./mysql-connection');
 
-  if(isValid(user)) {
-      const dbUser: User = users[user.email];
-      const token = jwt.sign({sub: dbUser.email, iss: 'anr-pacientes'}, apiConfig.secret);
-      resp.json({name: dbUser.name, email: dbUser.email, accessToken: token});
-      // resp.json({name: dbUser.name, email: dbUser.email});
+export const handleAuthentication = (req: Request, resp: Response) => {
+  const reqUser: User = req.body;
+  if(reqUser) {
+    getEmailLogin(reqUser, (err,rows) => {
+      if (err) throw err;
+      if (rows[0]) {
+        const dbUser: User = rows[0];
+        const token = jwt.sign({sub: dbUser.emailUsuario, iss: 'anr-pacientes'}, apiConfig.secret);
+        resp.json({name: dbUser.nomeUsuario, email: dbUser.emailUsuario, accessToken: token});
+      } else {
+        resp.status(403).json({message: 'Dados invalidos !!'});
+      }
+    });
   } else {
     resp.status(403).json({message: 'Dados invalidos !!'});
   }
 };
 
-function isValid(user: User): boolean {
-  if(!user) {
-    return false
-  }
-
-  const dbUser = users[user.email];
-  return dbUser !== undefined && dbUser.matches(user);
-}
+function getEmailLogin(reqUser: User, callback): any {
+  let emailUsuario: string = reqUser.emailUsuario;
+  let passwordUsuario: string = reqUser.passwordUsuario;
+  let sql = "SELECT * FROM awUsuarios WHERE (emailUsuario = '"+emailUsuario+"') and (passwordUsuario = '"+passwordUsuario+"')";
+  connection.query(sql, (error,rows) => { 
+      return callback(error, rows) 
+  });
+};

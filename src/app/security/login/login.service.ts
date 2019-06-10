@@ -30,9 +30,9 @@ export class LoginService{
         return this.user != undefined;
     }
 
-    login(email: string, password: string): Observable<User> {
+    login(emailUsuario: string, password: string): Observable<User> {
         return this.http
-            .post<User>(`${APP_API}/login`, {email: email, password: password})
+            .post<User>(`${APP_API}/login`, {emailUsuario: emailUsuario, passwordUsuario: password})
             .pipe( tap(user => this.user = user) );
     };
 

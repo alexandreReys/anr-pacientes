@@ -1,22 +1,22 @@
 "use strict";
 exports.__esModule = true;
 var User = /** @class */ (function () {
-    function User(email, name, password) {
-        this.email = email;
-        this.name = name;
-        this.password = password;
+    function User(emailUsuario, nomeUsuario, passwordUsuario) {
+        this.emailUsuario = emailUsuario;
+        this.nomeUsuario = nomeUsuario;
+        this.passwordUsuario = passwordUsuario;
     }
     ;
     User.prototype.matches = function (another) {
         return another !== undefined &&
-            another.email === this.email &&
-            another.password === this.password;
+            another.emailUsuario === this.emailUsuario &&
+            another.passwordUsuario === this.passwordUsuario;
     };
     return User;
 }());
 exports.User = User;
-exports.users = {
-    "juliana@gmail.com": new User('juliana@gmail.com', 'Juliana', 'juliana23'),
-    "amanda@gmail.com": new User('amanda@gmail.com', 'Amanda', 'amanda21'),
-    "ale@gmail.com": new User('ale@gmail.com', 'Ale', 'ale10')
-};
+// export const users: {[key: string]: User} = {
+//   "juliana@gmail.com": new User('juliana@gmail.com', 'Juliana', 'juliana23'),
+//   "amanda@gmail.com": new User('amanda@gmail.com', 'Amanda', 'amanda21'),
+//   "ale@gmail.com": new User('ale@gmail.com', 'Ale', 'ale10')
+// };
