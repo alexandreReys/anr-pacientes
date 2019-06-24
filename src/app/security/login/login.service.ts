@@ -24,11 +24,11 @@ export class LoginService{
     ) {
         this.router.events.pipe( filter(e => e instanceof NavigationEnd) )
                           .subscribe( (e:NavigationEnd) => this.lastUrl = e.url);
-    }
+    };
 
     isLoggedIn(): boolean {
         return this.user != undefined;
-    }
+    };
 
     login(emailUsuario: string, password: string): Observable<User> {
         return this.http
@@ -40,9 +40,9 @@ export class LoginService{
         this.notificationService.notify(`${this.user.name} logout !!`);
         this.user = undefined;
         this.router.navigate(['/']);
-    }
+    };
 
     handleLogin(path: string = this.lastUrl) {
         this.router.navigate(['/login', btoa(path)])
-    }
+    };
 }

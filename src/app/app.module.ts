@@ -20,7 +20,6 @@ import { SharedModule } from './shared/shared.module';
 import { MedicoService } from 'src/app/services/medico.service';
 import { ContatoService } from './services/contato.service';
 import { ConsultaService } from './services/consulta.service';
-// import { ConsultasPacienteFormComponent } from './pages/consultas/consulta-form/consulta-form.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +51,6 @@ import { ConsultaService } from './services/consulta.service';
     ContatoService,
     ConsultaService,
     MedicoService
-    // ConsultasPacienteFormComponent,
   ],
   bootstrap: [AppComponent]
 })

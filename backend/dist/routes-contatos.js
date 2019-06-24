@@ -28,6 +28,22 @@ router.get('/codigo/:codigo', function (req, res) {
         res.json(rows);
     });
 });
+router.get('/id/:id', function (req, res) {
+    var sId = req.params.id;
+    var sql = "SELECT * FROM awContatos WHERE id = " + "'" + sId + "'";
+    // let sql = "SELECT idConsulta,idPaciente,dataConsulta,horaConsulta," +
+    //                     "motivoConsulta,pesoConsulta,alturaConsulta,cabecaConsulta," +
+    //                     "infoConsulta,prescricaoConsulta,prescricao2Consulta," +
+    //                     "prescricao3Consulta,dataNascConsulta, " +
+    //                     "DATE_FORMAT(dataConsulta,'%d/%m/%Y') as dataConsultaF " +
+    //           "FROM awContatos " +
+    //           "WHERE id = " + "'" + sId + "'";
+    connection.query(sql, function (err, rows) {
+        if (err)
+            throw err;
+        res.json(rows);
+    });
+});
 router.post('/', function (req, res) {
     var c = req.body;
     var sql = 'insert into ' +

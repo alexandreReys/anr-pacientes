@@ -13,34 +13,30 @@
     <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
       <ul class="navbar-nav mr-auto">
  
-        <!-- <li class="nav-item dropdown">
+        <li class="nav-item dropdown">
           <a class="nav-link menu-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            Opções 
+            Cadastros
           </a>
  
           <div class=" dropdown dropdown-menu">
-            <a class="dropdown-item menu-item" [routerLink]="['/consulta']">Marcação de Consulta</a>
+            <a class="dropdown-item menu-item" [routerLink]="['/medico']">Médicos </a>
+            <a class="dropdown-item menu-item" [routerLink]="['/paciente']">Pacientes </a>
           </div>
-        </li> -->
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link menu-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            Consultas
+          </a>
+ 
+          <div class=" dropdown dropdown-menu">
+            <a class="dropdown-item menu-item" [routerLink]="['/agenda']">Agendamento </a>
+            <a class="dropdown-item menu-item" [routerLink]="['/consulta']">Atendimento </a>
+          </div>
+        </li>
         
         <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/medico']">
-            Médicos </a>
-        </li>
-          
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/paciente']">
-            Pacientes </a>
-        </li>
-    
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/consulta']">
-            Consultas </a>
-        </li>
-          
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/about']">
-            Sobre </a>
+          <a class="nav-link" [routerLink]="['/about']">Sobre </a>
         </li>
 
       </ul>

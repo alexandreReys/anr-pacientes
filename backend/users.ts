@@ -1,7 +1,11 @@
 export class User {
-  constructor(public emailUsuario: string,
-              public nomeUsuario: string,
-              public passwordUsuario: string) {};
+  constructor(
+        public emailUsuario: string,
+        public nomeUsuario: string,
+        public passwordUsuario: string,
+        public idEmpresaUsuario: string,
+        public idFuncionarioUsuario: string
+  ) {};
 
   matches(another: User): boolean {
     return another !== undefined &&
@@ -9,6 +13,7 @@ export class User {
            another.passwordUsuario === this.passwordUsuario;
   }
 }
+
 
 // export const users: {[key: string]: User} = {
 //   "juliana@gmail.com": new User('juliana@gmail.com', 'Juliana', 'juliana23'),

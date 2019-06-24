@@ -33,6 +33,25 @@ router.get('/codigo/:codigo', (req, res) => {
     );
 });
 
+router.get('/id/:id', (req, res) => {
+    let sId: string = req.params.id;
+    let sql = "SELECT * FROM awContatos WHERE id = " + "'" + sId + "'";
+
+    // let sql = "SELECT idConsulta,idPaciente,dataConsulta,horaConsulta," +
+    //                     "motivoConsulta,pesoConsulta,alturaConsulta,cabecaConsulta," +
+    //                     "infoConsulta,prescricaoConsulta,prescricao2Consulta," +
+    //                     "prescricao3Consulta,dataNascConsulta, " +
+    //                     "DATE_FORMAT(dataConsulta,'%d/%m/%Y') as dataConsultaF " +
+    //           "FROM awContatos " +
+    //           "WHERE id = " + "'" + sId + "'";
+    connection.query(sql, 
+      function(err, rows) {
+        if (err) throw err;
+        res.json(rows);
+      }
+    );
+});
+
 router.post('/', (req, res) => {
     var c = req.body;
     var sql = 'insert into '   +

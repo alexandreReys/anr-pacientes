@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ConsultaPacienteListComponent } from './consulta-paciente-list/consulta-paciente-list.component';
-import { ConsultasPacienteFormComponent } from './consulta-form/consulta-form.component';
-import { ConsultasReceitaPrintComponent } from './consultas-receita-print/consultas-receita-print.component';
+
+import { ConsultasListComponent } from './consultas-list/consultas-list.component';
+import { ConsultaFormComponent } from './consulta-form/consulta-form.component';
 
 const routes: Routes = [
-  {path: '', component: ConsultaPacienteListComponent},
-  {path: ':codigo/new', component: ConsultasPacienteFormComponent},
-  {path: 'receita', component: ConsultasReceitaPrintComponent}
+  {path: '', component: ConsultasListComponent},
+  {path: ':id/edit', component: ConsultaFormComponent}
 ];
 
 @NgModule({

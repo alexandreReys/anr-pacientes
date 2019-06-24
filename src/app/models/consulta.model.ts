@@ -1,15 +1,14 @@
 export class Consulta{
-    idConsulta: Number;
-    idPaciente: Number;
-    dataConsulta: String;
-    horaConsulta: String;
-    motivoConsulta: String;
-    pesoConsulta: Number;
-    alturaConsulta: Number;
-    cabecaConsulta: Number;
-    infoConsulta: String;
-    prescricaoConsulta: String;
-    prescricao2Consulta: String;
-    prescricao3Consulta: String;
-    dataNascConsulta: String;
+    idConsulta: number;
+    idPaciente: number;
+    dataConsulta: string;
+    horaConsulta: string;
+    motivoConsulta: string;
+    pesoConsulta: number;
+    alturaConsulta: number;
+    cabecaConsulta: number;
+    infoConsulta: string;
+    prescricaoConsulta: string;
+    dataConsultaFrm: string;
+    nome: string;
   }

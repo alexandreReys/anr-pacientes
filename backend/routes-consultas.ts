@@ -5,10 +5,61 @@ const connection = require('./mysql-connection');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    connection.query('select * from awConsultas order by idConsulta', function(err, rows, fields) {
+    let sql = "SELECT " + 
+                    "idConsulta, idPaciente, dataConsulta, horaConsulta, motivoConsulta, " + 
+                    "pesoConsulta, alturaConsulta, cabecaConsulta, infoConsulta, " + 
+                    "prescricaoConsulta, " + 
+                    "Date_Format(dataConsulta,'%d/%m/%Y') dataConsultaFrm, " +
+                    "ct.nome,  ct.maeNome, ct.paiNome, ct.telefone " +
+                "FROM awConsultas " +
+                    "INNER JOIN awContatos ct " +
+                        "ON awConsultas.idPaciente = ct.id " +
+                "ORDER BY Date_Format(dataConsulta,'%Y-%m-%d'), horaConsulta";
+    connection.query(sql, function(err, rows, fields) {
         if (err) throw err;
         res.json(rows);
     });
+});
+
+router.get('/id/:idConsulta', (req, res) => {
+    let idConsulta: string = req.params.idConsulta;
+//  let sql = "SELECT * FROM awConsultas WHERE idConsulta = " + "'" + idConsulta + "'" + " ORDER BY idConsulta";
+    let sql =   "SELECT " + 
+                    "idConsulta, idPaciente, dataConsulta, horaConsulta, motivoConsulta, " + 
+                    "pesoConsulta, alturaConsulta, cabecaConsulta, infoConsulta,prescricaoConsulta, " + 
+                    "Date_Format(dataConsulta,'%d/%m/%Y') dataConsultaFrm, " +
+                    "ct.nome,  ct.maeNome, ct.paiNome, ct.telefone " +
+                "FROM awConsultas " +
+                    "INNER JOIN awContatos ct " +
+                        "ON awConsultas.idPaciente = ct.id " +
+                "WHERE idConsulta = " + "'" + idConsulta + "'" +
+                "ORDER BY Date_Format(dataConsulta,'%Y-%m-%d'), horaConsulta";  
+    connection.query(sql, 
+        function(err, rows) {
+            if (err) throw err;
+            res.json(rows);
+        }
+    );
+});
+
+router.get('/data/:dataConsulta', (req, res) => {
+    let dataConsulta: string = req.params.dataConsulta;
+    let sql =   "SELECT " + 
+                    "idConsulta, idPaciente, dataConsulta, horaConsulta, motivoConsulta, " + 
+                    "pesoConsulta, alturaConsulta, cabecaConsulta, infoConsulta,prescricaoConsulta, " + 
+                    "Date_Format(dataConsulta,'%d/%m/%Y') dataConsultaFrm, " +
+                    "ct.nome,  ct.maeNome, ct.paiNome, ct.telefone " +
+                "FROM awConsultas " +
+                    "INNER JOIN awContatos ct " +
+                        "ON awConsultas.idPaciente = ct.id " +
+                "WHERE Date_Format(dataConsulta,'%Y-%m-%d') = " + "'" + dataConsulta + "'" +
+                "ORDER BY Date_Format(dataConsulta,'%Y-%m-%d'), horaConsulta";  
+    connection.query(sql, 
+        function(err, rows) {
+            if (err) throw err;
+            res.json(rows);
+        }
+    );
 });
 
 router.get('/paciente/:idPaciente', (req, res) => {
@@ -60,7 +111,7 @@ router.put('/', (req, res) => {
 
     connection.query(sql, [ c.idPaciente, c.dataConsulta, c.horaConsulta, c.motivoConsulta,
                             c.pesoConsulta, c.alturaConsulta, c.cabecaConsulta, c.infoConsulta,
-                            c.prescricaoConsulta, c.dataNascConsulta ], 
+                            c.prescricaoConsulta, c.dataNascConsulta, c.idConsulta ], 
         function(err, rows, fields) {
             if (err) throw err;
             res.json(rows);

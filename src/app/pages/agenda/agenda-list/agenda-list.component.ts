@@ -10,9 +10,9 @@ import { Contato } from '../../../models/contato.model';
 import { ContatoService } from 'src/app/services/contato.service';
 
 @Component({
-  selector: 'app-consulta-paciente-list',
-  templateUrl: './consulta-paciente-list.component.html',
-  styleUrls: ['./consulta-paciente-list.component.css'],
+  selector: 'app-agenda-list',
+  templateUrl: './agenda-list.component.html',
+  styleUrls: ['./agenda-list.component.css'],
   animations: [
     trigger('toggleSearch', [
       state('hidden', style( {
@@ -29,10 +29,9 @@ import { ContatoService } from 'src/app/services/contato.service';
   ]
 })
 
-export class ConsultaPacienteListComponent implements OnInit {
+export class AgendaListComponent implements OnInit {
   
   searchBarState = 'hidden';
-
   searchForm: FormGroup;
   searchControl: FormControl;
 
@@ -66,7 +65,7 @@ export class ConsultaPacienteListComponent implements OnInit {
   };  //ngOnInit()
   
   editarPaciente(contato: Contato) {
-    let navigateTo = '/paciente/'+contato.id+'/edit/consulta';
+    let navigateTo = '/paciente/'+contato.id+'/edit/agenda';
     this.contatoService.setDados(contato);
     this.router.navigate([navigateTo]);  // this.router.navigate(['/paciente']);
   }

@@ -44,7 +44,9 @@ export class LoginComponent implements OnInit {
     this.loginService
       .login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe(  
-        user => this.notificationService.notify(`Bem vindo, ${user.name}`),
+        user => {
+          this.notificationService.notify(`Bem vindo, ${user.name}`)
+        },
         response => {
           if (!response.error.message) {
             this.notificationService.notify('Erro ao tentar logar !!');

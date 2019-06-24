@@ -2,20 +2,21 @@
     <nav class="mt-3">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-            <li class="breadcrumb-item"><a routerLink="/consulta">Seleção de Pacientes</a></li>
-            <li class="breadcrumb-item active">Cadastro de Consulta</li>
+            <li class="breadcrumb-item"><a routerLink="/consulta">Agendamento</a></li>
+            <li class="breadcrumb-item active">Consulta</li>
         </ol>
     </nav>
-    
+  
     <div class="row my-3">
         <div class="col-md-8">
             <h1><i class="fa fa-laptop-medical text-danger" aria-hidden="true"></i> 
-                Consultas
+                Consulta
             </h1>
         </div>
         <div class="col-md-3">
             <a routerLink="/consulta" class="btn btn-success bt-sm float-right mt-2">
-                << Voltar </a>
+                << Voltar
+            </a>
         </div>
         <div class="col-md-1">
             <h4>
@@ -24,102 +25,81 @@
         </div>
     </div>
 
-  <form [formGroup]="form">
-
-    <div class="card">
-        <div class="card-header">
-            <strong class="text-danger">{{contato.nome}}</strong> | Telefone : {{contato.telefone}}
-        </div>
-        <div class="card-body">
-            <input type="hidden" class="form-control" formControlName="idPaciente" id="idPaciente">
-
-            <div class="form-row">
-
-                <div class="form-group col-md-3">
-                    <label for="dataConsulta">Data</label><br>
-                    <input type="date" class="form-control" formControlName="dataConsulta" id="dataConsulta">
-                </div>
-
-                <div class="form-group col-md-2">
-                    <label for="horaConsulta">Hora</label><br>
-                    <input type="time" class="form-control" formControlName="horaConsulta" id="horaConsulta">
-                </div>
-
-                <div class="form-group col-md-7">
-                    <label for="motivoConsulta">Motivo</label>
-                    <input type="text" class="form-control" formControlName="motivoConsulta" id="motivoConsulta">
-                </div>
+    <form [formGroup]="form">
+        <div class="card">
+            <div class="card-header">
+                <h4>
+                    <p class="text-danger">Consulta : {{dataConsult}} - {{horaConsult}} </p>
+                    <p> <strong class="text-dark">Paciente : {{nomePacient}}</strong>  </p>
+                </h4>
             </div>
 
-            <div class="form-row">
-                <div class="form-group col-md-2">
-                    <label for="pesoConsulta">Peso</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">KG</div>
-                        </div>
-                        <input [imask]="imaskConfig" type="text" class="form-control text-center" formControlName="pesoConsulta" id="pesoConsulta">
-                    </div>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="alturaConsulta">Altura</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">MT</div>
-                        </div>
-                        <input [imask]="imaskConfig" type="text" class="form-control text-center" formControlName="alturaConsulta" id="alturaConsulta">
-                    </div>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="cabecaConsulta">Circ.Cabeça</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">CM</div>
-                        </div>
-                        <input [imask]="imaskConfig" type="text" class="form-control text-center" formControlName="cabecaConsulta" id="cabecaConsulta">
+            <div class="card-body">
+
+                <input type="hidden" class="form-control" formControlName="idConsulta">
+                <input type="hidden" class="form-control" formControlName="idPaciente">
+                <input type="hidden" class="form-control" formControlName="dataConsulta">
+                <input type="hidden" class="form-control" formControlName="horaConsulta">
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="motivoConsulta">Motivo</label>
+                        <input type="text" class="form-control" formControlName="motivoConsulta" id="motivoConsulta">
                     </div>
                 </div>
 
-                <div class="form-group col-md-3">
-                    <label for="infoConsulta">dataNascConsulta</label>
-                    <input type="date" class="form-control" formControlName="dataNascConsulta" id="dataNascConsulta">
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label for="pesoConsulta">Peso</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">KG</div>
+                            </div>
+                            <input [imask]="imaskConfig" type="text" class="form-control text-center" formControlName="pesoConsulta" id="pesoConsulta">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="alturaConsulta">Altura</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">MT</div>
+                            </div>
+                            <input [imask]="imaskConfig" type="text" class="form-control text-center" formControlName="alturaConsulta" id="alturaConsulta">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="cabecaConsulta">Circ.Cabeça</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">CM</div>
+                            </div>
+                            <input [imask]="imaskConfig" type="text" class="form-control text-center" formControlName="cabecaConsulta" id="cabecaConsulta">
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label for="infoConsulta">Conclusão</label>
-                    <input type="text" class="form-control" formControlName="infoConsulta" id="infoConsulta">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="infoConsulta">Conclusão</label>
+                        <input type="text" class="form-control" formControlName="infoConsulta" id="infoConsulta">
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label for="prescricaoConsulta">Prescrição</label>
-                    <textarea rows="4" cols="50" maxlength="500" class="form-control" formControlName="prescricaoConsulta" id="prescricaoConsulta"></textarea>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label for="prescricaoConsulta">Prescrição</label>
-                    <textarea rows="4" cols="50" maxlength="500" class="form-control" formControlName="prescricao2Consulta" id="prescricao3Consulta"></textarea>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label for="prescricaoConsulta">Prescrição</label>
-                    <textarea rows="4" cols="50" maxlength="500" class="form-control" formControlName="prescricao3Consulta" id="prescricao3Consulta"></textarea>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="prescricaoConsulta">Prescrição</label>
+                        <textarea rows="4" cols="50" maxlength="500" class="form-control" formControlName="prescricaoConsulta" id="prescricaoConsulta"></textarea>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <button type="button" 
-        [disabled]="!form.valid"
-        (click)="submitForm()" 
-        class="btn btn-primary btn-lg float-right mt-2">
-        Salvar
-    </button>
+        <button type="button" 
+            [disabled]="!form.valid"
+            (click)="submitForm()" 
+            class="btn btn-primary btn-lg float-right mt-2">
+            Salvar
+        </button>
 
-  </form>
+    </form> 
 </div>

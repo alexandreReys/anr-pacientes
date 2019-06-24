@@ -37,6 +37,7 @@ export class PacienteFormComponent implements OnInit {
 
   ngOnInit() {
     this.navigateTo = this.route.snapshot.params['to'] || 'paciente';
+
     this.setCurrentAction();
     this.buildContatoForm();
     this.loadContatos();
@@ -92,7 +93,7 @@ export class PacienteFormComponent implements OnInit {
           this.contato = resp;
           this.form.patchValue(this.contato);  // binds loaded contato data to form
         }
-      );
+      )
     } else {
       this.form.controls['id'].setValue(1);
       let codigoPaciente = new Date().getTime().toString();

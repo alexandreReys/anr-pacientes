@@ -20,9 +20,17 @@ const APP_ROUTES: Routes = [
     { path: 'paciente', 
         loadChildren: './pages/pacientes/pacientes.module#PacientesModule',    
         canLoad: [LoggedInGuard], canActivate: [LoggedInGuard] },
+    { path: 'agenda', 
+        loadChildren: './pages/agenda/agenda.module#AgendaModule',
+        canLoad: [LoggedInGuard], canActivate: [LoggedInGuard] },
     { path: 'consulta', 
         loadChildren: './pages/consultas/consultas.module#ConsultasModule',
         canLoad: [LoggedInGuard], canActivate: [LoggedInGuard] }
+
+
+
+
+
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);

@@ -39,7 +39,7 @@ export class MedicoService {
     }
   };
 
-  getMedicoByCodigo(idMedico?: string): Observable<Medico[]> {
+  getMedicoById(idMedico?: string): Observable<Medico[]> {
       let urlGet: string = `${APP_API}/medicos/id/${idMedico}`;
       return this.httpClient
         .get<Medico[]>( urlGet, { headers: this.getHeaders() } )

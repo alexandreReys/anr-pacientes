@@ -12,10 +12,20 @@ export const handleAuthentication = (req: Request, resp: Response) => {
   if(reqUser) {
     getEmailLogin(reqUser, (err,rows) => {
       if (err) throw err;
+      
       if (rows[0]) {
         const dbUser: User = rows[0];
-        const token = jwt.sign({sub: dbUser.emailUsuario, iss: 'anr-pacientes'}, apiConfig.secret);
-        resp.json({name: dbUser.nomeUsuario, email: dbUser.emailUsuario, accessToken: token});
+
+        const emailUsuario: () => string = rows[0].emailUsuario;
+        const token = jwt.sign({sub:emailUsuario, iss: 'anr-pacientes'}, apiConfig.secret);
+
+        resp.json({
+          name: dbUser.nomeUsuario, 
+          email: dbUser.emailUsuario, 
+          accessToken: token, 
+          idEmpresaUsuario: dbUser.idEmpresaUsuario,
+          idFuncionarioUsuario: dbUser.idFuncionarioUsuario
+        });
       } else {
         resp.status(403).json({message: 'Dados invalidos !!'});
       }
@@ -29,7 +39,7 @@ function getEmailLogin(reqUser: User, callback): any {
   let emailUsuario: string = reqUser.emailUsuario;
   let passwordUsuario: string = reqUser.passwordUsuario;
   let sql = "SELECT * FROM awUsuarios WHERE (emailUsuario = '"+emailUsuario+"') and (passwordUsuario = '"+passwordUsuario+"')";
-  connection.query(sql, (error,rows) => { 
+  connection.query(sql, ( error, rows ) => { 
       return callback(error, rows) 
   });
 };

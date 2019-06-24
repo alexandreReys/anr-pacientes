@@ -1,10 +1,12 @@
 "use strict";
 exports.__esModule = true;
 var User = /** @class */ (function () {
-    function User(emailUsuario, nomeUsuario, passwordUsuario) {
+    function User(emailUsuario, nomeUsuario, passwordUsuario, idEmpresaUsuario, idFuncionarioUsuario) {
         this.emailUsuario = emailUsuario;
         this.nomeUsuario = nomeUsuario;
         this.passwordUsuario = passwordUsuario;
+        this.idEmpresaUsuario = idEmpresaUsuario;
+        this.idFuncionarioUsuario = idFuncionarioUsuario;
     }
     ;
     User.prototype.matches = function (another) {

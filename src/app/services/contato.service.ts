@@ -46,7 +46,14 @@ export class ContatoService {
         .pipe( catchError( error => ErrorHandler.handleError(error) ) );
   };
 
-  addContato(contato: Contato){
+  getContatosId(idPaciente?: string): Observable<Contato[]> {
+    let urlGet: string = `${APP_API}/contatos/id/${idPaciente}`;
+    return this.httpClient
+      .get<Contato[]>( urlGet, { headers: this.getHeaders() } )
+      .pipe( catchError( error => ErrorHandler.handleError(error) ) );
+};
+
+addContato(contato: Contato){
     return this.httpClient
       .post<Contato>( this.url, contato, this.getHttpOptions() )
       .pipe( catchError( error => ErrorHandler.handleError(error) ) )

@@ -32,20 +32,42 @@ export class ConsultaService {
     this.subject.next(consulta);
   }
 
-  getConsultas(): Observable<Consulta[]> {
+  getConsultas(search?: string): Observable<Consulta[]> {
+    if(search){ 
+      let urlGet: string = `${APP_API}/consultas/${search}`;
+      return this.httpClient
+        .get<Consulta[]>( urlGet, { headers: this.getHeaders() } )
+        .pipe( catchError( error => ErrorHandler.handleError(error) ) );
+
+    } else {
       return this.httpClient
         .get<Consulta[]>( this.url, { headers: this.getHeaders() })
         .pipe( catchError( error => ErrorHandler.handleError(error) ) );
+    }
   };
 
-  getConsultasPaciente(idPaciente?: string): Observable<Consulta[]> {
+  getConsultaId(idConsulta: string): Observable<Consulta[]> {
+    let urlGet: string = `${APP_API}/consultas/id/${idConsulta}`;
+    return this.httpClient
+      .get<Consulta[]>( urlGet, { headers: this.getHeaders() } )
+      .pipe( catchError( error => ErrorHandler.handleError(error) ) );
+  };
+
+  getConsultasData(dataConsulta: string): Observable<Consulta[]> {
+    let urlGet: string = `${APP_API}/consultas/data/${dataConsulta}`;
+    return this.httpClient
+      .get<Consulta[]>( urlGet, { headers: this.getHeaders() } )
+      .pipe( catchError( error => ErrorHandler.handleError(error) ) );
+  };
+
+  getConsultasPaciente(idPaciente: string): Observable<Consulta[]> {
       let urlGet: string = `${APP_API}/consultas/paciente/${idPaciente}`;
       return this.httpClient
         .get<Consulta[]>( urlGet, { headers: this.getHeaders() } )
         .pipe( catchError( error => ErrorHandler.handleError(error) ) );
   };
 
-  addConsulta(consulta: Consulta){
+addConsulta(consulta: Consulta){
     return this.httpClient
       .post<Consulta>( this.url, consulta, this.getHttpOptions() )
       .pipe( catchError( error => ErrorHandler.handleError(error) ) )
