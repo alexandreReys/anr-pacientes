@@ -34,34 +34,35 @@ export class ConsultaService {
 
   getConsultas(search?: string): Observable<Consulta[]> {
     if(search){ 
-      let urlGet: string = `${APP_API}/consultas/${search}`;
+      let urlGet: string = `${APP_API}/consultas/${search}?idEmpresa=${this.loginService.user.idEmpresaUsuario}`;
       return this.httpClient
         .get<Consulta[]>( urlGet, { headers: this.getHeaders() } )
         .pipe( catchError( error => ErrorHandler.handleError(error) ) );
 
     } else {
+      let urlGet = `${APP_API}/consultas?idEmpresa=${this.loginService.user.idEmpresaUsuario}`;
       return this.httpClient
-        .get<Consulta[]>( this.url, { headers: this.getHeaders() })
+        .get<Consulta[]>( urlGet, { headers: this.getHeaders() })
         .pipe( catchError( error => ErrorHandler.handleError(error) ) );
     }
   };
 
   getConsultaId(idConsulta: string): Observable<Consulta[]> {
-    let urlGet: string = `${APP_API}/consultas/id/${idConsulta}`;
+    let urlGet: string = `${APP_API}/consultas/id/${idConsulta}?idEmpresa=${this.loginService.user.idEmpresaUsuario}`;
     return this.httpClient
       .get<Consulta[]>( urlGet, { headers: this.getHeaders() } )
       .pipe( catchError( error => ErrorHandler.handleError(error) ) );
   };
 
   getConsultasData(dataConsulta: string): Observable<Consulta[]> {
-    let urlGet: string = `${APP_API}/consultas/data/${dataConsulta}`;
+    let urlGet: string = `${APP_API}/consultas/data/${dataConsulta}?idEmpresa=${this.loginService.user.idEmpresaUsuario}`;
     return this.httpClient
       .get<Consulta[]>( urlGet, { headers: this.getHeaders() } )
       .pipe( catchError( error => ErrorHandler.handleError(error) ) );
   };
 
   getConsultasPaciente(idPaciente: string): Observable<Consulta[]> {
-      let urlGet: string = `${APP_API}/consultas/paciente/${idPaciente}`;
+      let urlGet: string = `${APP_API}/consultas/paciente/${idPaciente}?idEmpresa=${this.loginService.user.idEmpresaUsuario}`;
       return this.httpClient
         .get<Consulta[]>( urlGet, { headers: this.getHeaders() } )
         .pipe( catchError( error => ErrorHandler.handleError(error) ) );

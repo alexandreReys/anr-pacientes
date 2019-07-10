@@ -1,4 +1,6 @@
 <div class="container">
+
+    <!-- NAV BREADCRUMB -->
     <nav class="mt-3">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
@@ -7,6 +9,7 @@
         </ol>
     </nav>
     
+    <!-- TITULO, VOLTAR E BOTÃO IMPRIMIR -->
     <div class="row my-3">
         <div class="col-md-8">
             <h1><i class="fa fa-laptop-medical text-danger" aria-hidden="true"></i> 
@@ -24,43 +27,81 @@
         </div>
     </div>
 
-  <form [formGroup]="form">
 
-    <div class="card">
-        <div class="card-header">
-            <strong class="text-danger">{{contato.nome}}</strong> | Telefone : {{contato.telefone}}
+    <!-- SELEÇÃO DE MEDICO PARA O AGENDAMENTO -->
+    <!-- <div class="row mt-4 mb-3">  
+        <div class="col-md-6">
+            <form [formGroup]="formMedico">
+                <h4> Médico(a): </h4>
+                
+                <select class="form-control mt-1 mr-4" formControlName="idMedico" id="idMedico">
+                    <option *ngFor="let medico of medicos" value="{{medico.idMedico}}">{{medico.nomeMedico}}</option>
+                </select>
+                
+                <button class="btn btn-dark mt-3"
+                    (click)="procuraData()" 
+                    [disabled]="!formMedico.valid">
+                    Confirma
+                </button>
+            </form>
         </div>
-        <div class="card-body">
-            <input type="hidden" class="form-control" formControlName="idPaciente" id="idPaciente">
+    </div> -->
 
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="dataConsulta">Data</label><br>
-                    <input type="date" class="form-control" formControlName="dataConsulta" id="dataConsulta">
-                </div>
+<!--     
+    {{form.valid}}
+    {{form.value | json}} 
+-->    
 
-                <div class="form-group col-md-3">
-                    <label for="horaConsulta">Hora</label><br>
-                    <input type="time" class="form-control" formControlName="horaConsulta" id="horaConsulta">
-                </div>
+    <form [formGroup]="form">
+
+        <div class="card">
+            <div class="card-header"> 
+                <strong class="text-danger">{{contato.nome}}</strong> | Telefone : {{contato.telefone}}
             </div>
+            <div class="card-body">
 
-            <div class="form-row">
-                <div class="form-group col-md-7">
-                    <label for="motivoConsulta">Motivo</label>
-                    <input type="text" class="form-control" formControlName="motivoConsulta" id="motivoConsulta">
+<!-- 
+                <input type="hidden" class="form-control" formControlName="idPacienteConsulta" id="idPaciente">
+                <input type="hidden" class="form-control" formControlName="idEmpresaConsulta" id="idPaciente"> 
+-->
+
+                <div class="form-row">
+                    <div class="form-group col-md-7">
+                        <label for="idMedicoConsulta">Médico</label>
+                        <select class="form-control mt-1 mr-4" formControlName="idMedicoConsulta" id="idMedicoConsulta">
+                            <option *ngFor="let medico of medicos" value="{{medico.idMedico}}">{{medico.nomeMedico}}</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
 
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="dataConsulta">Data</label><br>
+                        <input type="date" class="form-control" formControlName="dataConsulta" id="dataConsulta">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="horaConsulta">Hora</label><br>
+                        <input type="time" class="form-control" formControlName="horaConsulta" id="horaConsulta">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-7">
+                        <label for="motivoConsulta">Motivo</label>
+                        <input type="text" class="form-control" formControlName="motivoConsulta" id="motivoConsulta">
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
 
-    <button type="button" 
-        [disabled]="!form.valid"
-        (click)="submitForm()" 
-        class="btn btn-primary btn-lg float-right mt-2">
-        Salvar
-    </button>
+        <button type="button" 
+            [disabled]="!form.valid"
+            (click)="submitForm()" 
+            class="btn btn-primary btn-lg float-right mt-2">
+            Salvar
+        </button>
 
-  </form>
+    </form>
 </div>

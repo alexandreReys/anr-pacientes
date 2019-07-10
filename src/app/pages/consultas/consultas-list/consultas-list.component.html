@@ -4,7 +4,7 @@
     <nav class="mt-3">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-            <li class="breadcrumb-item active">Medicos</li>
+            <li class="breadcrumb-item active">Consultas Agendadas</li>
         </ol>
     </nav>
 
@@ -23,8 +23,8 @@
     </div>
 
     <!-- SELEÇÃO DE DATA PARA LISTA DE CONSULTAS -->
-    <div class="row">  
-        <div class="col-md-2">
+    <div class="row mt-4">  
+        <div class="col-md-3">
             <form [formGroup]="searchForm">
                 <div class="form-group mt-2">
                     <input type="date" 
@@ -41,6 +41,13 @@
                 [disabled]="!searchForm.valid">
                 <i class="fa fa-hand-point-left"></i>
                 Confirma
+            </button>
+
+            <button class="btn btn-dark mt-2"
+                (click)="procuraData(true)" 
+                [disabled]="!searchForm.valid">
+                <!-- <i class="fa fa-hand-point-left"></i> -->
+                Mostrar Todos
             </button>
         </div>
     </div>

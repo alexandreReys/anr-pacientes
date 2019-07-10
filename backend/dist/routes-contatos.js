@@ -4,15 +4,22 @@ var express = require("express");
 var connection = require('./mysql-connection');
 var router = express.Router();
 router.get('/', function (req, res) {
-    connection.query('select * from awContatos order by nome', function (err, rows, fields) {
+    var sql = "SELECT * " +
+        "FROM awContatos " +
+        "WHERE (idEmpresa = " + req.query.idEmpresa + ") " +
+        "ORDER BY nome";
+    connection.query(sql, function (err, rows, fields) {
         if (err)
             throw err;
         res.json(rows);
     });
 });
 router.get('/:nome', function (req, res) {
-    var sNome = req.params.nome;
-    var sql = "SELECT * FROM awContatos WHERE nome LIKE " + "'%" + sNome + "%'" + " ORDER BY nome";
+    var sql = "SELECT * " +
+        "FROM awContatos " +
+        "WHERE (idEmpresa = " + req.query.idEmpresa + ") " +
+        "AND (nome LIKE " + "'%" + req.params.nome + "%') " +
+        "ORDER BY nome";
     connection.query(sql, function (err, rows) {
         if (err)
             throw err;
@@ -20,8 +27,10 @@ router.get('/:nome', function (req, res) {
     });
 });
 router.get('/codigo/:codigo', function (req, res) {
-    var sCodigo = req.params.codigo;
-    var sql = "SELECT * FROM awContatos WHERE codigo = " + "'" + sCodigo + "'";
+    var sql = "SELECT * " +
+        "FROM awContatos " +
+        "WHERE (idEmpresa = " + req.query.idEmpresa + ") " +
+        "AND (codigo = " + "'" + req.params.codigo + "')";
     connection.query(sql, function (err, rows) {
         if (err)
             throw err;
@@ -29,8 +38,10 @@ router.get('/codigo/:codigo', function (req, res) {
     });
 });
 router.get('/id/:id', function (req, res) {
-    var sId = req.params.id;
-    var sql = "SELECT * FROM awContatos WHERE id = " + "'" + sId + "'";
+    var sql = "SELECT * " +
+        "FROM awContatos " +
+        "WHERE (idEmpresa = " + req.query.idEmpresa + ") " +
+        "AND (id = " + "'" + req.params.id + "')";
     // let sql = "SELECT idConsulta,idPaciente,dataConsulta,horaConsulta," +
     //                     "motivoConsulta,pesoConsulta,alturaConsulta,cabecaConsulta," +
     //                     "infoConsulta,prescricaoConsulta,prescricao2Consulta," +

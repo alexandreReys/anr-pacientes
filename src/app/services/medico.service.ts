@@ -28,19 +28,20 @@ export class MedicoService {
 
   getMedicos(search?: string): Observable<Medico[]> {
     if(search){ 
-      let urlGet: string = `${APP_API}/medicos/${search}`;
+      let urlGet: string = `${APP_API}/medicos/${search}?idEmpresa=${this.loginService.user.idEmpresaUsuario}`;
       return this.httpClient
         .get<Medico[]>( urlGet, { headers: this.getHeaders() } )
         .pipe( catchError( error => ErrorHandler.handleError(error)) );
     } else {
+      let urlGet: string = `${APP_API}/medicos?idEmpresa=${this.loginService.user.idEmpresaUsuario}` ;
       return this.httpClient
-        .get<Medico[]>( this.url, { headers: this.getHeaders() })
+        .get<Medico[]>( urlGet, { headers: this.getHeaders() })
         .pipe( catchError( error => ErrorHandler.handleError(error) ) );
     }
   };
 
   getMedicoById(idMedico?: string): Observable<Medico[]> {
-      let urlGet: string = `${APP_API}/medicos/id/${idMedico}`;
+      let urlGet: string = `${APP_API}/medicos/id/${idMedico}?idEmpresa=${this.loginService.user.idEmpresaUsuario}`;
       return this.httpClient
         .get<Medico[]>( urlGet, { headers: this.getHeaders() } )
         .pipe( catchError( error => ErrorHandler.handleError(error) ) );

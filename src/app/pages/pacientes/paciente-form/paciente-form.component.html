@@ -36,88 +36,90 @@
 
             <div class="form-row">
               <div class="form-group col-md-8">
-                <label for="motivoConsulta">Nome</label>
-                <input type="text" class="form-control" formControlName="nome" id="nome">
+                <label for="nome" class="control-label">Nome</label>
+                <input type="text" class="form-control" formControlName="nome" id="nome" placeholder="Nome do Paciente ( Obrigatório )">
               </div>
 
               <div class="form-group col-md-4">
-                <label for="infoConsulta">Telefone</label>
-                <input type="text" class="form-control" formControlName="telefone" id="telefone">
+                <label for="telefone">Telefone</label>
+                <input type="text" class="form-control" formControlName="telefone" id="telefone" placeholder="Telefone ( Obrigatório )">
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-8">
-                <label for="motivoConsulta">Endereço</label>
-                <input type="text" class="form-control" formControlName="endereco" id="endereco">
+                <label for="endereco">Endereço</label>
+                <input type="text" class="form-control" formControlName="endereco" id="endereco" placeholder="Endereço ( Obrigatório )">
               </div>
 
               <div class="form-group col-md-4">
-                <label for="infoConsulta">Numero</label>
-                <input type="text" class="form-control" formControlName="numero" id="numero">
+                <label for="numero">Numero</label>
+                <input type="text" class="form-control" formControlName="numero" id="numero" placeholder="Numero ( Obrigatório )">
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="motivoConsulta">Complemento</label>
-                <input type="text" class="form-control" formControlName="complemento" id="complemento">
+                <label for="complemento">Complemento</label>
+                <input type="text" class="form-control" formControlName="complemento" id="complemento" placeholder="Complemento">
               </div>
 
               <div class="form-group col-md-6">
-                <label for="infoConsulta">Bairro</label>
-                <input type="text" class="form-control" formControlName="bairro" id="bairro">
+                <label for="bairro">Bairro</label>
+                <input type="text" class="form-control" formControlName="bairro" id="bairro" placeholder="Bairro">
               </div>
             </div>            
 
             <div class="form-row">
               <div class="form-group col-md-8">
-                <label for="motivoConsulta">Cidade</label>
-                <input type="text" class="form-control" formControlName="cidade" id="cidade">
+                <label for="cidade">Cidade</label>
+                <input type="text" class="form-control" formControlName="cidade" id="cidade" placeholder="Cidade ( Obrigatório )">
               </div>
 
               <div class="form-group col-md-2">
-                <label for="infoConsulta">Estado</label>
-                <input type="text" class="form-control" formControlName="estado" id="estado">
+                <label for="estado">Estado</label>
+                <select class="custom-select" (change)="changeEstado($event)" formControlName="estado" placeholder="Selecione">
+                  <option *ngFor="let estado of estados" [ngValue]="estado.sigla">{{estado.nome}}</option>
+                </select>
               </div>
 
               <div class="form-group col-md-2">
-                <label for="infoConsulta">Cep</label>
-                <input type="text" class="form-control" formControlName="cep" id="cep">
+                <label for="cep">Cep</label>
+                <input type="text" class="form-control" formControlName="cep" id="cep" placeholder="Obrig. 00000-000">
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-5">
-                <label for="motivoConsulta">Nome do Pai</label>
-                <input type="text" class="form-control" formControlName="paiNome" id="paiNome">
+                <label for="paiNome">Nome do Pai</label>
+                <input type="text" class="form-control" formControlName="paiNome" id="paiNome" placeholder="Nome do Pai ( Obrigatório )">
               </div>
 
               <div class="form-group col-md-4">
-                <label for="infoConsulta">Telefone</label>
-                <input type="text" class="form-control" formControlName="paiTelefone" id="paiTelefone">
+                <label for="paiTelefone">Telefone</label>
+                <input type="text" class="form-control" formControlName="paiTelefone" id="paiTelefone" placeholder="Tel.do Pai">
               </div>
 
               <div class="form-group col-md-3">
-                <label for="infoConsulta">Profissão</label>
-                <input type="text" class="form-control" formControlName="paiProfissao" id="paiProfissao">
+                <label for="paiProfissao">Profissão</label>
+                <input type="text" class="form-control" formControlName="paiProfissao" id="paiProfissao" placeholder="Prof.do Pai">
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-5">
-                <label for="motivoConsulta">Nome da Mãe</label>
-                <input type="text" class="form-control" formControlName="maeNome" id="maeNome">
+                <label for="maeNome">Nome da Mãe</label>
+                <input type="text" class="form-control" formControlName="maeNome" id="maeNome" placeholder="Nome da mãe ( Obrigatório )">
               </div>
 
               <div class="form-group col-md-4">
-                <label for="infoConsulta">Telefone</label>
-                <input type="text" class="form-control" formControlName="maeTelefone" id="maeTelefone">
+                <label for="maeTelefone">Telefone</label>
+                <input type="text" class="form-control" formControlName="maeTelefone" id="maeTelefone" placeholder="Tel.da Mãe">
               </div>
 
               <div class="form-group col-md-3">
-                <label for="infoConsulta">Profissão</label>
-                <input type="text" class="form-control" formControlName="maeProfissao" id="maeProfissao">
+                <label for="maeProfissao">Profissão</label>
+                <input type="text" class="form-control" formControlName="maeProfissao" id="maeProfissao" placeholder="Prof.da Mãe">
               </div>
             </div>
 

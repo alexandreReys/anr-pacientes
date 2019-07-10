@@ -43,7 +43,9 @@ export class ConsultaFormComponent implements OnInit {
   buildForm() {
     this.form = this.fb.group({
       idConsulta:          ['', Validators.required ],
-      idPaciente:          ['', Validators.required ],
+      idPacienteConsulta:  ['', Validators.required ],
+      idEmpresaConsulta:   ['', Validators.required ],
+      idMedicoConsulta:    ['', Validators.required ],
       dataConsulta:        ['', Validators.required ],
       horaConsulta:        ['', Validators.required ],
       motivoConsulta:      ['', Validators.required ],
@@ -51,10 +53,7 @@ export class ConsultaFormComponent implements OnInit {
       alturaConsulta:      [''],
       cabecaConsulta:      [''],
       infoConsulta:        ['', Validators.required ],
-      prescricaoConsulta:  [''],
-      prescricao2Consulta: [''],
-      prescricao3Consulta: [''],
-      dataNascConsulta:    ['']
+      prescricaoConsulta:  ['']
     });
   }
 

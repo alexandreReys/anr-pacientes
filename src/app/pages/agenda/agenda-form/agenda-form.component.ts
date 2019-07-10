@@ -2,90 +2,109 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+import { LoginService } from 'src/app/security/login/login.service';
+
 import { Contato } from 'src/app/models/contato.model';
 import { ContatoService } from 'src/app/services/contato.service';
 
 import { Consulta } from 'src/app/models/consulta.model';
 import { ConsultaService } from 'src/app/services/consulta.service';
 
+import { Medico } from 'src/app/models/medico.model';
+import { MedicoService } from 'src/app/services/medico.service';
+
 @Component({
-  selector: 'app-agenda-form',
-  templateUrl: './agenda-form.component.html',
-  styleUrls: ['./agenda-form.component.css']
+    selector: 'app-agenda-form',
+    templateUrl: './agenda-form.component.html',
+    styleUrls: ['./agenda-form.component.css']
 })
 export class AgendaFormComponent implements OnInit {
 
-  form: FormGroup;
-  codigoPaciente: string;
-  nomePaciente: string;
-  submittingForm: boolean = false;
+    form: FormGroup;
+    formMedico: FormGroup;
 
-  contato: Contato;
-  contatos: Contato[];
+    codigoPaciente: string;
+    nomePaciente: string;
+    submittingForm: boolean = false;
 
-  consulta: Consulta;
+    contato: Contato;
+    contatos: Contato[];
 
-  imaskConfig = {
-    mask: Number,
-    scale: 2,
-    thousandsSeparator: '',
-    padFractionalZeros: true,
-    normalizeZeros: true,
-    radix: ','
-  };
+    consulta: Consulta;
 
-  constructor( private contatoService: ContatoService,
-    private consultaService: ConsultaService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private formBuilder: FormBuilder ) {}
+    medico: Medico;
+    medicos: Medico[];
+
+    imaskConfig = {
+        mask: Number,
+        scale: 2,
+        thousandsSeparator: '',
+        padFractionalZeros: true,
+        normalizeZeros: true,
+        radix: ','
+    };
+
+    constructor(
+        private loginService: LoginService,
+        private contatoService: ContatoService,
+        private medicoService: MedicoService,
+        private consultaService: ConsultaService,
+        private route: ActivatedRoute,
+        private router: Router,
+        private formBuilder: FormBuilder 
+    ) {}
 
     ngOnInit() {
-      this.buildConsultaForm();
-      this.loadContatos();
-    }
-
-    buildConsultaForm() {
-      this.form = this.formBuilder.group({
-        idPaciente:          [null, [ Validators.required ]],
-        dataConsulta:        [null, [ Validators.required ]],
-        horaConsulta:        [null, [ Validators.required ]],
-        motivoConsulta:      [null, [ Validators.required ]]
-      });
+        this.buildMedicosForm();
+        this.buildAgendamentoForm();
+        this.loadContatos();
+        this.loadMedicos();
     };
-    
-    loadContatos() {
-      this.codigoPaciente = this.route.snapshot.url[0].toString();
-      this.contato = new Contato();
-      this.contatoService.getContatosCodigo(this.codigoPaciente)
-        .subscribe( contatos => { 
-          this.contatos = contatos;
-          this.contato = contatos[0];
-          this.form.controls['idPaciente'].setValue(this.contato.id);
-          // this.form.controls['dataConsulta'].setValue('2019-05-17');
-          // this.form.controls['horaConsulta'].setValue('10:00');
-          // this.form.controls['motivoConsulta'].setValue('Tosse e Febre alta');
+
+    buildMedicosForm() {
+        this.formMedico = this.formBuilder.group({
+            idMedico: [null, [ Validators.required ]]
         });
     };
-  
+
+    buildAgendamentoForm() {
+        this.form = this.formBuilder.group({
+            idPacienteConsulta:     [null, [ Validators.required ]],
+            idEmpresaConsulta:      [null, [ Validators.required ]],
+            idMedicoConsulta:       [null, [ Validators.required ]],
+            dataConsulta:           [null, [ Validators.required ]],
+            horaConsulta:           [null, [ Validators.required ]],
+            motivoConsulta:         [null, [ Validators.required ]]
+        });
+        this.form.controls['idEmpresaConsulta'].setValue(`${this.loginService.user.idEmpresaUsuario}`);
+    };
+
+    loadContatos() {
+        this.codigoPaciente = this.route.snapshot.url[0].toString();
+        this.contato = new Contato();
+        this.contatoService.getContatosCodigo(this.codigoPaciente)
+            .subscribe( contatos => { 
+                this.contatos = contatos;
+                this.contato = contatos[0];
+                this.form.controls['idPacienteConsulta'].setValue(this.contato.id);
+            });
+    };
+
+    loadMedicos() {
+        this.medicoService.getMedicos().subscribe(medicos => this.medicos = medicos);
+    };
+
     // ////////////////////////////////////////////////////////////////// //
     submitForm() {
-      this.submittingForm = true;
-      this.createConsulta();
-      this.router.navigate(['/agenda']);
+        this.submittingForm = true;
+        this.createConsulta();
+        this.router.navigate(['/agenda']);
     };
-  
+
     createConsulta() {
-      // const consulta: Consulta = Object.assign(new Consulta(), this.form.value);
-      this.consulta = Object.assign( new Consulta(), this.form.value );
-  
-      // let data = this.consulta.dataConsulta;
-      // this.consulta.dataConsulta = data.substr(6,4)+'/'+data.substr(3,2)+'/'+data.substr(0,2);
-  
-      this.consultaService.setDados(this.consulta);
-  
-      this.consultaService.addConsulta(this.consulta);
-    }
+        this.consulta = Object.assign( new Consulta(), this.form.value );
+        this.consultaService.setDados(this.consulta);
+        this.consultaService.addConsulta(this.consulta);
+    };
     // ////////////////////////////////////////////////////////////////// //
-  }
-  
+}

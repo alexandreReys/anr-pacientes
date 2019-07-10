@@ -1,3 +1,7 @@
+.ng-invalid.ng-touched:not(form) {
+    border: 1px solid red;
+}
+
 label {
     font-size:12px;
     margin-bottom: 0;
@@ -25,3 +29,23 @@ input {
     font-size: 0.7rem;
     line-height: 1.0;
 }
+
+::-webkit-input-placeholder {
+    color: orange;
+    font: 12px verdana, arial, sans-serif;
+ }
+ 
+ :-moz-placeholder {
+    color: orange;
+    font: 12px verdana, arial, sans-serif;
+ }
+ 
+ ::-moz-placeholder {
+    color: orange;  
+    font: 12px verdana, arial, sans-serif;
+ }
+ 
+ :-ms-input-placeholder {  
+    color: orange;  
+    font: 12px verdana, arial, sans-serif;
+ }

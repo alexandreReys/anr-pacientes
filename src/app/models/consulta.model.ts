@@ -1,6 +1,8 @@
 export class Consulta{
     idConsulta: number;
-    idPaciente: number;
+    idPacienteConsulta: number;
+    idEmpresaConsulta: number;
+    idMedicoConsulta: number;
     dataConsulta: string;
     horaConsulta: string;
     motivoConsulta: string;

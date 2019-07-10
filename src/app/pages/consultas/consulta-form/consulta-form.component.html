@@ -25,6 +25,12 @@
         </div>
     </div>
 
+<!--     
+    {{form.valid}}
+    {{form.value | json}}  
+-->
+    
+
     <form [formGroup]="form">
         <div class="card">
             <div class="card-header">
@@ -36,10 +42,16 @@
 
             <div class="card-body">
 
+<!-- 
                 <input type="hidden" class="form-control" formControlName="idConsulta">
-                <input type="hidden" class="form-control" formControlName="idPaciente">
+                <input type="hidden" class="form-control" formControlName="idPacienteConsulta">
+                <input type="hidden" class="form-control" formControlName="idEmpresaConsulta">
+                <input type="hidden" class="form-control" formControlName="idMedicoConsulta">
                 <input type="hidden" class="form-control" formControlName="dataConsulta">
-                <input type="hidden" class="form-control" formControlName="horaConsulta">
+                <input type="hidden" class="form-control" formControlName="horaConsulta"> 
+-->
+
+
 
                 <div class="form-row">
                     <div class="form-group col-md-12">

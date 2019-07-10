@@ -27,27 +27,28 @@ export class ContatoService {
     
   getContatos(search?: string): Observable<Contato[]> {
     if(search){ 
-      let urlGet: string = `${APP_API}/contatos/${search}`;
+      let urlGet: string = `${APP_API}/contatos/${search}?idEmpresa=${this.loginService.user.idEmpresaUsuario}`;
       return this.httpClient
         .get<Contato[]>( urlGet, { headers: this.getHeaders() } )
         .pipe( catchError( error => ErrorHandler.handleError(error) ) );
 
     } else {
+      let urlGet: string = `${APP_API}/contatos?idEmpresa=${this.loginService.user.idEmpresaUsuario}`;
       return this.httpClient
-        .get<Contato[]>( this.url, { headers: this.getHeaders() })
+        .get<Contato[]>( urlGet, { headers: this.getHeaders() })
         .pipe( catchError( error => ErrorHandler.handleError(error) ) );
     }
   };
 
   getContatosCodigo(codigoPaciente?: string): Observable<Contato[]> {
-      let urlGet: string = `${APP_API}/contatos/codigo/${codigoPaciente}`;
+      let urlGet: string = `${APP_API}/contatos/codigo/${codigoPaciente}?idEmpresa=${this.loginService.user.idEmpresaUsuario}`;
       return this.httpClient
         .get<Contato[]>( urlGet, { headers: this.getHeaders() } )
         .pipe( catchError( error => ErrorHandler.handleError(error) ) );
   };
 
   getContatosId(idPaciente?: string): Observable<Contato[]> {
-    let urlGet: string = `${APP_API}/contatos/id/${idPaciente}`;
+    let urlGet: string = `${APP_API}/contatos/id/${idPaciente}?idEmpresa=${this.loginService.user.idEmpresaUsuario}`;
     return this.httpClient
       .get<Contato[]>( urlGet, { headers: this.getHeaders() } )
       .pipe( catchError( error => ErrorHandler.handleError(error) ) );

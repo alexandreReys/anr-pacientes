@@ -5,15 +5,26 @@ const connection = require('./mysql-connection');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    connection.query('select * from awContatos order by nome', function(err, rows, fields) {
-        if (err) throw err;
-        res.json(rows);
-    });
+    let sql =   "SELECT * "+
+                "FROM awContatos "+
+                "WHERE (idEmpresa = " + req.query.idEmpresa + ") "+
+                "ORDER BY nome";
+
+    connection.query(sql, 
+        function(err, rows, fields) {
+            if (err) throw err;
+            res.json(rows);
+        }
+    );
 });
 
 router.get('/:nome', (req, res) => {
-    let sNome: string = req.params.nome;
-    let sql = "SELECT * FROM awContatos WHERE nome LIKE " + "'%" + sNome + "%'" + " ORDER BY nome";
+    let sql =   "SELECT * "+
+                "FROM awContatos "+
+                "WHERE (idEmpresa = " + req.query.idEmpresa + ") "+
+                  "AND (nome LIKE " + "'%" + req.params.nome + "%') "+ 
+                "ORDER BY nome";
+
     connection.query(sql, 
       function(err, rows) {
         if (err) throw err;
@@ -23,8 +34,11 @@ router.get('/:nome', (req, res) => {
 });
 
 router.get('/codigo/:codigo', (req, res) => {
-    let sCodigo: string = req.params.codigo;
-    let sql = "SELECT * FROM awContatos WHERE codigo = " + "'" + sCodigo + "'";
+    let sql =   "SELECT * "+
+                "FROM awContatos "+
+                "WHERE (idEmpresa = " + req.query.idEmpresa + ") "+
+                  "AND (codigo = " + "'" + req.params.codigo + "')";
+
     connection.query(sql, 
       function(err, rows) {
         if (err) throw err;
@@ -34,8 +48,10 @@ router.get('/codigo/:codigo', (req, res) => {
 });
 
 router.get('/id/:id', (req, res) => {
-    let sId: string = req.params.id;
-    let sql = "SELECT * FROM awContatos WHERE id = " + "'" + sId + "'";
+    let sql =   "SELECT * "+
+                "FROM awContatos "+
+                "WHERE (idEmpresa = " + req.query.idEmpresa + ") "+
+                  "AND (id = " + "'" + req.params.id + "')";
 
     // let sql = "SELECT idConsulta,idPaciente,dataConsulta,horaConsulta," +
     //                     "motivoConsulta,pesoConsulta,alturaConsulta,cabecaConsulta," +

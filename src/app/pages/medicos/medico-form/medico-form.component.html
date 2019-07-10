@@ -36,66 +36,69 @@
 
             <div class="form-row">
               <div class="form-group col-md-8">
-                <label for="motivoConsulta">Nome</label>
-                <input type="text" class="form-control" formControlName="nomeMedico" id="nomeMedico">
+                <label for="nomeMedico">Nome</label>
+                <input type="text" class="form-control" formControlName="nomeMedico" id="nomeMedico" placeholder="Nome do(a) Médico(a) ( Obrigatório )">
               </div>
 
               <div class="form-group col-md-4">
-                <label for="infoConsulta">Telefone</label>
-                <input type="text" class="form-control" formControlName="telefoneMedico" id="telefoneMedico">
+                <label for="telefoneMedico">Telefone</label>
+                <input type="text" class="form-control" formControlName="telefoneMedico" id="telefoneMedico" placeholder="Telefone ( Obrigatório )">
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="motivoConsulta">CRM</label>
-                <input type="text" class="form-control" formControlName="crmMedico" id="crmMedico">
+                <label for="crmMedico">CRM</label>
+                <input type="text" class="form-control" formControlName="crmMedico" id="crmMedico" placeholder="CRM ( Obrigatório )">
               </div>
 
               <div class="form-group col-md-6">
-                <label for="infoConsulta">Especialidade</label>
-                <input type="text" class="form-control" formControlName="especialidadeMedico" id="especialidadeMedico">
+                <label for="especialidadeMedico">Especialidade</label>
+                <input type="text" class="form-control" formControlName="especialidadeMedico" id="especialidadeMedico" placeholder="Especialidade ( Obrigatório )">
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-8">
-                <label for="motivoConsulta">Endereço</label>
-                <input type="text" class="form-control" formControlName="enderecoMedico" id="enderecoMedico">
+                <label for="enderecoMedico">Endereço</label>
+                <input type="text" class="form-control" formControlName="enderecoMedico" id="enderecoMedico" placeholder="Endereço">
               </div>
 
               <div class="form-group col-md-4">
-                <label for="infoConsulta">Numero</label>
-                <input type="text" class="form-control" formControlName="numeroMedico" id="numeroMedico">
+                <label for="numeroMedico">Numero</label>
+                <input type="text" class="form-control" formControlName="numeroMedico" id="numeroMedico" placeholder="Numero">
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label for="motivoConsulta">Complemento</label>
-                <input type="text" class="form-control" formControlName="complementoMedico" id="complementoMedico">
+                <label for="complementoMedico">Complemento</label>
+                <input type="text" class="form-control" formControlName="complementoMedico" id="complementoMedico" placeholder="Complemento">
               </div>
 
               <div class="form-group col-md-6">
-                <label for="infoConsulta">Bairro</label>
-                <input type="text" class="form-control" formControlName="bairroMedico" id="bairroMedico">
+                <label for="bairroMedico">Bairro</label>
+                <input type="text" class="form-control" formControlName="bairroMedico" id="bairroMedico" placeholder="Bairro">
               </div>
             </div>            
 
             <div class="form-row">
               <div class="form-group col-md-8">
-                <label for="motivoConsulta">Cidade</label>
-                <input type="text" class="form-control" formControlName="cidadeMedico" id="cidadeMedico">
+                <label for="cidadeMedico">Cidade</label>
+                <input type="text" class="form-control" formControlName="cidadeMedico" id="cidadeMedico" placeholder="Cidade">
               </div>
 
               <div class="form-group col-md-2">
-                <label for="infoConsulta">Estado</label>
-                <input type="text" class="form-control" formControlName="estadoMedico" id="estadoMedico">
+                <label for="estadoMedico">Estado</label>
+                <select class="custom-select" (change)="changeEstado($event)" formControlName="estadoMedico">
+                  <option *ngFor="let estado of estados" [ngValue]="estado.sigla">{{estado.nome}}</option>
+                </select>
+                <!-- <input type="text" class="form-control" formControlName="estadoMedico" id="estadoMedico"> -->
               </div>
 
               <div class="form-group col-md-2">
-                <label for="infoConsulta">Cep</label>
-                <input type="text" class="form-control" formControlName="cepMedico" id="cepMedico">
+                <label for="cepMedico">Cep</label>
+                <input type="text" class="form-control" formControlName="cepMedico" id="cepMedico" placeholder="Cep">
               </div>
 
 

@@ -67,15 +67,18 @@ export class ConsultasListComponent implements OnInit {
         this.consultas.splice(index,1);
     }; // fim delete
 
-    procuraData() {
-        let searchDate = this.searchDate.value;
+    procuraData(todos?: boolean) {
         this.consulta = new Consulta();
         this.consulta.dataConsulta = 'Processando ...';
-        if(searchDate)
-            this.consultaService.getConsultasData(searchDate).subscribe( consultas => this.consultas = consultas );
-        else
+        if(todos) {
             this.consultaService.getConsultas().subscribe( consultas => this.consultas = consultas );
-
+        } else {
+            let searchDate = this.searchDate.value;
+            if(searchDate)
+                this.consultaService.getConsultasData(searchDate).subscribe( consultas => this.consultas = consultas );
+            else
+                this.consultaService.getConsultas().subscribe( consultas => this.consultas = consultas );
+        }
     }; // fim procuraData()
 
     setSearchDate() {
