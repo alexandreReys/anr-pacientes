@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
       email: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)]),
       password: this.formBuilder.control('', [Validators.required, Validators.minLength(5)])
     });
+
     this.navigateTo = this.activatedRoute.snapshot.params['to'] || btoa('/');
   };
 

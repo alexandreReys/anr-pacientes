@@ -28,25 +28,24 @@
             <form [formGroup]="searchForm">
                 <div class="form-group mt-2">
                     <input type="date" 
-                            formControlName="searchDate" 
-                            class="form-control" 
-                            placeholder="Data Consulta" 
-                            style="font-size: 14px;">
+                        formControlName="searchDate" 
+                        class="form-control" 
+                        placeholder="Data Consulta" 
+                        style="font-size: 14px">
                 </div>
             </form>
         </div>
-        <div class="col-md-2">
-            <button class="btn btn-dark mt-2"
+        <div class="col-md-9">
+            <button class="btn btn-dark mt-2 ml-3"
                 (click)="procuraData()" 
                 [disabled]="!searchForm.valid">
                 <i class="fa fa-hand-point-left"></i>
-                Confirma
+                Mostrar
             </button>
 
-            <button class="btn btn-dark mt-2"
+            <button class="btn btn-dark mt-2 ml-3"
                 (click)="procuraData(true)" 
                 [disabled]="!searchForm.valid">
-                <!-- <i class="fa fa-hand-point-left"></i> -->
                 Mostrar Todos
             </button>
         </div>
