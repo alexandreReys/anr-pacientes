@@ -5,14 +5,16 @@ var connection = require('./mysql-connection');
 var router = express.Router();
 router.get('/', function (req, res) {
     var sql = "SELECT " +
-        "idConsulta, idPacienteConsulta, idEmpresaConsulta, idMedicoConsulta, " +
-        "dataConsulta, horaConsulta, motivoConsulta, pesoConsulta, alturaConsulta, " +
-        "cabecaConsulta, infoConsulta, prescricaoConsulta, " +
-        "Date_Format(dataConsulta,'%d/%m/%Y') dataConsultaFrm, " +
-        "ct.nome,  ct.maeNome, ct.paiNome, ct.telefone " +
+        "md.nomeMedico, ct.nome, dataConsulta, horaConsulta, " +
+        "idConsulta, idMedicoConsulta, idPacienteConsulta, idEmpresaConsulta, " +
+        "motivoConsulta, pesoConsulta, alturaConsulta, cabecaConsulta, infoConsulta, " +
+        "prescricaoConsulta, Date_Format(dataConsulta,'%d/%m/%Y') dataConsultaFrm, " +
+        "ct.maeNome, ct.paiNome, ct.telefone " +
         "FROM awConsultas " +
         "INNER JOIN awContatos ct " +
         "ON awConsultas.idPacienteConsulta = ct.id " +
+        "INNER JOIN awMedicos md " +
+        "ON awConsultas.idMedicoConsulta = md.idMedico " +
         "WHERE (idEmpresaConsulta = " + req.query.idEmpresa + ") " +
         "ORDER BY Date_Format(dataConsulta,'%Y-%m-%d'), horaConsulta";
     connection.query(sql, function (err, rows, fields) {

@@ -19,8 +19,15 @@
           </a>
  
           <div class=" dropdown dropdown-menu">
+
+            <p class="ml-3 text-danger font-weight-bold font-italic">CADASTROS :</p>
             <a class="dropdown-item menu-item" [routerLink]="['/medico']">Médicos </a>
             <a class="dropdown-item menu-item" [routerLink]="['/paciente']">Pacientes </a>
+            <div class="dropdown-divider"></div>
+
+            <p class="ml-3 text-danger font-weight-bold font-italic">LISTAGENS :</p>
+            <a class="dropdown-item menu-item">Médicos </a>
+            <a class="dropdown-item menu-item">Pacientes </a>
           </div>
         </li>
 
@@ -30,8 +37,13 @@
           </a>
  
           <div class=" dropdown dropdown-menu">
+            <p class="ml-3 text-danger font-weight-bold font-italic">CONSULTAS :</p>
             <a class="dropdown-item menu-item" [routerLink]="['/agenda']">Agendamento </a>
             <a class="dropdown-item menu-item" [routerLink]="['/consulta']">Atendimento </a>
+            <div class="dropdown-divider"></div>
+
+            <p class="ml-3 text-danger font-weight-bold font-italic">LISTAGENS :</p>
+            <a class="dropdown-item menu-item" [routerLink]="['/consulta/listagem']">Consultas </a>
           </div>
         </li>
         

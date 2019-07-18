@@ -2,6 +2,7 @@ import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+import { LoginService } from 'src/app/security/login/login.service';
 import { Contato } from '../../../models/contato.model';
 import { ContatoService } from '../../../services/contato.service';
 import { Estado } from 'src/app/models/estado.model';
@@ -34,6 +35,7 @@ export class PacienteFormComponent implements OnInit {
   };
 
   constructor(  private contatoService: ContatoService,
+                private loginService: LoginService,
                 private route: ActivatedRoute,
                 private router: Router,
                 private formBuilder: FormBuilder ) {}
@@ -100,6 +102,7 @@ export class PacienteFormComponent implements OnInit {
   buildContatoForm() {
     this.form = this.formBuilder.group({
       id:             [null],
+      idEmpresa:      [null],
       codigo:         [null],
       nome:           [null, [ Validators.required ]],
       telefone:       [null, [ Validators.required ]],
@@ -127,13 +130,14 @@ export class PacienteFormComponent implements OnInit {
         resp => { 
           this.contato = resp;
           this.form.patchValue(this.contato);  // binds loaded contato data to form
+          this.form.controls['idEmpresa'].setValue(this.loginService.user.idEmpresaUsuario);
           this.form.controls['estado'].setValue(this.contato.estado);
         }
       )
     } else {
       this.form.controls['id'].setValue(1);
-      let codigoPaciente = new Date().getTime().toString();
-      this.form.controls['codigo'].setValue(codigoPaciente);
+      this.form.controls['idEmpresa'].setValue(this.loginService.user.idEmpresaUsuario);
+      this.form.controls['estado'].setValue('SP');
     };
   };
 
@@ -142,7 +146,9 @@ export class PacienteFormComponent implements OnInit {
   };
 
   changeEstado(e) {
-    this.form.controls['estado'].setValue( e.target.value, {onlySelf: true} );
+    let estado = e.target.value;
+    if(estado.length > 2) { estado = estado.substr(estado.length-2) };
+    this.form.controls['estado'].setValue( estado, {onlySelf: true} );
   };
 
   // ////////////////////////////////////////////////////////////////// //

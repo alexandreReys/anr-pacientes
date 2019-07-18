@@ -2,6 +2,7 @@ import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+import { LoginService } from 'src/app/security/login/login.service';
 import { Medico } from '../../../models/medico.model';
 import { MedicoService } from '../../../services/medico.service';
 import { Estado } from 'src/app/models/estado.model';
@@ -33,7 +34,8 @@ export class MedicoFormComponent implements OnInit, AfterContentChecked {
     radix: ','
   };
 
-  constructor( private medicoService: MedicoService,
+  constructor(  private medicoService: MedicoService,
+                private loginService: LoginService,
                 private route: ActivatedRoute,
                 private router: Router,
                 private formBuilder: FormBuilder ) {}
@@ -99,6 +101,7 @@ export class MedicoFormComponent implements OnInit, AfterContentChecked {
   buildMedicoForm() {
       this.form = this.formBuilder.group({
       idMedico:            [null, [ Validators.required ]],
+      idEmpresa:           [null, [ Validators.required ]],
       nomeMedico:          [null, [ Validators.required, Validators.minLength(3) ]],
       telefoneMedico:      [null, [ Validators.required, Validators.minLength(8) ]],
       enderecoMedico:      [null],
@@ -119,15 +122,21 @@ export class MedicoFormComponent implements OnInit, AfterContentChecked {
         resp => { 
           this.medico = resp;
           this.form.patchValue(this.medico);  // binds loaded medico data to form
+          this.form.controls['idEmpresa'].setValue(this.loginService.user.idEmpresaUsuario);
+          this.form.controls['estadoMedico'].setValue(this.medico.estadoMedico);
         }
       );
     } else {
       this.form.controls['idMedico'].setValue(1);
+      this.form.controls['idEmpresa'].setValue(this.loginService.user.idEmpresaUsuario);
+      this.form.controls['estadoMedico'].setValue('SP');
     };
   };
 
   changeEstado(e) {
-    this.form.controls['estadoMedico'].setValue( e.target.value, {onlySelf: true} );
+    let estado = e.target.value;
+    if(estado.length > 2) { estado = estado.substr(estado.length-2) };
+    this.form.controls['estadoMedico'].setValue( estado, {onlySelf: true} );
   };
   // ////////////////////////////////////////////////////////////////// //
   submitForm() {

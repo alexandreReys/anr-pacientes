@@ -41,7 +41,7 @@ router.post('/', function (req, res) {
     var c = req.body;
     var sql = 'insert into ' +
         'awMedicos (' +
-        'idPaciente, nomeMedico, telefoneMedico, enderecoMedico, numeroMedico, complementoMedico, ' +
+        'idEmpresa, nomeMedico, telefoneMedico, enderecoMedico, numeroMedico, complementoMedico, ' +
         'bairroMedico, cidadeMedico, estadoMedico, cepMedico, crmMedico, especialidadeMedico )' +
         'values (' +
         '?,?,?,?,?,  ?,?,?,?,?,  ?,? )';

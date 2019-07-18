@@ -1,0 +1,25 @@
+<table class="table table-hover">
+    <ng-container *ngFor="let medico of consultas[0]">
+        
+        <thead>
+            <tr class="bg-primary text-light">
+                <th>Medico</th>
+                <th>Paciente</th>
+                <th>Data Agendada</th>
+            </tr>
+        </thead>
+        
+        <p> <strong> {{medico.nomeMedico}} </strong> </p>
+        
+        <tbody>
+            <tr *ngFor="let consulta of medico.consultas">
+                <td></td>
+                <td>{{consulta.nome}}</td>
+                <td>{{consulta.dataConsultaFrm}} - {{consulta.horaConsulta}}</td>
+            </tr>
+        </tbody>
+
+    </ng-container>
+</table> 
+
+

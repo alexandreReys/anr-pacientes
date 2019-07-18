@@ -1,4 +1,4 @@
-#login .container #login-row #login-column #login-box {
+#login .container-fluid #login-row #login-column #login-box {
   margin-top: 40px;
   max-width: 600px;
   height: 300px;

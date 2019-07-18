@@ -7,6 +7,8 @@ import { IMaskModule } from 'angular-imask';
 import { ConsultasRoutingModule } from './consultas-routing.module';
 import { ConsultasListComponent } from './consultas-list/consultas-list.component';
 import { ConsultaFormComponent } from './consulta-form/consulta-form.component';
+import { ConsultasListagemComponent } from './consultas-listagem/consultas-listagem.component';
+import { ConsultasListagemDetComponent } from './consultas-listagem/consultas-listagem-det/consultas-listagem-det.component';
 
 @NgModule({
   imports: [
@@ -16,6 +18,6 @@ import { ConsultaFormComponent } from './consulta-form/consulta-form.component';
     ConsultasRoutingModule,
     IMaskModule
   ],
-  declarations: [ConsultasListComponent, ConsultaFormComponent]
+  declarations: [ConsultasListComponent, ConsultaFormComponent, ConsultasListagemComponent, ConsultasListagemDetComponent]
 })
 export class ConsultasModule { }

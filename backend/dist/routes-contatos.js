@@ -58,13 +58,13 @@ router.get('/id/:id', function (req, res) {
 router.post('/', function (req, res) {
     var c = req.body;
     var sql = 'insert into ' +
-        'awContatos (' +
+        'awContatos ( idEmpresa, ' +
         'codigo, nome, telefone, endereco, numero, complemento, ' +
         'bairro, cidade, estado, cep, paiNome, paiTelefone, ' +
         'paiProfissao, maeNome, maeTelefone, maeProfissao )' +
         'values (' +
-        '?,?,?,?, ?,?,?,?, ?,?,?,? ,?,?,?,? )';
-    connection.query(sql, [c.codigo, c.nome, c.telefone, c.endereco, c.numero, c.complemento,
+        '?, ?,?,?,?, ?,?,?,?, ?,?,?,? ,?,?,?,? )';
+    connection.query(sql, [c.idEmpresa, c.codigo, c.nome, c.telefone, c.endereco, c.numero, c.complemento,
         c.bairro, c.cidade, c.estado, c.cep, c.paiNome, c.paiTelefone,
         c.paiProfissao, c.maeNome, c.maeTelefone, c.maeProfissao], function (err, rows, fields) {
         if (err)

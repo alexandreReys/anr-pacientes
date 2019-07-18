@@ -1,0 +1,44 @@
+<div class="container">
+    <nav class="mt-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+            <li class="breadcrumb-item active">Listagem de Pacientes</li>
+        </ol>
+    </nav>
+
+    <div class="row mt-3">
+        <div class="col-md-8">
+            <h1><i class="fa fa-print text-danger" aria-hidden="true"></i> 
+                Listagem de Pacientes
+            </h1>
+        </div>
+    </div>
+
+
+    <table class="table table-hover">
+            <thead>
+                <tr class="bg-primary text-light">
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th class="widthAcoes">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let contato of contatos">
+                    <td><strong>{{contato.nome}}</strong></td>
+                    <td>{{contato.telefone}}</td>
+                    <td class="widthAcoes">
+                        <h5> 
+                            <a class="fa fa-edit pointer mr-3 text-primary"
+                                (click)="edit(contato)">
+                            </a> 
+                            <a class="fa fa-trash-alt pointer text-danger"
+                                (click)="delete(contato)">
+                            </a>
+                        </h5>
+                    </td>
+                </tr>
+               
+            </tbody>
+        </table>
+</div>

@@ -1,5 +1,6 @@
 export class Medico{
     idMedico: number;
+    idEmpresa: number;
     nomeMedico: string;
     telefoneMedico: string;
     enderecoMedico: string;

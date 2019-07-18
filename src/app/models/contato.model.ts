@@ -1,5 +1,6 @@
 export class Contato{
     id: number;
+    idEmpresa: string;
     codigo: string;
     nome: string;
     telefone: string;

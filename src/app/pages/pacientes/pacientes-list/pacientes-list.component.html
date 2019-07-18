@@ -47,7 +47,6 @@
               <th class="widthAcoes">Ações</th>
           </tr>
       </thead>
-
       <tbody>
           <tr *ngFor="let contato of contatos">
               <td><strong>{{contato.nome}}</strong></td>
@@ -57,14 +56,13 @@
                       <a class="fa fa-edit pointer mr-3 text-primary"
                           (click)="edit(contato)">
                       </a> 
-                  
                       <a class="fa fa-trash-alt pointer text-danger"
                           (click)="delete(contato)">
                       </a>
                   </h5>
               </td>
           </tr>
-          
+         
       </tbody>
   </table>
 </div>
