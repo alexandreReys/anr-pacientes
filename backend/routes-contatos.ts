@@ -5,11 +5,15 @@ const connection = require('./mysql-connection');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    let sql =   "SELECT * "+
+    let sql =   "SELECT "+
+                    "id, idEmpresa, codigo, nome, telefone, endereco, "+
+                    "numero, complemento, bairro, cidade, estado, cep, "+
+                    "paiNome, paiTelefone, paiProfissao, maeNome, maeTelefone, "+
+                    "maeProfissao, Date_Format(dataNasc,'%d/%m/%Y') dataNasc, "+
+                    "sexo, email, certidaoNasc "+
                 "FROM awContatos "+
                 "WHERE (idEmpresa = " + req.query.idEmpresa + ") "+
                 "ORDER BY nome";
-
     connection.query(sql, 
         function(err, rows, fields) {
             if (err) throw err;
@@ -19,7 +23,12 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:nome', (req, res) => {
-    let sql =   "SELECT * "+
+    let sql =   "SELECT  "+
+                    "id, idEmpresa, codigo, nome, telefone, endereco, "+
+                    "numero, complemento, bairro, cidade, estado, cep, "+
+                    "paiNome, paiTelefone, paiProfissao, maeNome, maeTelefone, "+
+                    "maeProfissao, Date_Format(dataNasc,'%d/%m/%Y') dataNasc, "+
+                    "sexo, email, certidaoNasc "+
                 "FROM awContatos "+
                 "WHERE (idEmpresa = " + req.query.idEmpresa + ") "+
                   "AND (nome LIKE " + "'%" + req.params.nome + "%') "+ 
@@ -74,13 +83,15 @@ router.post('/', (req, res) => {
                     'awContatos ( idEmpresa, ' + 
                         'codigo, nome, telefone, endereco, numero, complemento, ' +
                         'bairro, cidade, estado, cep, paiNome, paiTelefone, ' +
-                        'paiProfissao, maeNome, maeTelefone, maeProfissao )'  +
+                        'paiProfissao, maeNome, maeTelefone, maeProfissao, ' +
+                        'dataNasc, sexo, email, certidaoNasc )'  +
                     'values (' +
-                        '?, ?,?,?,?, ?,?,?,?, ?,?,?,? ,?,?,?,? )';
+                        '?, ?,?,?,?, ?,?,?,?, ?,?,?,? ,?,?,?,?, ?,?,?,? )';
 
     connection.query(sql, [ c.idEmpresa, c.codigo, c.nome, c.telefone, c.endereco, c.numero, c.complemento,
                             c.bairro, c.cidade, c.estado, c.cep, c.paiNome, c.paiTelefone, 
-                            c.paiProfissao, c.maeNome, c.maeTelefone, c.maeProfissao ], 
+                            c.paiProfissao, c.maeNome, c.maeTelefone, c.maeProfissao,
+                            c.dataNasc, c.sexo, c.email, c.certidaoNasc ], 
         function(err, rows, fields) {
             if (err) throw err;
             res.json(rows);
@@ -97,15 +108,17 @@ router.delete('/:codigo', (req, res) => {
 
 router.put('/', (req, res) => {
     var c = req.body;
+    
     var sql = 'update awContatos set ' + 
                 'nome=?, telefone=?, endereco=?, numero=?, complemento=?, ' +
                 'bairro=?, cidade=?, estado=?, cep=?, paiNome=?, paiTelefone=?, ' +
-                'paiProfissao=?, maeNome=?, maeTelefone=?, maeProfissao=? '  +
+                'paiProfissao=?, maeNome=?, maeTelefone=?, maeProfissao=?, '  +
+                'dataNasc=?, sexo=?, email=?, certidaoNasc=?' +
                 'where codigo=?';
-
     connection.query(sql, [ c.nome, c.telefone, c.endereco, c.numero, c.complemento,
                             c.bairro, c.cidade, c.estado, c.cep, c.paiNome, c.paiTelefone, 
-                            c.paiProfissao, c.maeNome, c.maeTelefone, c.maeProfissao, c.codigo ], 
+                            c.paiProfissao, c.maeNome, c.maeTelefone, c.maeProfissao,
+                            c.dataNasc, c.sexo, c.email, c.certidaoNasc, c.codigo ], 
     function(err, rows, fields) {
         if (err) throw err;
         res.json(rows);

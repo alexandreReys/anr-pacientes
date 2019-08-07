@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 import { PacientesRoutingModule } from './pacientes-routing.module';
 import { PacientesListComponent } from './pacientes-list/pacientes-list.component';
@@ -13,8 +14,14 @@ import { PacientesListagemDetComponent } from './pacientes-listagem/pacientes-li
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
     PacientesRoutingModule
   ],
-  declarations: [PacientesListComponent, PacienteFormComponent, PacientesListagemComponent, PacientesListagemDetComponent]
+  declarations: [
+    PacientesListComponent, 
+    PacienteFormComponent, 
+    PacientesListagemComponent, 
+    PacientesListagemDetComponent
+  ]
 })
 export class PacientesModule { }

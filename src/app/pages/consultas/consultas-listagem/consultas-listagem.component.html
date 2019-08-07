@@ -1,19 +1,37 @@
-<div class="container">
-    <nav class="mt-3">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-            <li class="breadcrumb-item active">Listagem de Consultas</li>
-        </ol>
-    </nav>
+<div class="container-fluid">
+    <app-listagem-header [pageTitle]="pageTitle"></app-listagem-header>
 
-    <div class="row mt-3">
-        <div class="col-md-8">
-            <h1><i class="fa fa-print text-danger" aria-hidden="true"></i> 
-                Listagem de Consultas
-            </h1>
-        </div>
-    </div>
+    <!-- <app-consultas-listagem-det [consultas]="consultas"></app-consultas-listagem-det> -->
 
-    <app-consultas-listagem-det [consultas]="consultas"></app-consultas-listagem-det>
-
+    <table class="table table-hover mt-3">
+        <ng-container *ngFor="let medico of consultas[0]">
+      
+          <thead>
+            <tr class="bg-primary text-light">
+              <th>Medico</th>
+              <th>Paciente</th>
+              <th>Data Agendada</th>
+              <th>Motivo Consulta</th>
+              <th>Telefone</th>
+              <th>Pai</th>
+              <th>Mãe</th>
+            </tr>
+          </thead>
+      
+          <p> <strong> {{medico.nomeMedico}} </strong> </p>
+      
+          <tbody>
+            <tr *ngFor="let consulta of medico.consultas">
+              <td></td>
+              <td>{{consulta.nome}}</td>
+              <td>{{consulta.dataConsultaFrm}} - {{consulta.horaConsulta}}</td>
+              <td>{{consulta.motivoConsulta}}</td>
+              <td>{{consulta.telefone}}</td>
+              <td>{{consulta.paiNome}}</td>
+              <td>{{consulta.maeNome}}</td>
+            </tr>
+          </tbody>
+      
+        </ng-container>
+      </table>
 </div>

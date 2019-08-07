@@ -11,19 +11,16 @@ import { ConsultaService } from 'src/app/services/consulta.service';
 })
 export class ConsultasListagemComponent implements OnInit {
  
-  consultas: Consulta[]=[];
+    pageTitle: string = 'Listagem das Consultas Agendadas';
+    consultas: Consulta[]=[];
 
-  constructor(
-      private consultaService: ConsultaService
-  ) { }
+    constructor(
+        private consultaService: ConsultaService
+    ) { }
 
     ngOnInit() {
         this.consultaService.getConsultas().subscribe( 
             consultas => { 
-                // this.consultas = consultas;
-                
-                // this.consultas = Array.of( _.groupBy(consultas, 'nomeMedico') );
-                
                 var result = _(consultas)
                     .groupBy(x => x.nomeMedico)
                     .map((value, key) => ({nomeMedico: key, consultas: value}))

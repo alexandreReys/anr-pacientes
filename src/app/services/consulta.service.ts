@@ -32,18 +32,28 @@ export class ConsultaService {
     this.subject.next(consulta);
   }
 
-  getConsultas(search?: string): Observable<Consulta[]> {
+  getConsultas(search?, idMedico?: string): Observable<Consulta[]> {
+    let idEmpresa = this.loginService.user.idEmpresaUsuario;
+    let urlGet: string;
     if(search){ 
-      let urlGet: string = `${APP_API}/consultas/${search}?idEmpresa=${this.loginService.user.idEmpresaUsuario}`;
-      return this.httpClient
-        .get<Consulta[]>( urlGet, { headers: this.getHeaders() } )
-        .pipe( catchError( error => ErrorHandler.handleError(error) ) );
-
+        if(!idMedico)
+          urlGet = `${APP_API}/consultas/${search}?idEmpresa=${idEmpresa}`;
+        else
+          urlGet = `${APP_API}/consultas/${search}?idEmpresa=${idEmpresa}&idMedico=${idMedico}`;
+        
+        return this.httpClient
+          .get<Consulta[]>( urlGet, { headers: this.getHeaders() } )
+          .pipe( catchError( error => ErrorHandler.handleError(error) ) );
     } else {
-      let urlGet = `${APP_API}/consultas?idEmpresa=${this.loginService.user.idEmpresaUsuario}`;
-      return this.httpClient
-        .get<Consulta[]>( urlGet, { headers: this.getHeaders() })
-        .pipe( catchError( error => ErrorHandler.handleError(error) ) );
+        if(!idMedico) {
+          urlGet = `${APP_API}/consultas?idEmpresa=${idEmpresa}`;
+        } else {
+          urlGet = `${APP_API}/consultas?idEmpresa=${idEmpresa}&idMedico=${idMedico}`;
+        };
+
+        return this.httpClient
+          .get<Consulta[]>( urlGet, { headers: this.getHeaders() })
+          .pipe( catchError( error => ErrorHandler.handleError(error) ) );
     }
   };
 
@@ -54,8 +64,14 @@ export class ConsultaService {
       .pipe( catchError( error => ErrorHandler.handleError(error) ) );
   };
 
-  getConsultasData(dataConsulta: string): Observable<Consulta[]> {
-    let urlGet: string = `${APP_API}/consultas/data/${dataConsulta}?idEmpresa=${this.loginService.user.idEmpresaUsuario}`;
+  getConsultasData(dataConsulta, idMedico?: string): Observable<Consulta[]> {
+    let idEmpresa = this.loginService.user.idEmpresaUsuario;
+    let urlGet: string;
+    if(!idMedico)
+      urlGet = `${APP_API}/consultas/data/${dataConsulta}?idEmpresa=${idEmpresa}`;
+    else
+      urlGet = `${APP_API}/consultas/data/${dataConsulta}?idEmpresa=${idEmpresa}&idMedico=${idMedico}`;
+
     return this.httpClient
       .get<Consulta[]>( urlGet, { headers: this.getHeaders() } )
       .pipe( catchError( error => ErrorHandler.handleError(error) ) );
@@ -68,7 +84,7 @@ export class ConsultaService {
         .pipe( catchError( error => ErrorHandler.handleError(error) ) );
   };
 
-addConsulta(consulta: Consulta){
+  addConsulta(consulta: Consulta){
     return this.httpClient
       .post<Consulta>( this.url, consulta, this.getHttpOptions() )
       .pipe( catchError( error => ErrorHandler.handleError(error) ) )

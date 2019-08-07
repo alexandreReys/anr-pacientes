@@ -5,8 +5,18 @@ const connection = require('./mysql-connection');
 const router = express.Router();
 
 router.get('/', (req, res) => {
+    let where: string;
+    if(!req.query.idMedico){
+      where =
+        "WHERE (idEmpresaConsulta = " + req.query.idEmpresa + ") ";
+    } else {
+        where =
+            "WHERE (idEmpresaConsulta = " + req.query.idEmpresa + ") " +
+                "AND (idMedicoConsulta = " + req.query.idMedico + ") ";
+    };
+
     let sql = "SELECT " + 
-                    "md.nomeMedico, ct.nome, dataConsulta, horaConsulta, " + 
+                    "md.nomeMedico, ct.nome, dataConsulta, mid(horaConsulta,1,5) horaConsulta, " + 
                     "idConsulta, idMedicoConsulta, idPacienteConsulta, idEmpresaConsulta, " + 
                     "motivoConsulta, pesoConsulta, alturaConsulta, cabecaConsulta, infoConsulta, " + 
                     "prescricaoConsulta, Date_Format(dataConsulta,'%d/%m/%Y') dataConsultaFrm, " +
@@ -16,7 +26,7 @@ router.get('/', (req, res) => {
                         "ON awConsultas.idPacienteConsulta = ct.id " +
                     "INNER JOIN awMedicos md " +
                         "ON awConsultas.idMedicoConsulta = md.idMedico " +
-                "WHERE (idEmpresaConsulta = " + req.query.idEmpresa + ") "+
+                where +
                 "ORDER BY Date_Format(dataConsulta,'%Y-%m-%d'), horaConsulta";
 
     connection.query(sql, function(err, rows, fields) {
@@ -30,7 +40,7 @@ router.get('/id/:idConsulta', (req, res) => {
 //  let sql = "SELECT * FROM awConsultas WHERE idConsulta = " + "'" + idConsulta + "'" + " ORDER BY idConsulta";
     let sql =   "SELECT " + 
                     "idConsulta, idPacienteConsulta, idEmpresaConsulta, idMedicoConsulta, " + 
-                    "dataConsulta, horaConsulta, motivoConsulta, pesoConsulta, alturaConsulta, " + 
+                    "dataConsulta, mid(horaConsulta,1,5) horaConsulta, motivoConsulta, pesoConsulta, alturaConsulta, " + 
                     "cabecaConsulta, infoConsulta,prescricaoConsulta, Date_Format(dataConsulta,'%d/%m/%Y') dataConsultaFrm, " +
                     "ct.nome,  ct.maeNome, ct.paiNome, ct.telefone " +
                 "FROM awConsultas " +
@@ -50,16 +60,31 @@ router.get('/id/:idConsulta', (req, res) => {
 
 router.get('/data/:dataConsulta', (req, res) => {
     let dataConsulta: string = req.params.dataConsulta;
+
+    let where: string;
+    if(!req.query.idMedico){
+      where =
+        "WHERE (idEmpresaConsulta = " + req.query.idEmpresa + ") "+
+            "AND (Date_Format(dataConsulta,'%Y-%m-%d') = " + "'" + dataConsulta + "') ";
+    } else {
+        where =
+            "WHERE (idEmpresaConsulta = " + req.query.idEmpresa + ") "+
+                "AND (idMedicoConsulta = " + req.query.idMedico + ") "+
+                "AND (Date_Format(dataConsulta,'%Y-%m-%d') = " + "'" + dataConsulta + "') ";
+    };
+
     let sql =   "SELECT " + 
-                    "idConsulta, idPacienteConsulta, idEmpresaConsulta, idMedicoConsulta, dataConsulta, horaConsulta, motivoConsulta, " + 
-                    "pesoConsulta, alturaConsulta, cabecaConsulta, infoConsulta,prescricaoConsulta, " + 
+                    "md.nomeMedico, idConsulta, idPacienteConsulta, idEmpresaConsulta, idMedicoConsulta, " +
+                    "dataConsulta, mid(horaConsulta,1,5) horaConsulta, motivoConsulta, pesoConsulta, " + 
+                    "alturaConsulta, cabecaConsulta, infoConsulta,prescricaoConsulta, " + 
                     "Date_Format(dataConsulta,'%d/%m/%Y') dataConsultaFrm, " +
                     "ct.nome,  ct.maeNome, ct.paiNome, ct.telefone " +
                 "FROM awConsultas " +
                     "INNER JOIN awContatos ct " +
                         "ON awConsultas.idPacienteConsulta = ct.id " +
-                "WHERE (idEmpresaConsulta = " + req.query.idEmpresa + ") "+
-                  "AND (Date_Format(dataConsulta,'%Y-%m-%d') = " + "'" + dataConsulta + "') " +
+                    "INNER JOIN awMedicos md " +
+                        "ON awConsultas.idMedicoConsulta = md.idMedico " +
+                where +
                 "ORDER BY Date_Format(dataConsulta,'%Y-%m-%d'), horaConsulta";
 
     connection.query(sql, 

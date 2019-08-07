@@ -4,7 +4,12 @@ var express = require("express");
 var connection = require('./mysql-connection');
 var router = express.Router();
 router.get('/', function (req, res) {
-    var sql = "SELECT * " +
+    var sql = "SELECT " +
+        "id, idEmpresa, codigo, nome, telefone, endereco, " +
+        "numero, complemento, bairro, cidade, estado, cep, " +
+        "paiNome, paiTelefone, paiProfissao, maeNome, maeTelefone, " +
+        "maeProfissao, Date_Format(dataNasc,'%d/%m/%Y') dataNasc, " +
+        "sexo, email, certidaoNasc " +
         "FROM awContatos " +
         "WHERE (idEmpresa = " + req.query.idEmpresa + ") " +
         "ORDER BY nome";
@@ -15,7 +20,12 @@ router.get('/', function (req, res) {
     });
 });
 router.get('/:nome', function (req, res) {
-    var sql = "SELECT * " +
+    var sql = "SELECT  " +
+        "id, idEmpresa, codigo, nome, telefone, endereco, " +
+        "numero, complemento, bairro, cidade, estado, cep, " +
+        "paiNome, paiTelefone, paiProfissao, maeNome, maeTelefone, " +
+        "maeProfissao, Date_Format(dataNasc,'%d/%m/%Y') dataNasc, " +
+        "sexo, email, certidaoNasc " +
         "FROM awContatos " +
         "WHERE (idEmpresa = " + req.query.idEmpresa + ") " +
         "AND (nome LIKE " + "'%" + req.params.nome + "%') " +
@@ -61,12 +71,14 @@ router.post('/', function (req, res) {
         'awContatos ( idEmpresa, ' +
         'codigo, nome, telefone, endereco, numero, complemento, ' +
         'bairro, cidade, estado, cep, paiNome, paiTelefone, ' +
-        'paiProfissao, maeNome, maeTelefone, maeProfissao )' +
+        'paiProfissao, maeNome, maeTelefone, maeProfissao, ' +
+        'dataNasc, sexo, email, certidaoNasc )' +
         'values (' +
-        '?, ?,?,?,?, ?,?,?,?, ?,?,?,? ,?,?,?,? )';
+        '?, ?,?,?,?, ?,?,?,?, ?,?,?,? ,?,?,?,?, ?,?,?,? )';
     connection.query(sql, [c.idEmpresa, c.codigo, c.nome, c.telefone, c.endereco, c.numero, c.complemento,
         c.bairro, c.cidade, c.estado, c.cep, c.paiNome, c.paiTelefone,
-        c.paiProfissao, c.maeNome, c.maeTelefone, c.maeProfissao], function (err, rows, fields) {
+        c.paiProfissao, c.maeNome, c.maeTelefone, c.maeProfissao,
+        c.dataNasc, c.sexo, c.email, c.certidaoNasc], function (err, rows, fields) {
         if (err)
             throw err;
         res.json(rows);
@@ -84,11 +96,13 @@ router.put('/', function (req, res) {
     var sql = 'update awContatos set ' +
         'nome=?, telefone=?, endereco=?, numero=?, complemento=?, ' +
         'bairro=?, cidade=?, estado=?, cep=?, paiNome=?, paiTelefone=?, ' +
-        'paiProfissao=?, maeNome=?, maeTelefone=?, maeProfissao=? ' +
+        'paiProfissao=?, maeNome=?, maeTelefone=?, maeProfissao=?, ' +
+        'dataNasc=?, sexo=?, email=?, certidaoNasc=?' +
         'where codigo=?';
     connection.query(sql, [c.nome, c.telefone, c.endereco, c.numero, c.complemento,
         c.bairro, c.cidade, c.estado, c.cep, c.paiNome, c.paiTelefone,
-        c.paiProfissao, c.maeNome, c.maeTelefone, c.maeProfissao, c.codigo], function (err, rows, fields) {
+        c.paiProfissao, c.maeNome, c.maeTelefone, c.maeProfissao,
+        c.dataNasc, c.sexo, c.email, c.certidaoNasc, c.codigo], function (err, rows, fields) {
         if (err)
             throw err;
         res.json(rows);

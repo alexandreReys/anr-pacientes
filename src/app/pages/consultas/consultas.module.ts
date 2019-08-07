@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { IMaskModule } from 'angular-imask';
 
+import { SharedModule } from 'src/app/shared/shared.module';
 import { ConsultasRoutingModule } from './consultas-routing.module';
+
 import { ConsultasListComponent } from './consultas-list/consultas-list.component';
 import { ConsultaFormComponent } from './consulta-form/consulta-form.component';
 import { ConsultasListagemComponent } from './consultas-listagem/consultas-listagem.component';
@@ -16,8 +17,14 @@ import { ConsultasListagemDetComponent } from './consultas-listagem/consultas-li
     FormsModule,
     ReactiveFormsModule,
     ConsultasRoutingModule,
+    SharedModule,
     IMaskModule
   ],
-  declarations: [ConsultasListComponent, ConsultaFormComponent, ConsultasListagemComponent, ConsultasListagemDetComponent]
+  declarations: [
+    ConsultasListComponent, 
+    ConsultaFormComponent, 
+    ConsultasListagemComponent, 
+    ConsultasListagemDetComponent
+  ]
 })
 export class ConsultasModule { }

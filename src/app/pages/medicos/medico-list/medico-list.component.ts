@@ -37,7 +37,7 @@ export class MedicoListComponent implements OnInit {
   searchControl: FormControl;
 
   medico: Medico;
-  medicos: Medico[];
+  medicos: Medico[]=[];
   
   constructor(
     private formBuilder: FormBuilder,

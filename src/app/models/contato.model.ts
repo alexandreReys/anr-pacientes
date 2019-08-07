@@ -17,4 +17,8 @@ export class Contato{
     maeNome: string;
     maeTelefone: string;
     maeProfissao: string;
+    dataNasc: string;
+    sexo: string;
+    email: string;
+    certidaoNasc: string;
   }

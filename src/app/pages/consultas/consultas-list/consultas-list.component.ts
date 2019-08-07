@@ -23,11 +23,11 @@ export class ConsultasListComponent implements OnInit {
     searchDate: FormControl;
 
     consulta: Consulta;
-    consultas: Consulta[];
+    consultas: Consulta[]=[];
 
     medico: Medico;
-    idMedico: string;
-    nomeMedico: string;
+    idMedico: string = '';
+    nomeMedico: string = '';
 
     constructor(
         private formBuilder: FormBuilder,
@@ -42,15 +42,19 @@ export class ConsultasListComponent implements OnInit {
         this.searchForm = this.formBuilder.group({
             searchDate: this.searchDate 
         });
-        this.setSearchDate();
+        
         this.idMedico = `${this.loginService.user.idFuncionarioUsuario}`;
+        if(this.idMedico === '0') { this.idMedico = null }
+
+        this.setSearchDate();
+
         this.medicoService.getMedicoById(this.idMedico)
             .subscribe( medicos => { 
                 this.medico = medicos[0]; 
                 if(this.medico)
                     this.nomeMedico = this.medico.nomeMedico
                 else
-                    this.nomeMedico = 'Não cadastrado';
+                    this.nomeMedico = 'Todos';
             });
 
     };  // fim ngOnInit() 
@@ -71,14 +75,30 @@ export class ConsultasListComponent implements OnInit {
         this.consulta = new Consulta();
         this.consulta.dataConsulta = 'Processando ...';
         if(todos) {
-            this.consultaService.getConsultas().subscribe( consultas => this.consultas = consultas );
+            this.consultaService.getConsultas(null, this.idMedico)
+                .subscribe( consultas => this.consultas = consultas );
         } else {
             let searchDate = this.searchDate.value;
             if(searchDate)
-                this.consultaService.getConsultasData(searchDate).subscribe( consultas => this.consultas = consultas );
+                this.consultaService.getConsultasData(searchDate, this.idMedico)
+                    .subscribe( consultas => this.consultas = consultas );
             else
-                this.consultaService.getConsultas().subscribe( consultas => this.consultas = consultas );
+                this.consultaService.getConsultas(null, this.idMedico)
+                    .subscribe( consultas => this.consultas = consultas );
         }
+
+        // if(todos) {
+        //     this.consultaService.getConsultas()
+        //         .subscribe( consultas => this.consultas = consultas );
+        // } else {
+        //     let searchDate = this.searchDate.value;
+        //     if(searchDate)
+        //         this.consultaService.getConsultasData(searchDate, this.idMedico)
+        //             .subscribe( consultas => this.consultas = consultas );
+        //     else
+        //         this.consultaService.getConsultas()
+        //             .subscribe( consultas => this.consultas = consultas );
+        // }
     }; // fim procuraData()
 
     setSearchDate() {
@@ -93,6 +113,7 @@ export class ConsultasListComponent implements OnInit {
         
         let searchDate = year + '-' + month + '-' + day; 
         this.searchDate.setValue( searchDate );
-        this.consultaService.getConsultasData(searchDate).subscribe( consultas => this.consultas = consultas );
+        this.consultaService.getConsultasData(searchDate, this.idMedico)
+            .subscribe( consultas => this.consultas = consultas );
       }; // fim setSearchDate()
 }

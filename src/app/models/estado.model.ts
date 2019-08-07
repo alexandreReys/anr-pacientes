@@ -3,3 +3,8 @@ export class Estado{
     sigla: string;
     nome: string;
   }
+
+  export class Sexo{
+    descricao: string;
+  }
+

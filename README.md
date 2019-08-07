@@ -3,8 +3,6 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.3.
 
 
-
-
 ## Run backend
 
 nodemon --watch backend backend/dist/express.js
@@ -14,6 +12,34 @@ https://localhost:3001
 ## Run frontend
 
 http://localhost:4200
+
+
+
+## Features
+
+Usuarios
+	Login (ok)
+		Limitar tamanho do usuario e senha ( ==== P E N D E N T E ==== )
+		Limitar caracteres permitidos do usuario e senha ( ==== P E N D E N T E ==== )
+
+	Registro de usuario ( ==== P E N D E N T E ==== )
+		confirmação por email ( ==== P E N D E N T E ==== )
+
+Medicos
+	cadastro de medicos (ok)
+	listagem de medicos ( ==== P E N D E N T E ==== )
+
+Pacientes
+	cadastro de pacientes (ok)
+	listagem de pacientes ( ==== P E N D E N T E ==== )
+
+Consultas
+	agendamento (ok)
+	atendimento (ok)
+	listagem de consultas (ok)
+	impressao de receita medica ( ==== P E N D E N T E ==== )
+	impressao de receita medica ( ==== P E N D E N T E ==== )
+	hISTORICO DE CONSULTAS POR PACIENTE ( ==== P E N D E N T E ==== )
 
 
 ## Development server

@@ -61,6 +61,7 @@ export class ConsultaFormComponent implements OnInit {
     this.consultaService.subject.subscribe( 
       resp => { 
         this.consulta = resp; 
+        if (this.consulta.horaConsulta) { this.consulta.horaConsulta = this.consulta.horaConsulta.substr(0,5); };
         this.form.patchValue(this.consulta);
         
         this.dataConsult = this.consulta.dataConsultaFrm;

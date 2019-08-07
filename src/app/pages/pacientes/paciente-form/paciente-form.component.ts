@@ -5,7 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from 'src/app/security/login/login.service';
 import { Contato } from '../../../models/contato.model';
 import { ContatoService } from '../../../services/contato.service';
-import { Estado } from 'src/app/models/estado.model';
+import { Estado, Sexo } from 'src/app/models/estado.model';
 
 @Component({
   selector: 'app-paciente-form',
@@ -14,16 +14,24 @@ import { Estado } from 'src/app/models/estado.model';
 })
 export class PacienteFormComponent implements OnInit {
 
-  form: FormGroup;
-  currentAction: string;
+  pageTitle: string = 'Pacientes';
+  formTitle: string = 'Novo Cadastro !!';
+  breadcrumb1_item_link: string = '/paciente';
+  breadcrumb1_item_title: string = 'Seleção de Pacientes';
+
+  emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
   navigateTo: string;
-  submittingForm: boolean = false;
-  pageTitle: string;
+  currentAction: string;
+
+  form: FormGroup;
+  //submittingForm: boolean = false;
 
   contato: Contato = new Contato();
-  contatos: Contato[];
+  contatos: Contato[]=[];
   
-  estados: Estado[];
+  estados: Estado[]=[];
+  sexos: Sexo[]=[];
 
   imaskConfig = {
     mask: Number,
@@ -72,24 +80,26 @@ export class PacienteFormComponent implements OnInit {
       {"id":28,"sigla":"SE","nome":"Sergipe"},
       {"id":17,"sigla":"TO","nome":"Tocantins"}
     ];
-    
+    this.sexos = [ 
+      {"descricao":"Masculino"},
+      {"descricao":"Feminino"}
+    ];
     this.setCurrentAction();
     this.buildContatoForm();
     this.loadContatos();
-  }
+  };
 
   ngAfterContentChecked() {
     this.setPageTitle();
-  }
+  };
 
   setPageTitle() {
     if (this.currentAction == 'new')
-      this.pageTitle = 'Novo Cadastro !!'
+      this.formTitle = 'Novo Cadastro !!'
     else {
       const contatoName = this.contato.nome || '';
-      this.pageTitle = 'Editando : ' + contatoName;
+      this.formTitle = 'Editando : ' + contatoName;
     }
-
   };
 
   setCurrentAction() {
@@ -97,47 +107,60 @@ export class PacienteFormComponent implements OnInit {
       this.currentAction = 'new'
     else
       this.currentAction = 'edit';
-  }
+  };
 
   buildContatoForm() {
     this.form = this.formBuilder.group({
-      id:             [null],
-      idEmpresa:      [null],
-      codigo:         [null],
-      nome:           [null, [ Validators.required ]],
-      telefone:       [null, [ Validators.required ]],
-      endereco:       [null, [ Validators.required ]],
-      numero:         [null, [ Validators.required ]],
-      complemento:    [null],
-      bairro:         [null],
-      cidade:         [null, [ Validators.required ]],
-      estado:         [null, [ Validators.required ]],
-      cep:            [null, [ Validators.required, Validators.pattern('^[0-9]{5}-[0-9]{3}') ]],
+      id:             [''],
+      idEmpresa:      [''],
+      codigo:         [''],
+      nome:           ['', [ Validators.required ]],
+      telefone:       ['', [ Validators.required ]],
+
+      endereco:       [''],
+      numero:         [''],
+      complemento:    [''],
+      bairro:         [''],
+      cidade:         [''],
+      estado:         [''],
+      cep:            ['', [ Validators.pattern('^[0-9]{5}-[0-9]{3}') ]],
       
-      paiNome:        [null, [ Validators.required ]],
-      paiTelefone:    [null],
-      paiProfissao:   [null],
+      paiNome:        [''],
+      paiTelefone:    [''],
+      paiProfissao:   [''],
       
-      maeNome:        [null, [ Validators.required ]],
-      maeTelefone:    [null],
-      maeProfissao:   [null]
+      maeNome:        [''],
+      maeTelefone:    [''],
+      maeProfissao:   [''],
+
+      dataNasc:       [''],
+      sexo:           [''],
+      email:          ['', [ Validators.required, Validators.pattern(this.emailPattern) ]],
+      certidaoNasc:   ['']
+      
     })
   };
   
   loadContatos() {
     if (this.currentAction == 'edit') {
       this.contatoService.subject.subscribe( 
-        resp => { 
-          this.contato = resp;
+        respService => { 
+          this.contato = respService;
+
+          let dataNasc = this.contato.dataNasc;
+          dataNasc = dataNasc.substr(0,10);
+
           this.form.patchValue(this.contato);  // binds loaded contato data to form
           this.form.controls['idEmpresa'].setValue(this.loginService.user.idEmpresaUsuario);
           this.form.controls['estado'].setValue(this.contato.estado);
+          this.form.controls['dataNasc'].setValue(dataNasc);
         }
       )
     } else {
       this.form.controls['id'].setValue(1);
       this.form.controls['idEmpresa'].setValue(this.loginService.user.idEmpresaUsuario);
       this.form.controls['estado'].setValue('SP');
+      this.form.controls['sexo'].setValue('Masculino');
     };
   };
 
@@ -151,9 +174,16 @@ export class PacienteFormComponent implements OnInit {
     this.form.controls['estado'].setValue( estado, {onlySelf: true} );
   };
 
+  changeSexo(e) {
+    let sexo = e.target.value;
+    if(sexo.length > 9) { sexo = sexo.substr(sexo.length-9) };
+    sexo = sexo.trim();
+    this.form.controls['sexo'].setValue( sexo, {onlySelf: true} );
+  };
+
   // ////////////////////////////////////////////////////////////////// //
   submitForm() {
-    this.submittingForm = true;
+    //this.submittingForm = true;
     this.createContato();
     this.contato = new Contato;
     this.form.reset();
