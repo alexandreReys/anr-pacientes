@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
-
 import * as jwt from 'jsonwebtoken';
-
 import { apiConfig } from './api-config';
 import { User } from "./users";
 
@@ -10,7 +8,7 @@ const connection = require('./mysql-connection');
 export const handleAuthentication = (req: Request, resp: Response) => {
   const reqUser: User = req.body;
   if(reqUser) {
-    getEmailLogin(reqUser, (err,rows) => {
+      getEmailLogin(reqUser, (err,rows) => {
       if (err) throw err;
       
       if (rows[0]) {

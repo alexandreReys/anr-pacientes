@@ -8,6 +8,21 @@ body {
     margin: 0; font-family: 'Roboto', sans-serif;
 }
 
+.breadcrumb {
+    font-size: 12px;
+}
+
+.table td, .table th {
+    padding: .10rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+    font-size: 10px;
+}
+
+.btn-sm {
+    font-size:12px
+}
+
 .search-link {
     cursor: pointer;
     color: #555;
@@ -32,6 +47,10 @@ body {
 
 .pointer {
      cursor: pointer;
+}
+
+.uppercase {
+    text-transform: uppercase;
 }
 
 /* .bg-hospital {

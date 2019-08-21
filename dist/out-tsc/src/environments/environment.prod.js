@@ -1,4 +1,5 @@
 export var environment = {
-    production: true
+    production: true,
+    api: 'https://atendweb.com'
 };
 //# sourceMappingURL=environment.prod.js.map

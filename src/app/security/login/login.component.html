@@ -10,27 +10,36 @@
                         <br>
                         Valores: {{loginForm.value | json}} -->
 
-                        <h4 class="text-center text-dark my-3">Efetue o Login para continuar</h4>
+                        <h5 class="text-center text-dark mt-3 mb-4">Efetue o Login para continuar</h5>
 
-                        <app-input-container errorMessage="Digite um E-mail válido ..." label="Email">
-                            <input type="text" class="form-control" formControlName="email" placeholder="Email" autocomplete="off" style="font-size:14px;">
-                            <span class="form-control-feedback"></span>
-                        </app-input-container>
+                        <div class="row">
+                            <div class="col">
+                                <app-input-container errorMessage="Digite um E-mail válido ..." label="Email">
+                                    <input type="text" class="form-control" formControlName="email" placeholder="Email" autocomplete="off" style="font-size:12px;">
+                                    <span class="form-control-feedback"></span>
+                                </app-input-container>
+                            </div>                            
+                        </div>
                     
-                        <app-input-container errorMessage="O Password deve ter no minimo 5 posições" label="Password">
-                            <input type="password" class="form-control" formControlName="password" placeholder="Password" autocomplete="off" style="font-size:14px;">
-                            <span class="form-control-feedback"></span>
-                        </app-input-container>
-                
-                        <button class="btn btn-primary mt-3"
-                            (click)="login()" 
-                            [disabled]="!loginForm.valid">
-                            <i class="fa fa-credit-card"></i>
-                            Confirma
-                        </button>
+                        <div class="row">
+                            <div class="col-8">
+                                <app-input-container errorMessage="O Password deve ter no minimo 5 posições" label="Password">
+                                    <input type="password" class="form-control" formControlName="password" placeholder="Password" autocomplete="off" style="font-size:12px;">
+                                    <span class="form-control-feedback"></span>
+                                </app-input-container>
+                            </div>
 
+                            <div class="col-4">
+                                <button class="btn btn-primary bt-sm" 
+                                    (click)="login()" 
+                                    [disabled]="!loginForm.valid"
+                                    style="font-size:12px;">
+                                    <i class="fa fa-credit-card" style="font-size:12px"></i>
+                                    Confirma
+                                </button>
+                            </div>
+                        </div>
                     </form>
-
                 </div>
             </div>
         </div>

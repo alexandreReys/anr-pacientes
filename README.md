@@ -27,19 +27,19 @@ Usuarios
 
 Medicos
 	cadastro de medicos (ok)
-	listagem de medicos ( ==== P E N D E N T E ==== )
+	listagem de medicos (ok)
 
 Pacientes
 	cadastro de pacientes (ok)
-	listagem de pacientes ( ==== P E N D E N T E ==== )
+	listagem de pacientes (ok)
 
 Consultas
 	agendamento (ok)
 	atendimento (ok)
 	listagem de consultas (ok)
 	impressao de receita medica ( ==== P E N D E N T E ==== )
-	impressao de receita medica ( ==== P E N D E N T E ==== )
-	hISTORICO DE CONSULTAS POR PACIENTE ( ==== P E N D E N T E ==== )
+	impressao de atestado ( ==== P E N D E N T E ==== )
+	Historico de Consultas por Paciente (ok)
 
 
 ## Development server

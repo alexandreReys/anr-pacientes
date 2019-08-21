@@ -21,6 +21,7 @@ var MedicoListComponent = /** @class */ (function () {
         this.router = router;
         this.medicoService = medicoService;
         this.searchBarState = 'hidden';
+        this.medicos = [];
     }
     MedicoListComponent.prototype.ngOnInit = function () {
         var _this = this;

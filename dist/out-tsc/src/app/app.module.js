@@ -7,7 +7,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-// import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { routing } from './app.routing';
@@ -39,7 +38,6 @@ var AppModule = /** @class */ (function () {
             ],
             imports: [
                 SharedModule,
-                // HttpModule,
                 HttpClientModule,
                 BrowserModule,
                 BrowserAnimationsModule,

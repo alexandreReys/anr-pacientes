@@ -47,7 +47,7 @@ export class PacientesListComponent implements OnInit {
         this.contato = new Contato();
 
         this.contatoService.getContatos()
-          .subscribe( contatos => { this.contatos = contatos });
+            .subscribe( contatos => this.contatos = contatos );
 
         this.searchControl = this.formBuilder.control('');
         this.searchForm = this.formBuilder.group({ searchControl: this.searchControl });
@@ -81,4 +81,5 @@ export class PacientesListComponent implements OnInit {
   toggleSearch() {
         this.searchBarState = this.searchBarState === 'hidden' ? 'visible' : 'hidden';
   } // fim toggleSearch()
+
 }

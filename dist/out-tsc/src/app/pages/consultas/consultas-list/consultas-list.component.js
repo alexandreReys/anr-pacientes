@@ -22,6 +22,9 @@ var ConsultasListComponent = /** @class */ (function () {
         this.medicoService = medicoService;
         this.loginService = loginService;
         this.searchBarState = 'hidden';
+        this.consultas = [];
+        this.idMedico = '';
+        this.nomeMedico = '';
     }
     ConsultasListComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -29,15 +32,18 @@ var ConsultasListComponent = /** @class */ (function () {
         this.searchForm = this.formBuilder.group({
             searchDate: this.searchDate
         });
-        this.setSearchDate();
         this.idMedico = "" + this.loginService.user.idFuncionarioUsuario;
+        if (this.idMedico === '0') {
+            this.idMedico = null;
+        }
+        this.setSearchDate();
         this.medicoService.getMedicoById(this.idMedico)
             .subscribe(function (medicos) {
             _this.medico = medicos[0];
             if (_this.medico)
                 _this.nomeMedico = _this.medico.nomeMedico;
             else
-                _this.nomeMedico = 'Não cadastrado';
+                _this.nomeMedico = 'Todos';
         });
     };
     ; // fim ngOnInit() 
@@ -57,15 +63,30 @@ var ConsultasListComponent = /** @class */ (function () {
         this.consulta = new Consulta();
         this.consulta.dataConsulta = 'Processando ...';
         if (todos) {
-            this.consultaService.getConsultas().subscribe(function (consultas) { return _this.consultas = consultas; });
+            this.consultaService.getConsultas(null, this.idMedico)
+                .subscribe(function (consultas) { return _this.consultas = consultas; });
         }
         else {
             var searchDate = this.searchDate.value;
             if (searchDate)
-                this.consultaService.getConsultasData(searchDate).subscribe(function (consultas) { return _this.consultas = consultas; });
+                this.consultaService.getConsultasData(searchDate, this.idMedico)
+                    .subscribe(function (consultas) { return _this.consultas = consultas; });
             else
-                this.consultaService.getConsultas().subscribe(function (consultas) { return _this.consultas = consultas; });
+                this.consultaService.getConsultas(null, this.idMedico)
+                    .subscribe(function (consultas) { return _this.consultas = consultas; });
         }
+        // if(todos) {
+        //     this.consultaService.getConsultas()
+        //         .subscribe( consultas => this.consultas = consultas );
+        // } else {
+        //     let searchDate = this.searchDate.value;
+        //     if(searchDate)
+        //         this.consultaService.getConsultasData(searchDate, this.idMedico)
+        //             .subscribe( consultas => this.consultas = consultas );
+        //     else
+        //         this.consultaService.getConsultas()
+        //             .subscribe( consultas => this.consultas = consultas );
+        // }
     };
     ; // fim procuraData()
     ConsultasListComponent.prototype.setSearchDate = function () {
@@ -78,7 +99,8 @@ var ConsultasListComponent = /** @class */ (function () {
         day = day.length > 1 ? day : '0' + day;
         var searchDate = year + '-' + month + '-' + day;
         this.searchDate.setValue(searchDate);
-        this.consultaService.getConsultasData(searchDate).subscribe(function (consultas) { return _this.consultas = consultas; });
+        this.consultaService.getConsultasData(searchDate, this.idMedico)
+            .subscribe(function (consultas) { return _this.consultas = consultas; });
     };
     ; // fim setSearchDate()
     ConsultasListComponent = __decorate([

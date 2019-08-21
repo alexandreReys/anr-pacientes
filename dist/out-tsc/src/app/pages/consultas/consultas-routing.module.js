@@ -8,9 +8,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ConsultasListComponent } from './consultas-list/consultas-list.component';
 import { ConsultaFormComponent } from './consulta-form/consulta-form.component';
+import { ConsultasListagemComponent } from './consultas-listagem/consultas-listagem.component';
 var routes = [
     { path: '', component: ConsultasListComponent },
-    { path: ':id/edit', component: ConsultaFormComponent }
+    { path: ':id/edit', component: ConsultaFormComponent },
+    { path: 'listagem', component: ConsultasListagemComponent }
 ];
 var ConsultasRoutingModule = /** @class */ (function () {
     function ConsultasRoutingModule() {

@@ -20,8 +20,16 @@ var PacienteFormComponent = /** @class */ (function () {
         this.route = route;
         this.router = router;
         this.formBuilder = formBuilder;
-        this.submittingForm = false;
+        this.pageTitle = 'Pacientes';
+        this.formTitle = 'Novo Cadastro !!';
+        this.breadcrumb1_item_link = '/paciente';
+        this.breadcrumb1_item_title = 'Seleção de Pacientes';
+        this.emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        //submittingForm: boolean = false;
         this.contato = new Contato();
+        this.contatos = [];
+        this.estados = [];
+        this.sexos = [];
         this.imaskConfig = {
             mask: Number,
             scale: 2,
@@ -62,19 +70,25 @@ var PacienteFormComponent = /** @class */ (function () {
             { "id": 28, "sigla": "SE", "nome": "Sergipe" },
             { "id": 17, "sigla": "TO", "nome": "Tocantins" }
         ];
+        this.sexos = [
+            { "descricao": "Masculino" },
+            { "descricao": "Feminino" }
+        ];
         this.setCurrentAction();
         this.buildContatoForm();
         this.loadContatos();
     };
+    ;
     PacienteFormComponent.prototype.ngAfterContentChecked = function () {
         this.setPageTitle();
     };
+    ;
     PacienteFormComponent.prototype.setPageTitle = function () {
         if (this.currentAction == 'new')
-            this.pageTitle = 'Novo Cadastro !!';
+            this.formTitle = 'Novo Cadastro !!';
         else {
             var contatoName = this.contato.nome || '';
-            this.pageTitle = 'Editando : ' + contatoName;
+            this.formTitle = 'Editando : ' + contatoName;
         }
     };
     ;
@@ -84,43 +98,52 @@ var PacienteFormComponent = /** @class */ (function () {
         else
             this.currentAction = 'edit';
     };
+    ;
     PacienteFormComponent.prototype.buildContatoForm = function () {
         this.form = this.formBuilder.group({
-            id: [null],
-            idEmpresa: [null],
-            codigo: [null],
-            nome: [null, [Validators.required]],
-            telefone: [null, [Validators.required]],
-            endereco: [null, [Validators.required]],
-            numero: [null, [Validators.required]],
-            complemento: [null],
-            bairro: [null],
-            cidade: [null, [Validators.required]],
-            estado: [null, [Validators.required]],
-            cep: [null, [Validators.required, Validators.pattern('^[0-9]{5}-[0-9]{3}')]],
-            paiNome: [null, [Validators.required]],
-            paiTelefone: [null],
-            paiProfissao: [null],
-            maeNome: [null, [Validators.required]],
-            maeTelefone: [null],
-            maeProfissao: [null]
+            id: [''],
+            idEmpresa: [''],
+            codigo: [''],
+            nome: ['', [Validators.required]],
+            telefone: ['', [Validators.required]],
+            endereco: [''],
+            numero: [''],
+            complemento: [''],
+            bairro: [''],
+            cidade: [''],
+            estado: [''],
+            cep: ['', [Validators.pattern('^[0-9]{5}-[0-9]{3}')]],
+            paiNome: [''],
+            paiTelefone: [''],
+            paiProfissao: [''],
+            maeNome: [''],
+            maeTelefone: [''],
+            maeProfissao: [''],
+            dataNasc: [''],
+            sexo: [''],
+            email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
+            certidaoNasc: ['']
         });
     };
     ;
     PacienteFormComponent.prototype.loadContatos = function () {
         var _this = this;
         if (this.currentAction == 'edit') {
-            this.contatoService.subject.subscribe(function (resp) {
-                _this.contato = resp;
+            this.contatoService.subject.subscribe(function (respService) {
+                _this.contato = respService;
+                var dataNasc = _this.contato.dataNasc;
+                dataNasc = dataNasc.substr(0, 10);
                 _this.form.patchValue(_this.contato); // binds loaded contato data to form
                 _this.form.controls['idEmpresa'].setValue(_this.loginService.user.idEmpresaUsuario);
                 _this.form.controls['estado'].setValue(_this.contato.estado);
+                _this.form.controls['dataNasc'].setValue(dataNasc);
             });
         }
         else {
             this.form.controls['id'].setValue(1);
             this.form.controls['idEmpresa'].setValue(this.loginService.user.idEmpresaUsuario);
             this.form.controls['estado'].setValue('SP');
+            this.form.controls['sexo'].setValue('Masculino');
         }
         ;
     };
@@ -138,9 +161,19 @@ var PacienteFormComponent = /** @class */ (function () {
         this.form.controls['estado'].setValue(estado, { onlySelf: true });
     };
     ;
+    PacienteFormComponent.prototype.changeSexo = function (e) {
+        var sexo = e.target.value;
+        if (sexo.length > 9) {
+            sexo = sexo.substr(sexo.length - 9);
+        }
+        ;
+        sexo = sexo.trim();
+        this.form.controls['sexo'].setValue(sexo, { onlySelf: true });
+    };
+    ;
     // ////////////////////////////////////////////////////////////////// //
     PacienteFormComponent.prototype.submitForm = function () {
-        this.submittingForm = true;
+        //this.submittingForm = true;
         this.createContato();
         this.contato = new Contato;
         this.form.reset();

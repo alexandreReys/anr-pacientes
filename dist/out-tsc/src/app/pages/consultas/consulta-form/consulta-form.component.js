@@ -51,6 +51,10 @@ var ConsultaFormComponent = /** @class */ (function () {
         var _this = this;
         this.consultaService.subject.subscribe(function (resp) {
             _this.consulta = resp;
+            if (_this.consulta.horaConsulta) {
+                _this.consulta.horaConsulta = _this.consulta.horaConsulta.substr(0, 5);
+            }
+            ;
             _this.form.patchValue(_this.consulta);
             _this.dataConsult = _this.consulta.dataConsultaFrm;
             _this.horaConsult = _this.consulta.horaConsulta;

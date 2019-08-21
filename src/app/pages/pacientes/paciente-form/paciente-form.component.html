@@ -1,169 +1,182 @@
-<div class="container">
-  <nav class="mt-3">
-      <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-          <li class="breadcrumb-item"><a routerLink={{breadcrumb1_item_link}}>{{breadcrumb1_item_title}}</a></li>
-          <li class="breadcrumb-item active">{{pageTitle}}</li>
-      </ol>
-  </nav>
-  
-  <div class="row my-3">
-      <div class="col-md-8">
-          <h1><i class="fa fa-laptop-medical text-danger" aria-hidden="true"></i> 
-            {{pageTitle}} 
-          </h1>
-      </div>
-      <div class="col-md-2">
-          <h4>
-            <a href="javascript:window.print()" class="fa fa-print text-primary float-right mt-3 mr-3" aria-hidden="true"></a>
-          </h4>
-      </div>
-      <div class="col-md-2">
-          <button type="button" class="btn btn-success bt-sm float-right mt-2 mr-3" (click)="voltar()">
-            << Voltar
-          </button>
-      </div>
-  </div>
+<div class="container-fluid">
+    <nav class="mt-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+            <li class="breadcrumb-item"><a routerLink={{breadcrumb1_item_link}}>{{breadcrumb1_item_title}}</a></li>
+            <li class="breadcrumb-item active">{{pageTitle}}</li>
+        </ol>
+    </nav>
 
-  <form [formGroup]="form">
-
-    <div class="card">
-        <div class="card-header">
-            <div class="row">
-              <div class="col-md-9">
-                <h4> <strong class="text-primary">{{formTitle}}</strong> </h4>
-              </div>
-              <div class="col-md-3">
-                <button type="button" class="btn btn-primary btn-md float-right" [disabled]="!form.valid" (click)="submitForm()">
-                  Salvar
-              </button>
-            </div>
-          </div>
+    <div class="row my-3">
+        <div class="col-md-8">
+            <h3><i class="fa fa-laptop-medical text-danger" aria-hidden="true"></i> 
+                {{pageTitle}} 
+            </h3>
         </div>
-
-        <div class="card-body">
-            <input type="hidden" class="form-control" formControlName="id" id="id">
-            <input type="hidden" class="form-control" formControlName="idEmpresa" id="idEmpresa">
-
-            <div class="form-row">
-              <div class="form-group col-md-8">
-                <label for="nome" class="control-label">Nome</label>
-                <input type="text" class="form-control" formControlName="nome" id="nome" placeholder="Nome do Paciente ( Obrigatório )">
-              </div>
-
-              <div class="form-group col-md-4">
-                <label for="telefone">Telefone</label>
-                <input type="text" class="form-control" formControlName="telefone" id="telefone" placeholder="Telefone ( Obrigatório )">
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group col-md-3">
-                <label for="dataNasc">Data de Nascimento</label>    
-                <input type="date" class="form-control" formControlName="dataNasc" id="dataNasc" placeholder="Data Nasc.">
-              </div>
-
-              <div class="form-group col-md-3">
-                <label for="email">email</label>     
-                <input type="text" class="form-control" formControlName="email" id="email" placeholder="E-mail">
-              </div>
-
-              <div class="form-group col-md-3">     
-                <label for="sexo">sexo</label>
-                <select class="custom-select" (change)="changeSexo($event)" formControlName="sexo" placeholder="Selecione">
-                  <option *ngFor="let sexo of sexos" [ngValue]="sexo.descricao">{{sexo.descricao}}</option>
-                </select>
-              </div>
-
-              <div class="form-group col-md-3">
-                <label for="certidaoNasc">certidaoNasc</label>
-                <input type="text" class="form-control" formControlName="certidaoNasc" id="certidaoNasc" placeholder="certidaoNasc">
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group col-md-8">
-                <label for="endereco">Endereço</label>
-                <input type="text" class="form-control" formControlName="endereco" id="endereco" placeholder="Endereço ( Obrigatório )">
-              </div>
-
-              <div class="form-group col-md-4">
-                <label for="numero">Numero</label>
-                <input type="text" class="form-control" formControlName="numero" id="numero" placeholder="Numero ( Obrigatório )">
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="complemento">Complemento</label>
-                <input type="text" class="form-control" formControlName="complemento" id="complemento" placeholder="Complemento">
-              </div>
-
-              <div class="form-group col-md-6">
-                <label for="bairro">Bairro</label>
-                <input type="text" class="form-control" formControlName="bairro" id="bairro" placeholder="Bairro">
-              </div>
-            </div>            
-
-            <div class="form-row">
-              <div class="form-group col-md-8">
-                <label for="cidade">Cidade</label>
-                <input type="text" class="form-control" formControlName="cidade" id="cidade" placeholder="Cidade ( Obrigatório )">
-              </div>
-
-              <div class="form-group col-md-2">
-                <label for="estado">Estado</label>
-                <select class="custom-select" (change)="changeEstado($event)" formControlName="estado" placeholder="Selecione">
-                  <option *ngFor="let estado of estados" [ngValue]="estado.sigla">{{estado.nome}}</option>
-                </select>
-              </div>
-
-              <div class="form-group col-md-2">
-                <label for="cep">Cep</label>
-                <input type="text" class="form-control" formControlName="cep" id="cep" placeholder="Obrig. 00000-000">
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group col-md-5">
-                <label for="paiNome">Nome do Pai</label>
-                <input type="text" class="form-control" formControlName="paiNome" id="paiNome" placeholder="Nome do Pai ( Obrigatório )">
-              </div>
-
-              <div class="form-group col-md-4">
-                <label for="paiTelefone">Telefone</label>
-                <input type="text" class="form-control" formControlName="paiTelefone" id="paiTelefone" placeholder="Tel.do Pai">
-              </div>
-
-              <div class="form-group col-md-3">
-                <label for="paiProfissao">Profissão</label>
-                <input type="text" class="form-control" formControlName="paiProfissao" id="paiProfissao" placeholder="Prof.do Pai">
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group col-md-5">
-                <label for="maeNome">Nome da Mãe</label>
-                <input type="text" class="form-control" formControlName="maeNome" id="maeNome" placeholder="Nome da mãe ( Obrigatório )">
-              </div>
-
-              <div class="form-group col-md-4">
-                <label for="maeTelefone">Telefone</label>
-                <input type="text" class="form-control" formControlName="maeTelefone" id="maeTelefone" placeholder="Tel.da Mãe">
-              </div>
-
-              <div class="form-group col-md-3">
-                <label for="maeProfissao">Profissão</label>
-                <input type="text" class="form-control" formControlName="maeProfissao" id="maeProfissao" placeholder="Prof.da Mãe">
-              </div>
-            </div>
+        <div class="col-md-2">
+            <h5>
+                <a href="javascript:window.print()" 
+                    class="fa fa-print text-primary float-right mt-2 mr-3" 
+                    aria-hidden="true"></a>
+            </h5>
+        </div>
+        <div class="col-md-2">
+            <button type="button" 
+                    class="btn btn-success bt-sm float-right mt-2 mr-3" 
+                    style="font-size:10px"
+                    (click)="voltar()">
+                << Voltar
+            </button>
         </div>
     </div>
 
-    <button type="button" class="btn btn-primary btn-lg float-right mt-2 mb-5" [disabled]="!form.valid" (click)="submitForm()"Ks>
-        Salvar
-    </button>
+    <form [formGroup]="form">
 
-  </form>
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h5> <strong class="text-primary">{{formTitle}}</strong> </h5>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" 
+                                class="btn btn-primary btn-md float-right" 
+                                [disabled]="!form.valid" 
+                                style="font-size: 12px"
+                                (click)="submitForm()">
+                            S a l v a r
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <input type="hidden" class="form-control" formControlName="id" id="id">
+                <input type="hidden" class="form-control" formControlName="idEmpresa" id="idEmpresa">
+
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label for="nome" class="control-label">Nome</label>
+                        <input type="text" class="form-control" formControlName="nome" id="nome" placeholder="Nome do Paciente ( Obrigatório )">
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="telefone">Telefone</label>
+                        <input type="text" class="form-control" formControlName="telefone" id="telefone" placeholder="Telefone ( Obrigatório )">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="dataNasc">Data de Nascimento</label>    
+                        <input type="date" class="form-control" formControlName="dataNasc" id="dataNasc" placeholder="Data Nasc.">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="email">email</label>     
+                        <input type="text" class="form-control" formControlName="email" id="email" placeholder="E-mail">
+                    </div>
+
+                    <div class="form-group col-md-3">     
+                        <label for="sexo">sexo</label>
+                        <select class="custom-select" (change)="changeSexo($event)" formControlName="sexo" placeholder="Selecione">
+                        <option *ngFor="let sexo of sexos" [ngValue]="sexo.descricao">{{sexo.descricao}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="certidaoNasc">Certidao Nasc.</label>
+                        <input type="text" class="form-control" formControlName="certidaoNasc" id="certidaoNasc" placeholder="certidaoNasc">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label for="endereco">Endereço</label>
+                        <input type="text" class="form-control" formControlName="endereco" id="endereco" placeholder="Endereço ( Obrigatório )">
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="numero">Numero</label>
+                        <input type="text" class="form-control" formControlName="numero" id="numero" placeholder="Numero ( Obrigatório )">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="complemento">Complemento</label>
+                        <input type="text" class="form-control" formControlName="complemento" id="complemento" placeholder="Complemento">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="bairro">Bairro</label>
+                        <input type="text" class="form-control" formControlName="bairro" id="bairro" placeholder="Bairro">
+                    </div>
+                </div>            
+
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label for="cidade">Cidade</label>
+                        <input type="text" class="form-control" formControlName="cidade" id="cidade" placeholder="Cidade ( Obrigatório )">
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label for="estado">Estado</label>
+                        <select class="custom-select" (change)="changeEstado($event)" formControlName="estado" placeholder="Selecione">
+                        <option *ngFor="let estado of estados" [ngValue]="estado.sigla">{{estado.nome}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label for="cep">Cep</label>
+                        <input type="text" class="form-control" formControlName="cep" id="cep" placeholder="Obrig. 00000-000">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="paiNome">Nome do Pai</label>
+                        <input type="text" class="form-control" formControlName="paiNome" id="paiNome" placeholder="Nome do Pai ( Obrigatório )">
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="paiTelefone">Telefone</label>
+                        <input type="text" class="form-control" formControlName="paiTelefone" id="paiTelefone" placeholder="Tel.do Pai">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="paiProfissao">Profissão</label>
+                        <input type="text" class="form-control" formControlName="paiProfissao" id="paiProfissao" placeholder="Prof.do Pai">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="maeNome">Nome da Mãe</label>
+                        <input type="text" class="form-control" formControlName="maeNome" id="maeNome" placeholder="Nome da mãe ( Obrigatório )">
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="maeTelefone">Telefone</label>
+                        <input type="text" class="form-control" formControlName="maeTelefone" id="maeTelefone" placeholder="Tel.da Mãe">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="maeProfissao">Profissão</label>
+                        <input type="text" class="form-control" formControlName="maeProfissao" id="maeProfissao" placeholder="Prof.da Mãe">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" 
+                class="btn btn-primary btn-md float-right mt-2 mb-5" 
+                [disabled]="!form.valid" 
+                style="font-size: 12px"
+                (click)="submitForm()">
+            S a l v a r
+        </button>
+
+    </form>
 
 </div>

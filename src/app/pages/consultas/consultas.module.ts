@@ -10,21 +10,25 @@ import { ConsultasListComponent } from './consultas-list/consultas-list.componen
 import { ConsultaFormComponent } from './consulta-form/consulta-form.component';
 import { ConsultasListagemComponent } from './consultas-listagem/consultas-listagem.component';
 import { ConsultasListagemDetComponent } from './consultas-listagem/consultas-listagem-det/consultas-listagem-det.component';
+import { ConsultasHistoricoComponent } from './consultas-historico/consultas-historico.component';
+import { ConsultasHistoricoListComponent } from './consultas-historico/consultas-historico-list/consultas-historico-list.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    ConsultasRoutingModule,
-    SharedModule,
-    IMaskModule
-  ],
-  declarations: [
-    ConsultasListComponent, 
-    ConsultaFormComponent, 
-    ConsultasListagemComponent, 
-    ConsultasListagemDetComponent
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ConsultasRoutingModule,
+        SharedModule,
+        IMaskModule
+    ],
+    declarations: [
+        ConsultasListComponent, 
+        ConsultaFormComponent, 
+        ConsultasListagemComponent, 
+        ConsultasListagemDetComponent, 
+        ConsultasHistoricoComponent,
+        ConsultasHistoricoListComponent
+    ]
 })
 export class ConsultasModule { }

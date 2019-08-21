@@ -97,11 +97,28 @@ router.get('/data/:dataConsulta', (req, res) => {
 
 router.get('/paciente/:idPacienteConsulta', (req, res) => {
     let idPacienteConsulta: string = req.params.idPacienteConsulta;
-    let sql =   "SELECT * "+
-                "FROM awConsultas "+
-                "WHERE (idEmpresaConsulta = " + req.query.idEmpresa + ") "+
-                  "AND (idPacienteConsulta = " + "'" + idPacienteConsulta + "') " + 
-                "ORDER BY idConsulta";
+
+    // let sql =   "SELECT * "+
+    //             "FROM awConsultas "+
+    //             "WHERE (idEmpresaConsulta = " + req.query.idEmpresa + ") "+
+    //               "AND (idPacienteConsulta = " + "'" + idPacienteConsulta + "') " + 
+    //             "ORDER BY idConsulta";
+
+    let sql = "SELECT " + 
+                    "md.nomeMedico, ct.nome, dataConsulta, mid(horaConsulta,1,5) horaConsulta, " + 
+                    "idConsulta, idMedicoConsulta, idPacienteConsulta, idEmpresaConsulta, " + 
+                    "motivoConsulta, pesoConsulta, alturaConsulta, cabecaConsulta, infoConsulta, " + 
+                    "prescricaoConsulta, Date_Format(dataConsulta,'%d/%m/%Y') dataConsultaFrm, " +
+                    "ct.maeNome, ct.paiNome, ct.telefone " +
+            "FROM awConsultas " +
+                "INNER JOIN awContatos ct " +
+                    "ON awConsultas.idPacienteConsulta = ct.id " +
+                "INNER JOIN awMedicos md " +
+                    "ON awConsultas.idMedicoConsulta = md.idMedico " +
+            "WHERE (idEmpresaConsulta = " + req.query.idEmpresa + ") "+
+                    "AND (idPacienteConsulta = " + "'" + idPacienteConsulta + "') " + 
+            "ORDER BY idConsulta";
+
     connection.query(sql, 
         function(err, rows) {
             if (err) throw err;

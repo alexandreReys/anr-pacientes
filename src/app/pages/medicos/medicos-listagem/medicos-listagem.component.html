@@ -1,0 +1,48 @@
+<div class="container-fluid">   
+    
+    <app-listagem-header [pageTitle]="pageTitle"></app-listagem-header>
+
+    <table class="table table-hover mt-4">
+        <thead>
+            <tr class="bg-primary text-light">
+                <th>
+                    Nome <br> 
+                    Endereço
+                </th>
+
+                <th>
+                    Especialidade <br> 
+                    CRM
+                </th>
+
+                <th>
+                    Telefone <br> 
+                    .
+                </th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr *ngFor="let medico of medicos">
+                <td>
+                    <strong>{{medico.nomeMedico}}</strong> <br> 
+                    {{medico.enderecoMedico}}, 
+                        {{medico.numeroMedico}} - 
+                        Bairro: {{medico.bairroMedico}}, 
+                        {{medico.cidadeMedico}}, 
+                        {{medico.estadoMedico}}
+                </td>
+
+                <td>
+                    {{medico.especialidadeMedico}} <br> 
+                    {{medico.crmMedico}}
+                </td>
+                
+                <td>
+                    {{medico.telefoneMedico}} <br> 
+                    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

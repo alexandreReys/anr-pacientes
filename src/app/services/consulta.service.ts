@@ -78,10 +78,10 @@ export class ConsultaService {
   };
 
   getConsultasPaciente(idPaciente: string): Observable<Consulta[]> {
-      let urlGet: string = `${APP_API}/consultas/paciente/${idPaciente}?idEmpresa=${this.loginService.user.idEmpresaUsuario}`;
-      return this.httpClient
-        .get<Consulta[]>( urlGet, { headers: this.getHeaders() } )
-        .pipe( catchError( error => ErrorHandler.handleError(error) ) );
+    let urlGet: string = `${APP_API}/consultas/paciente/${idPaciente}?idEmpresa=${this.loginService.user.idEmpresaUsuario}`;
+    return this.httpClient
+      .get<Consulta[]>( urlGet, { headers: this.getHeaders() } )
+      .pipe( catchError( error => ErrorHandler.handleError(error) ) );
   };
 
   addConsulta(consulta: Consulta){

@@ -9,16 +9,12 @@ input {
     padding: .375rem .45rem;
 }
 
-.validation-error {
+input, select, textarea, .validation-error {
     font-size:10px;
 }
 
 .icone-size {
     font-size: 24px;
-}
-
-.uppercase {
-    text-transform: uppercase;
 }
 
 .input-group-text {

@@ -90,8 +90,22 @@ router.get('/data/:dataConsulta', function (req, res) {
 });
 router.get('/paciente/:idPacienteConsulta', function (req, res) {
     var idPacienteConsulta = req.params.idPacienteConsulta;
-    var sql = "SELECT * " +
+    // let sql =   "SELECT * "+
+    //             "FROM awConsultas "+
+    //             "WHERE (idEmpresaConsulta = " + req.query.idEmpresa + ") "+
+    //               "AND (idPacienteConsulta = " + "'" + idPacienteConsulta + "') " + 
+    //             "ORDER BY idConsulta";
+    var sql = "SELECT " +
+        "md.nomeMedico, ct.nome, dataConsulta, mid(horaConsulta,1,5) horaConsulta, " +
+        "idConsulta, idMedicoConsulta, idPacienteConsulta, idEmpresaConsulta, " +
+        "motivoConsulta, pesoConsulta, alturaConsulta, cabecaConsulta, infoConsulta, " +
+        "prescricaoConsulta, Date_Format(dataConsulta,'%d/%m/%Y') dataConsultaFrm, " +
+        "ct.maeNome, ct.paiNome, ct.telefone " +
         "FROM awConsultas " +
+        "INNER JOIN awContatos ct " +
+        "ON awConsultas.idPacienteConsulta = ct.id " +
+        "INNER JOIN awMedicos md " +
+        "ON awConsultas.idMedicoConsulta = md.idMedico " +
         "WHERE (idEmpresaConsulta = " + req.query.idEmpresa + ") " +
         "AND (idPacienteConsulta = " + "'" + idPacienteConsulta + "') " +
         "ORDER BY idConsulta";

@@ -13,14 +13,17 @@ import { ConsultaService } from 'src/app/services/consulta.service';
 var ConsultasListagemComponent = /** @class */ (function () {
     function ConsultasListagemComponent(consultaService) {
         this.consultaService = consultaService;
+        this.pageTitle = 'Listagem das Consultas Agendadas';
+        this.consultas = [];
     }
     ConsultasListagemComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.consultaService.getConsultas()
-            .subscribe(function (consultas) {
-            _this.consultas = consultas;
-            // this.contatos = Array.of( _.groupBy(contatos, 'complemento') );
-            // console.log(this.contatos);
+        this.consultaService.getConsultas().subscribe(function (consultas) {
+            var result = _(consultas)
+                .groupBy(function (x) { return x.nomeMedico; })
+                .map(function (value, key) { return ({ nomeMedico: key, consultas: value }); })
+                .value();
+            _this.consultas = Array.of(result);
         });
     };
     ConsultasListagemComponent = __decorate([

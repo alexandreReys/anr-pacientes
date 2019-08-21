@@ -2,6 +2,7 @@ import * as jwt from 'jsonwebtoken';
 import { apiConfig } from './api-config';
 var connection = require('./mysql-connection');
 export var handleAuthentication = function (req, resp) {
+    console.log(req.body);
     var reqUser = req.body;
     if (reqUser) {
         getEmailLogin(reqUser, function (err, rows) {

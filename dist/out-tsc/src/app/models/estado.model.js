@@ -4,4 +4,10 @@ var Estado = /** @class */ (function () {
     return Estado;
 }());
 export { Estado };
+var Sexo = /** @class */ (function () {
+    function Sexo() {
+    }
+    return Sexo;
+}());
+export { Sexo };
 //# sourceMappingURL=estado.model.js.map

@@ -24,15 +24,26 @@ var ConsultaService = /** @class */ (function () {
     ConsultaService.prototype.setDados = function (consulta) {
         this.subject.next(consulta);
     };
-    ConsultaService.prototype.getConsultas = function (search) {
+    ConsultaService.prototype.getConsultas = function (search, idMedico) {
+        var idEmpresa = this.loginService.user.idEmpresaUsuario;
+        var urlGet;
         if (search) {
-            var urlGet = APP_API + "/consultas/" + search + "?idEmpresa=" + this.loginService.user.idEmpresaUsuario;
+            if (!idMedico)
+                urlGet = APP_API + "/consultas/" + search + "?idEmpresa=" + idEmpresa;
+            else
+                urlGet = APP_API + "/consultas/" + search + "?idEmpresa=" + idEmpresa + "&idMedico=" + idMedico;
             return this.httpClient
                 .get(urlGet, { headers: this.getHeaders() })
                 .pipe(catchError(function (error) { return ErrorHandler.handleError(error); }));
         }
         else {
-            var urlGet = APP_API + "/consultas?idEmpresa=" + this.loginService.user.idEmpresaUsuario;
+            if (!idMedico) {
+                urlGet = APP_API + "/consultas?idEmpresa=" + idEmpresa;
+            }
+            else {
+                urlGet = APP_API + "/consultas?idEmpresa=" + idEmpresa + "&idMedico=" + idMedico;
+            }
+            ;
             return this.httpClient
                 .get(urlGet, { headers: this.getHeaders() })
                 .pipe(catchError(function (error) { return ErrorHandler.handleError(error); }));
@@ -46,8 +57,13 @@ var ConsultaService = /** @class */ (function () {
             .pipe(catchError(function (error) { return ErrorHandler.handleError(error); }));
     };
     ;
-    ConsultaService.prototype.getConsultasData = function (dataConsulta) {
-        var urlGet = APP_API + "/consultas/data/" + dataConsulta + "?idEmpresa=" + this.loginService.user.idEmpresaUsuario;
+    ConsultaService.prototype.getConsultasData = function (dataConsulta, idMedico) {
+        var idEmpresa = this.loginService.user.idEmpresaUsuario;
+        var urlGet;
+        if (!idMedico)
+            urlGet = APP_API + "/consultas/data/" + dataConsulta + "?idEmpresa=" + idEmpresa;
+        else
+            urlGet = APP_API + "/consultas/data/" + dataConsulta + "?idEmpresa=" + idEmpresa + "&idMedico=" + idMedico;
         return this.httpClient
             .get(urlGet, { headers: this.getHeaders() })
             .pipe(catchError(function (error) { return ErrorHandler.handleError(error); }));

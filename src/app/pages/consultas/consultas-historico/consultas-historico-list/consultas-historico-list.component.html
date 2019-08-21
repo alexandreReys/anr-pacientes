@@ -1,0 +1,61 @@
+<div class="container-fluid">
+    <nav class="mt-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+            <li class="breadcrumb-item active">Histórico</li>
+        </ol>
+    </nav>
+  
+    <div class="row mt-3">
+        <div class="col-md-9">
+            <h3><i class="fa fa-laptop-medical text-danger" aria-hidden="true"></i> 
+                Histórico
+            </h3>
+        </div>
+        <div class="col-md-3">
+            <h5><a (click)="toggleSearch()" class="search-link" style="float:right;">
+                <i class="fa fa-search float-right mt-3 mr-3"></i></a>
+            </h5>
+        </div>
+    </div>
+  
+    <div class="row">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+            <!-- barra de busca -->
+            <div class="search-bar" [@toggleSearch]="searchBarState">
+                <form [formGroup]="searchForm">
+                    <div class="form-group mr-3">
+                        <input type="text" formControlName="searchControl" class="form-control" 
+                                placeholder="O que esta procurando ?" style="font-size: 12px;" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  
+    <table class="table table-hover">
+        <thead>
+            <tr class="bg-primary text-light">
+                <th>Paciente</th>
+                <th>Telefone</th>
+                <th>Sexo</th>
+                <th>Data Nasc.</th>
+                <th>Pai</th>
+                <th>Mãe</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let contato of contatos" class="pointer" (click)="abrirHistorico(contato)">
+                <td><strong>{{contato.nome}}</strong></td>
+                <td>{{contato.telefone}}</td>
+                <td>{{contato.sexo}}</td>
+                <td>{{contato.dataNasc}}</td>
+                <td>{{contato.paiNome}}</td>
+                <td>{{contato.maeNome}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

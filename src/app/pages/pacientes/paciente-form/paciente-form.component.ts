@@ -148,7 +148,7 @@ export class PacienteFormComponent implements OnInit {
           this.contato = respService;
 
           let dataNasc = this.contato.dataNasc;
-          dataNasc = dataNasc.substr(0,10);
+          dataNasc = dataNasc.substr(6,4)+'-'+dataNasc.substr(3,2)+'-'+dataNasc.substr(0,2);
 
           this.form.patchValue(this.contato);  // binds loaded contato data to form
           this.form.controls['idEmpresa'].setValue(this.loginService.user.idEmpresaUsuario);

@@ -13,14 +13,14 @@ import { ContatoService } from 'src/app/services/contato.service';
 var PacientesListagemComponent = /** @class */ (function () {
     function PacientesListagemComponent(contatoService) {
         this.contatoService = contatoService;
+        this.pageTitle = 'Listagem de Pacientes';
     }
     PacientesListagemComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.contatoService.getContatos()
             .subscribe(function (contatos) {
-            // this.contatos = contatos;
-            _this.contatos = Array.of(_.groupBy(contatos, 'complemento'));
-            console.log(_this.contatos);
+            _this.contatos = contatos;
+            // this.contatos = Array.of( _.groupBy(contatos, 'complemento') );
         });
     };
     PacientesListagemComponent = __decorate([

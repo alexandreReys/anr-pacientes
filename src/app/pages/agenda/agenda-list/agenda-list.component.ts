@@ -6,7 +6,7 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Observable, from } from 'rxjs';
 import { switchMap, debounceTime, distinctUntilChanged, catchError } from 'rxjs/internal/operators';
 
-import { Contato } from '../../../models/contato.model';
+import { Contato } from 'src/app/models/contato.model';
 import { ContatoService } from 'src/app/services/contato.service';
 
 @Component({

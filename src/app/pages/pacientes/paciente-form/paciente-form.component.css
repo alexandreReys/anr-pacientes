@@ -3,26 +3,21 @@
 }
 
 label {
-    font-size:12px;
     margin-bottom: 0;
     margin-left: 5px;
+    font-size:10px;
 }
 
 input {
-    /* font-size:12px; */
     padding: .375rem .45rem;
 }
 
-.validation-error {
-    font-size:12px;
+input, select, .validation-error {
+    font-size:10px;
 }
 
 .icone-size {
     font-size: 24px;
-}
-
-.uppercase {
-    text-transform: uppercase;
 }
 
 .input-group-text {
@@ -32,20 +27,20 @@ input {
 
 ::-webkit-input-placeholder {
     color: orange;
-    font: 12px verdana, arial, sans-serif;
+    font: 10px verdana, arial, sans-serif;
  }
  
  :-moz-placeholder {
     color: orange;
-    font: 12px verdana, arial, sans-serif;
+    font: 10px verdana, arial, sans-serif;
  }
  
  ::-moz-placeholder {
     color: orange;  
-    font: 12px verdana, arial, sans-serif;
+    font: 10px verdana, arial, sans-serif;
  }
  
  :-ms-input-placeholder {  
     color: orange;  
-    font: 12px verdana, arial, sans-serif;
+    font: 10px verdana, arial, sans-serif;
  }
