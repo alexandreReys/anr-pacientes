@@ -40,12 +40,12 @@ export class ContatoService {
     }
   };
 
-  getContatosCodigo(codigoPaciente?: string): Observable<Contato[]> {
-      let urlGet: string = `${APP_API}/contatos/codigo/${codigoPaciente}?idEmpresa=${this.loginService.user.idEmpresaUsuario}`;
-      return this.httpClient
-        .get<Contato[]>( urlGet, { headers: this.getHeaders() } )
-        .pipe( catchError( error => ErrorHandler.handleError(error) ) );
-  };
+  // getContatosCodigo(codigoPaciente?: string): Observable<Contato[]> {
+  //     let urlGet: string = `${APP_API}/contatos/codigo/${codigoPaciente}?idEmpresa=${this.loginService.user.idEmpresaUsuario}`;
+  //     return this.httpClient
+  //       .get<Contato[]>( urlGet, { headers: this.getHeaders() } )
+  //       .pipe( catchError( error => ErrorHandler.handleError(error) ) );
+  // };
 
   getContatosId(idPaciente?: string): Observable<Contato[]> {
     let urlGet: string = `${APP_API}/contatos/id/${idPaciente}?idEmpresa=${this.loginService.user.idEmpresaUsuario}`;
@@ -55,7 +55,7 @@ export class ContatoService {
 };
 
 addContato(contato: Contato){
-    return this.httpClient
+  return this.httpClient
       .post<Contato>( this.url, contato, this.getHttpOptions() )
       .pipe( catchError( error => ErrorHandler.handleError(error) ) )
       .subscribe();
@@ -69,7 +69,7 @@ addContato(contato: Contato){
   }
   
   deleteContato(contato: Contato){
-    let url: string = `${APP_API}/contatos/${contato.codigo}`;
+    let url: string = `${APP_API}/contatos/${contato.id}`;
     return this.httpClient
       .delete( url, this.getHttpOptions() )
       .pipe( catchError( error => ErrorHandler.handleError(error) ) )

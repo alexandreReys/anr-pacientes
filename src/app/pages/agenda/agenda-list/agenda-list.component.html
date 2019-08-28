@@ -57,9 +57,9 @@
                 <td>{{contato.paiNome}}</td>
                 <td>{{contato.maeNome}}</td>
                 <td class="widthAcoes">
-                    <a class="fa fa-plus pointer mr-3 text-primary"
-                        [routerLink]="[contato.codigo,'new']"></a>
-                    <a class="fa fa-edit pointer text-success ml-3"
+                    <a class="fa fa-plus pointer mr-3 text-primary" style="font-size:16px"
+                        [routerLink]="[contato.id,'new']"></a>
+                    <a class="fa fa-edit pointer text-success ml-3" style="font-size:16px"
                         (click)="editarPaciente(contato)"></a>
                         <!-- [routerLink]="['/paciente']">  -->
                         <!-- [routerLink]="['/paciente', contato.id, 'edit']">  -->

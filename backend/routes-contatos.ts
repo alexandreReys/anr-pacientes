@@ -43,7 +43,7 @@ router.get('/:nome', (req, res) => {
 });
 
 router.get('/codigo/:codigo', (req, res) => {
-    let sql =   "SELECT * "+
+    let sql = "SELECT * "+
                 "FROM awContatos "+
                 "WHERE (idEmpresa = " + req.query.idEmpresa + ") "+
                   "AND (codigo = " + "'" + req.params.codigo + "')";
@@ -99,8 +99,8 @@ router.post('/', (req, res) => {
     );
 });
 
-router.delete('/:codigo', (req, res) => {
-    connection.query('delete from awContatos where codigo = ?',[req.params.codigo], function(err, rows, fields) {
+router.delete('/:id', (req, res) => {
+    connection.query('delete from awContatos where id = ?',[req.params.id], function(err, rows, fields) {
         if (err) throw err;
         res.end('Deletado')
     });
@@ -114,11 +114,11 @@ router.put('/', (req, res) => {
                 'bairro=?, cidade=?, estado=?, cep=?, paiNome=?, paiTelefone=?, ' +
                 'paiProfissao=?, maeNome=?, maeTelefone=?, maeProfissao=?, '  +
                 'dataNasc=?, sexo=?, email=?, certidaoNasc=?' +
-                'where codigo=?';
+                'where id=?';
     connection.query(sql, [ c.nome, c.telefone, c.endereco, c.numero, c.complemento,
                             c.bairro, c.cidade, c.estado, c.cep, c.paiNome, c.paiTelefone, 
                             c.paiProfissao, c.maeNome, c.maeTelefone, c.maeProfissao,
-                            c.dataNasc, c.sexo, c.email, c.certidaoNasc, c.codigo ], 
+                            c.dataNasc, c.sexo, c.email, c.certidaoNasc, c.id ], 
     function(err, rows, fields) {
         if (err) throw err;
         res.json(rows);

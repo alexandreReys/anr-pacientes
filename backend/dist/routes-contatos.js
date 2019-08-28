@@ -84,8 +84,8 @@ router.post('/', function (req, res) {
         res.json(rows);
     });
 });
-router["delete"]('/:codigo', function (req, res) {
-    connection.query('delete from awContatos where codigo = ?', [req.params.codigo], function (err, rows, fields) {
+router["delete"]('/:id', function (req, res) {
+    connection.query('delete from awContatos where id = ?', [req.params.id], function (err, rows, fields) {
         if (err)
             throw err;
         res.end('Deletado');
@@ -98,11 +98,11 @@ router.put('/', function (req, res) {
         'bairro=?, cidade=?, estado=?, cep=?, paiNome=?, paiTelefone=?, ' +
         'paiProfissao=?, maeNome=?, maeTelefone=?, maeProfissao=?, ' +
         'dataNasc=?, sexo=?, email=?, certidaoNasc=?' +
-        'where codigo=?';
+        'where id=?';
     connection.query(sql, [c.nome, c.telefone, c.endereco, c.numero, c.complemento,
         c.bairro, c.cidade, c.estado, c.cep, c.paiNome, c.paiTelefone,
         c.paiProfissao, c.maeNome, c.maeTelefone, c.maeProfissao,
-        c.dataNasc, c.sexo, c.email, c.certidaoNasc, c.codigo], function (err, rows, fields) {
+        c.dataNasc, c.sexo, c.email, c.certidaoNasc, c.id], function (err, rows, fields) {
         if (err)
             throw err;
         res.json(rows);

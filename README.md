@@ -5,14 +5,20 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Run backend
 
+cd ..../backend
 nodemon --watch backend backend/dist/express.js
 https://localhost:3001
 
 
 ## Run frontend
 
+ng serve
 http://localhost:4200
 
+
+## Run tsc
+
+tsc -w
 
 
 ## Features

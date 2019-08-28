@@ -23,7 +23,7 @@ export class AgendaFormComponent implements OnInit {
     form: FormGroup;
     formMedico: FormGroup;
 
-    codigoPaciente: string;
+    idPaciente: string;
     nomePaciente: string;
     submittingForm: boolean = false;
 
@@ -80,9 +80,9 @@ export class AgendaFormComponent implements OnInit {
     };
 
     loadContatos() {
-        this.codigoPaciente = this.route.snapshot.url[0].toString();
+        this.idPaciente = this.route.snapshot.url[0].toString();
         this.contato = new Contato();
-        this.contatoService.getContatosCodigo(this.codigoPaciente)
+        this.contatoService.getContatosId(this.idPaciente)
             .subscribe( contatos => { 
                 this.contatos = contatos;
                 this.contato = contatos[0];
