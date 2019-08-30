@@ -16,7 +16,7 @@ router.get('/', function (req, res) {
     var sql = "SELECT " +
         "md.nomeMedico, ct.nome, dataConsulta, mid(horaConsulta,1,5) horaConsulta, " +
         "idConsulta, idMedicoConsulta, idPacienteConsulta, idEmpresaConsulta, " +
-        "motivoConsulta, pesoConsulta, alturaConsulta, cabecaConsulta, infoConsulta, " +
+        "queixaPrincipalConsulta, pesoConsulta, alturaConsulta, cabecaConsulta, historiaDoencaAtualConsulta, " +
         "prescricaoConsulta, Date_Format(dataConsulta,'%d/%m/%Y') dataConsultaFrm, " +
         "ct.maeNome, ct.paiNome, ct.telefone " +
         "FROM awConsultas " +
@@ -37,8 +37,8 @@ router.get('/id/:idConsulta', function (req, res) {
     //  let sql = "SELECT * FROM awConsultas WHERE idConsulta = " + "'" + idConsulta + "'" + " ORDER BY idConsulta";
     var sql = "SELECT " +
         "idConsulta, idPacienteConsulta, idEmpresaConsulta, idMedicoConsulta, " +
-        "dataConsulta, mid(horaConsulta,1,5) horaConsulta, motivoConsulta, pesoConsulta, alturaConsulta, " +
-        "cabecaConsulta, infoConsulta,prescricaoConsulta, Date_Format(dataConsulta,'%d/%m/%Y') dataConsultaFrm, " +
+        "dataConsulta, mid(horaConsulta,1,5) horaConsulta, queixaPrincipalConsulta, pesoConsulta, alturaConsulta, " +
+        "cabecaConsulta, historiaDoencaAtualConsulta,prescricaoConsulta, Date_Format(dataConsulta,'%d/%m/%Y') dataConsultaFrm, " +
         "ct.nome,  ct.maeNome, ct.paiNome, ct.telefone " +
         "FROM awConsultas " +
         "INNER JOIN awContatos ct " +
@@ -69,8 +69,8 @@ router.get('/data/:dataConsulta', function (req, res) {
     ;
     var sql = "SELECT " +
         "md.nomeMedico, idConsulta, idPacienteConsulta, idEmpresaConsulta, idMedicoConsulta, " +
-        "dataConsulta, mid(horaConsulta,1,5) horaConsulta, motivoConsulta, pesoConsulta, " +
-        "alturaConsulta, cabecaConsulta, infoConsulta,prescricaoConsulta, " +
+        "dataConsulta, mid(horaConsulta,1,5) horaConsulta, queixaPrincipalConsulta, pesoConsulta, " +
+        "alturaConsulta, cabecaConsulta, historiaDoencaAtualConsulta,prescricaoConsulta, " +
         "Date_Format(dataConsulta,'%d/%m/%Y') dataConsultaFrm, " +
         "ct.nome,  ct.maeNome, ct.paiNome, ct.telefone " +
         "FROM awConsultas " +
@@ -103,12 +103,12 @@ router.post('/', function (req, res) {
     var c = req.body;
     var sql = 'insert into ' +
         'awConsultas (' +
-        'idPacienteConsulta, idEmpresaConsulta, idMedicoConsulta, dataConsulta, horaConsulta, motivoConsulta, ' +
-        'pesoConsulta, alturaConsulta, cabecaConsulta, infoConsulta, prescricaoConsulta )' +
+        'idPacienteConsulta, idEmpresaConsulta, idMedicoConsulta, dataConsulta, horaConsulta, queixaPrincipalConsulta, ' +
+        'pesoConsulta, alturaConsulta, cabecaConsulta, historiaDoencaAtualConsulta, prescricaoConsulta )' +
         'values (' +
         ' ?,?,?,?, ?,?,?,?, ?,?,?)';
-    connection.query(sql, [c.idPacienteConsulta, c.idEmpresaConsulta, c.idMedicoConsulta, c.dataConsulta, c.horaConsulta, c.motivoConsulta,
-        c.pesoConsulta, c.alturaConsulta, c.cabecaConsulta, c.infoConsulta, c.prescricaoConsulta], function (err, rows, fields) {
+    connection.query(sql, [c.idPacienteConsulta, c.idEmpresaConsulta, c.idMedicoConsulta, c.dataConsulta, c.horaConsulta, c.queixaPrincipalConsulta,
+        c.pesoConsulta, c.alturaConsulta, c.cabecaConsulta, c.historiaDoencaAtualConsulta, c.prescricaoConsulta], function (err, rows, fields) {
         if (err)
             throw err;
         res.json(rows);
@@ -124,11 +124,11 @@ router.delete('/:idConsulta', function (req, res) {
 router.put('/', function (req, res) {
     var c = req.body;
     var sql = 'update awConsultas set ' +
-        'motivoConsulta=?, pesoConsulta=?, alturaConsulta=?, ' +
-        'cabecaConsulta=?, infoConsulta=?, prescricaoConsulta=? ' +
+        'queixaPrincipalConsulta=?, pesoConsulta=?, alturaConsulta=?, ' +
+        'cabecaConsulta=?, historiaDoencaAtualConsulta=?, prescricaoConsulta=? ' +
         'where idConsulta=?';
-    connection.query(sql, [c.motivoConsulta, c.pesoConsulta, c.alturaConsulta,
-        c.cabecaConsulta, c.infoConsulta, c.prescricaoConsulta,
+    connection.query(sql, [c.queixaPrincipalConsulta, c.pesoConsulta, c.alturaConsulta,
+        c.cabecaConsulta, c.historiaDoencaAtualConsulta, c.prescricaoConsulta,
         c.idConsulta], function (err, rows, fields) {
         if (err)
             throw err;

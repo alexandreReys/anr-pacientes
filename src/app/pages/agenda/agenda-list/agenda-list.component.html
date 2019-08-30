@@ -46,20 +46,20 @@
                 <th>Telefone</th>
                 <th>Pai</th>
                 <th>Mãe</th>
-                <th class="widthAcoes"> Ações</th>
+                <th class="widthAcoes"></th>
             </tr>
         </thead>
 
         <tbody>
-            <tr *ngFor="let contato of contatos">
+            <tr *ngFor="let contato of contatos" class="pointer" [routerLink]="[contato.id,'new']">
                 <td><strong>{{contato.nome}}</strong></td>
                 <td>{{contato.telefone}}</td>
                 <td>{{contato.paiNome}}</td>
                 <td>{{contato.maeNome}}</td>
                 <td class="widthAcoes">
-                    <a class="fa fa-plus pointer mr-3 text-primary" style="font-size:16px"
-                        [routerLink]="[contato.id,'new']"></a>
-                    <a class="fa fa-edit pointer text-success ml-3" style="font-size:16px"
+                    <!-- <a class="fa fa-plus pointer mr-3 text-primary" style="font-size:16px"
+                        [routerLink]="[contato.id,'new']"></a> -->
+                    <a class="fa fa-edit pointer text-success" style="font-size:16px"
                         (click)="editarPaciente(contato)"></a>
                         <!-- [routerLink]="['/paciente']">  -->
                         <!-- [routerLink]="['/paciente', contato.id, 'edit']">  -->

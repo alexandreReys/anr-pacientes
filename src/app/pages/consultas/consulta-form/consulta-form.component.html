@@ -36,12 +36,14 @@
     
 
     <form [formGroup]="form">
-        <div class="card">
+        <div class="card mb-5">
             <div class="card-header">
-                <h5>
-                    <p class="text-danger">Consulta : {{dataConsult}} - {{horaConsult}} </p>
-                    <p> <strong class="text-dark">Paciente : {{nomePacient}}</strong>  </p>
-                </h5>
+                <strong>
+                    <span class="text-danger"> Consulta : </span>
+                    <span class="text-dark">   {{dataConsult}}, {{horaConsult}} </span>
+                    <span class="text-danger"> - Paciente : </span> 
+                    <span class="text-dark">   {{nomePacient}} </span> 
+                </strong>
             </div>
 
             <div class="card-body">
@@ -59,8 +61,8 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <label for="motivoConsulta">Motivo</label>
-                        <input type="text" class="form-control" formControlName="motivoConsulta" id="motivoConsulta">
+                        <label for="queixaPrincipalConsulta">Queixa Principal</label>
+                        <input type="text" class="form-control" formControlName="queixaPrincipalConsulta" id="queixaPrincipalConsulta">
                     </div>
                 </div>
 
@@ -96,8 +98,8 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <label for="infoConsulta">Conclusão</label>
-                        <input type="text" class="form-control" formControlName="infoConsulta" id="infoConsulta">
+                        <label for="historiaDoencaAtualConsulta">História Doença Atual</label>
+                        <input type="text" class="form-control" formControlName="historiaDoencaAtualConsulta" id="historiaDoencaAtualConsulta">
                     </div>
                 </div>
 
@@ -107,16 +109,17 @@
                         <textarea rows="4" cols="50" maxlength="500" class="form-control" formControlName="prescricaoConsulta" id="prescricaoConsulta"></textarea>
                     </div>
                 </div>
+
+                <button type="button" 
+                    [disabled]="!form.valid"
+                    (click)="submitForm()" 
+                    class="btn btn-primary btn-md float-right mt-2"
+                    style="font-size: 12px">
+                    S a l v a r
+                </button>
             </div>
         </div>
 
-        <button type="button" 
-            [disabled]="!form.valid"
-            (click)="submitForm()" 
-            class="btn btn-primary btn-md float-right mt-2 mb-5"
-            style="font-size: 12px">
-            S a l v a r
-        </button>
 
     </form> 
 </div>

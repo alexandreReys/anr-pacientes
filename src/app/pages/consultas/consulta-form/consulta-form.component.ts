@@ -48,11 +48,11 @@ export class ConsultaFormComponent implements OnInit {
       idMedicoConsulta:    ['', Validators.required ],
       dataConsulta:        ['', Validators.required ],
       horaConsulta:        ['', Validators.required ],
-      motivoConsulta:      ['', Validators.required ],
+      queixaPrincipalConsulta:      ['', Validators.required ],
       pesoConsulta:        [''],
       alturaConsulta:      [''],
       cabecaConsulta:      [''],
-      infoConsulta:        ['', Validators.required ],
+      historiaDoencaAtualConsulta:        ['', Validators.required ],
       prescricaoConsulta:  ['']
     });
   }

@@ -42,6 +42,8 @@ Pacientes
 Consultas
 	agendamento (ok)
 	atendimento (ok)
+	remarcação de consulta ( ==== P E N D E N T E ==== )
+	cancelamento de consulta ( ==== P E N D E N T E ==== )
 	listagem de consultas (ok)
 	impressao de receita medica ( ==== P E N D E N T E ==== )
 	impressao de atestado ( ==== P E N D E N T E ==== )

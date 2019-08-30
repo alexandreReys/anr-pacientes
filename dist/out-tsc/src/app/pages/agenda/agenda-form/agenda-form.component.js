@@ -55,7 +55,7 @@ var AgendaFormComponent = /** @class */ (function () {
             idMedicoConsulta: [null, [Validators.required]],
             dataConsulta: [null, [Validators.required]],
             horaConsulta: [null, [Validators.required]],
-            motivoConsulta: [null, [Validators.required]]
+            queixaPrincipalConsulta: [null, [Validators.required]]
         });
         this.form.controls['idEmpresaConsulta'].setValue("" + this.loginService.user.idEmpresaUsuario);
     };

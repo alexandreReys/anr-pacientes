@@ -53,8 +53,8 @@ router.get('/id/:id', function (req, res) {
         "WHERE (idEmpresa = " + req.query.idEmpresa + ") " +
         "AND (id = " + "'" + req.params.id + "')";
     // let sql = "SELECT idConsulta,idPaciente,dataConsulta,horaConsulta," +
-    //                     "motivoConsulta,pesoConsulta,alturaConsulta,cabecaConsulta," +
-    //                     "infoConsulta,prescricaoConsulta,prescricao2Consulta," +
+    //                     "queixaPrincipalConsulta,pesoConsulta,alturaConsulta,cabecaConsulta," +
+    //                     "historiaDoencaAtualConsulta,prescricaoConsulta,prescricao2Consulta," +
     //                     "prescricao3Consulta,dataNascConsulta, " +
     //                     "DATE_FORMAT(dataConsulta,'%d/%m/%Y') as dataConsultaF " +
     //           "FROM awContatos " +

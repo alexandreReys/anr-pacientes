@@ -135,7 +135,7 @@ export class PacienteFormComponent implements OnInit {
 
       dataNasc:       [''],
       sexo:           [''],
-      email:          ['', [ Validators.required, Validators.pattern(this.emailPattern) ]],
+      email:          ['', [ Validators.pattern(this.emailPattern) ]],
       certidaoNasc:   ['']
       
     })

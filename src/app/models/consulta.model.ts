@@ -5,11 +5,11 @@ export class Consulta{
     idMedicoConsulta: number;
     dataConsulta: string;
     horaConsulta: string;
-    motivoConsulta: string;
+    queixaPrincipalConsulta: string;        //motivoConsulta: string;
     pesoConsulta: number;
     alturaConsulta: number;
     cabecaConsulta: number;
-    infoConsulta: string;
+    historiaDoencaAtualConsulta: string;    //infoConsulta: string;
     prescricaoConsulta: string;
     dataConsultaFrm: string;
     nome: string;

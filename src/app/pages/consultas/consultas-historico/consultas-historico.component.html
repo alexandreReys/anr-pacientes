@@ -13,8 +13,8 @@
             <tr class="bg-primary text-light">
                 <th>Data / Hora</th>
                 <th>Medico</th>
-                <th>Motivo</th>
-                <th>Informações</th>
+                <th>Queixa Principal</th>
+                <th>História Doença Atual</th>
                 <th>Prescrição</th>
             </tr>
         </thead>
@@ -23,8 +23,8 @@
             <tr *ngFor="let consulta of consultas">
                 <td><strong>{{consulta.dataConsultaFrm}} {{consulta.horaConsulta}}</strong></td>
                 <td>{{consulta.nomeMedico}}</td>
-                <td>{{consulta.motivoConsulta}}</td>
-                <td>{{consulta.infoConsulta}}</td>
+                <td>{{consulta.queixaPrincipalConsulta}}</td>
+                <td>{{consulta.historiaDoencaAtualConsulta}}</td>
                 <td>{{consulta.prescricaoConsulta}}</td>
             </tr>
         </tbody>
