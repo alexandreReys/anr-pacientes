@@ -8,6 +8,15 @@ body {
     margin: 0; font-family: 'Roboto', sans-serif;
 }
 
+.body {
+    min-height: 100vh; 
+    /* background-color: rgba(154, 214, 240, 0.911)" */
+
+    font-family: 'Lato', sans-serif;
+    background: linear-gradient(to right, rgb(22, 34, 42), rgb(58, 96, 115));
+    color: #FFF;
+}
+
 .breadcrumb {
     font-size: 12px;
 }

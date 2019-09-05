@@ -18,6 +18,7 @@ http://localhost:4200
 
 ## Run tsc
 
+cd ..../backend
 tsc -w
 
 

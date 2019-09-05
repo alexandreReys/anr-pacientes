@@ -66,32 +66,39 @@
                     </div>
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        <label for="pesoConsulta">Peso</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">KG</div>
-                            </div>
-                            <input [imask]="imaskConfig" type="text" class="form-control text-center" formControlName="pesoConsulta" id="pesoConsulta">
-                        </div>
+                <div class="card">
+                    <div class="card-header card-header-input">
+                        Medidas Antropométricas 
                     </div>
-                    <div class="form-group col-md-2">
-                        <label for="alturaConsulta">Altura</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">MT</div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label for="pesoConsulta">Peso</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">Kg</div>
+                                    </div>
+                                    <input [imask]="imaskConfig" type="text" class="form-control text-center" formControlName="pesoConsulta" id="pesoConsulta">
+                                </div>
                             </div>
-                            <input [imask]="imaskConfig" type="text" class="form-control text-center" formControlName="alturaConsulta" id="alturaConsulta">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label for="cabecaConsulta">Circ.Cabeça</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">CM</div>
+                            <div class="form-group col-md-2">
+                                <label for="alturaConsulta">Altura</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">Mt</div>
+                                    </div>
+                                    <input [imask]="imaskConfig" type="text" class="form-control text-center" formControlName="alturaConsulta" id="alturaConsulta">
+                                </div>
                             </div>
-                            <input [imask]="imaskConfig" type="text" class="form-control text-center" formControlName="cabecaConsulta" id="cabecaConsulta">
+                            <div class="form-group col-md-2">
+                                <label for="cabecaConsulta">Circ.Cabeça</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">Cm</div>
+                                    </div>
+                                    <input [imask]="imaskConfig" type="text" class="form-control text-center" formControlName="cabecaConsulta" id="cabecaConsulta">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -100,6 +107,25 @@
                     <div class="form-group col-md-12">
                         <label for="historiaDoencaAtualConsulta">História Doença Atual</label>
                         <input type="text" class="form-control" formControlName="historiaDoencaAtualConsulta" id="historiaDoencaAtualConsulta">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="exameFisicoConsulta">Exame Fisico</label>
+                        <input type="text" class="form-control" formControlName="exameFisicoConsulta" id="exameFisicoConsulta">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="hipoteseDiagnosticaConsulta">Hipótese Diagnóstica</label>
+                        <input type="text" class="form-control" formControlName="hipoteseDiagnosticaConsulta" id="hipoteseDiagnosticaConsulta">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="condutaConsulta">Conduta</label>
+                        <input type="text" class="form-control" formControlName="condutaConsulta" id="condutaConsulta">
                     </div>
                 </div>
 

@@ -18,7 +18,8 @@ router.get('/', (req, res) => {
     let sql = "SELECT " + 
                     "md.nomeMedico, ct.nome, dataConsulta, mid(horaConsulta,1,5) horaConsulta, " + 
                     "idConsulta, idMedicoConsulta, idPacienteConsulta, idEmpresaConsulta, " + 
-                    "queixaPrincipalConsulta, pesoConsulta, alturaConsulta, cabecaConsulta, historiaDoencaAtualConsulta, " + 
+                    "queixaPrincipalConsulta, pesoConsulta, alturaConsulta, cabecaConsulta, historiaDoencaAtualConsulta, " +
+                    "exameFisicoConsulta, hipoteseDiagnosticaConsulta, condutaConsulta, " +
                     "prescricaoConsulta, Date_Format(dataConsulta,'%d/%m/%Y') dataConsultaFrm, " +
                     "ct.maeNome, ct.paiNome, ct.telefone " +
                 "FROM awConsultas " +
@@ -42,6 +43,7 @@ router.get('/id/:idConsulta', (req, res) => {
                     "idConsulta, idPacienteConsulta, idEmpresaConsulta, idMedicoConsulta, " + 
                     "dataConsulta, mid(horaConsulta,1,5) horaConsulta, queixaPrincipalConsulta, pesoConsulta, alturaConsulta, " + 
                     "cabecaConsulta, historiaDoencaAtualConsulta,prescricaoConsulta, Date_Format(dataConsulta,'%d/%m/%Y') dataConsultaFrm, " +
+                    "exameFisicoConsulta, hipoteseDiagnosticaConsulta, condutaConsulta, " +
                     "ct.nome,  ct.maeNome, ct.paiNome, ct.telefone " +
                 "FROM awConsultas " +
                     "INNER JOIN awContatos ct " +
@@ -77,6 +79,7 @@ router.get('/data/:dataConsulta', (req, res) => {
                     "md.nomeMedico, idConsulta, idPacienteConsulta, idEmpresaConsulta, idMedicoConsulta, " +
                     "dataConsulta, mid(horaConsulta,1,5) horaConsulta, queixaPrincipalConsulta, pesoConsulta, " + 
                     "alturaConsulta, cabecaConsulta, historiaDoencaAtualConsulta,prescricaoConsulta, " + 
+                    "exameFisicoConsulta, hipoteseDiagnosticaConsulta, condutaConsulta, " +
                     "Date_Format(dataConsulta,'%d/%m/%Y') dataConsultaFrm, " +
                     "ct.nome,  ct.maeNome, ct.paiNome, ct.telefone " +
                 "FROM awConsultas " +
@@ -108,6 +111,7 @@ router.get('/paciente/:idPacienteConsulta', (req, res) => {
                     "md.nomeMedico, ct.nome, dataConsulta, mid(horaConsulta,1,5) horaConsulta, " + 
                     "idConsulta, idMedicoConsulta, idPacienteConsulta, idEmpresaConsulta, " + 
                     "queixaPrincipalConsulta, pesoConsulta, alturaConsulta, cabecaConsulta, historiaDoencaAtualConsulta, " + 
+                    "exameFisicoConsulta, hipoteseDiagnosticaConsulta, condutaConsulta, " +
                     "prescricaoConsulta, Date_Format(dataConsulta,'%d/%m/%Y') dataConsultaFrm, " +
                     "ct.maeNome, ct.paiNome, ct.telefone " +
             "FROM awConsultas " +
@@ -132,12 +136,14 @@ router.post('/', (req, res) => {
     var sql = 'insert into '   +
                     'awConsultas (' + 
                         'idPacienteConsulta, idEmpresaConsulta, idMedicoConsulta, dataConsulta, horaConsulta, queixaPrincipalConsulta, ' +
-                        'pesoConsulta, alturaConsulta, cabecaConsulta, historiaDoencaAtualConsulta, prescricaoConsulta )'  +
+                        'pesoConsulta, alturaConsulta, cabecaConsulta, historiaDoencaAtualConsulta, exameFisicoConsulta, ' +
+                        'hipoteseDiagnosticaConsulta, condutaConsulta, prescricaoConsulta )'  +
                 'values (' +
-                        ' ?,?,?,?, ?,?,?,?, ?,?,?)';
+                        ' ?,?,?,?, ?,?,?,?, ?,?,?, ?,?,?)';
     
     connection.query(sql, [ c.idPacienteConsulta, c.idEmpresaConsulta, c.idMedicoConsulta, c.dataConsulta, c.horaConsulta, c.queixaPrincipalConsulta,
-        c.pesoConsulta, c.alturaConsulta, c.cabecaConsulta, c.historiaDoencaAtualConsulta, c.prescricaoConsulta ], 
+        c.pesoConsulta, c.alturaConsulta, c.cabecaConsulta, c.historiaDoencaAtualConsulta, c.exameFisicoConsulta, c.hipoteseDiagnosticaConsulta, 
+        c.condutaConsulta, c.prescricaoConsulta ], 
         function(err, rows, fields) {
             if (err) throw err;
         res.json(rows);
@@ -158,11 +164,13 @@ router.put('/', (req, res) => {
 
     var sql =   'update awConsultas set ' + 
                     'queixaPrincipalConsulta=?, pesoConsulta=?, alturaConsulta=?, ' +
-                    'cabecaConsulta=?, historiaDoencaAtualConsulta=?, prescricaoConsulta=? '  +
+                    'cabecaConsulta=?, historiaDoencaAtualConsulta=?, exameFisicoConsulta=?, ' +
+                    'hipoteseDiagnosticaConsulta=?, condutaConsulta=?, prescricaoConsulta=? ' +
                 'where idConsulta=?';
 
     connection.query(sql, [ c.queixaPrincipalConsulta, c.pesoConsulta, c.alturaConsulta, 
-                            c.cabecaConsulta, c.historiaDoencaAtualConsulta, c.prescricaoConsulta, 
+                            c.cabecaConsulta, c.historiaDoencaAtualConsulta, c.exameFisicoConsulta,
+                            c.hipoteseDiagnosticaConsulta, c.condutaConsulta, c.prescricaoConsulta, 
                             c.idConsulta ], 
         function(err, rows, fields) {
             if (err) throw err;

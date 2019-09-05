@@ -1,7 +1,19 @@
-label {
+label, .card-header-input {
     font-size:12px;
+    font-weight: bold;
     margin-bottom: 0;
     margin-left: 5px;
+}
+
+.card-header-input {
+    padding: .10rem 1.25rem;
+}
+.card-body {
+    padding: 0.05rem 1.0rem;
+}
+
+.input-group-text {
+    font-weight: bold;
 }
 
 input {
