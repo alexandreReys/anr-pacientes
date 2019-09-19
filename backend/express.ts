@@ -9,6 +9,7 @@ import { handleAuthorization } from './authz';
 const routesContatos = require('./routes-contatos');
 const routesConsultas = require('./routes-consultas');
 const routesMedicos = require('./routes-medicos');
+const routesEmpresas = require('./routes-empresas');
 
 //import * as fs from 'fs';
 //import * as https from 'https';
@@ -38,11 +39,14 @@ server.use('/consultas', routesConsultas);
 
 server.use('/medicos', handleAuthorization);
 server.use('/medicos', routesMedicos);
-//
+
+server.use('/empresas', handleAuthorization);
+server.use('/empresas', routesEmpresas);
+
 //const options = {
 //   cert: fs.readFileSync('./backend/keys/cert.pem'),
 //   key: fs.readFileSync('./backend/keys/key.pem')  };
-//
+
 const port = normalizePort(process.env.atendWeb_port || '3000');  // Variavel Ambiental
 server.set('port', port);
 

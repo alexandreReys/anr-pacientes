@@ -29,8 +29,8 @@ export class ConsultaFormComponent implements OnInit {
   };
 
   constructor( 
-    private consultaService: ConsultaService,
     private fb: FormBuilder,
+    private consultaService: ConsultaService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -76,17 +76,17 @@ export class ConsultaFormComponent implements OnInit {
     // this.consultaService.getConsultaId(id).subscribe( resp => this.consulta = resp[0] ); //imask não funciona
   };
 
-    // ////////////////////////////////////////////////////////////////// //
+  // ////////////////////////////////////////////////////////////////// //
 
-    submitForm() {
-      this.updateConsulta();
-      this.router.navigate(['/consulta']);
-    };
-  
-    updateConsulta() {
-      this.consulta = new Consulta();
-      this.consulta = Object.assign( new Consulta(), this.form.value );
-      this.consultaService.updateConsulta(this.consulta);
-    }
-    // ////////////////////////////////////////////////////////////////// //
+  submitForm() {
+    this.updateConsulta();
+    this.router.navigate(['/consulta']);
+  };
+
+  updateConsulta() {
+    this.consulta = new Consulta();
+    this.consulta = Object.assign( new Consulta(), this.form.value );
+    this.consultaService.updateConsulta(this.consulta);
+  }
+  // ////////////////////////////////////////////////////////////////// //
 }

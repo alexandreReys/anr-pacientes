@@ -32,6 +32,7 @@ router.get('/:nomeMedico', (req, res) => {
         }
     );
 });
+
 router.get('/id/:idMedico', (req, res) => {
     let sql =   "SELECT * "+
                 "FROM awMedicos "+

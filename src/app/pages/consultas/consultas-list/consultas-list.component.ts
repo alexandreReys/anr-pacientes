@@ -39,6 +39,7 @@ export class ConsultasListComponent implements OnInit {
 
     ngOnInit() {
         this.searchDate = this.formBuilder.control('');
+
         this.searchForm = this.formBuilder.group({
             searchDate: this.searchDate 
         });
@@ -55,7 +56,8 @@ export class ConsultasListComponent implements OnInit {
                     this.nomeMedico = this.medico.nomeMedico
                 else
                     this.nomeMedico = 'Todos';
-            });
+            }
+        );
 
     };  // fim ngOnInit() 
         
@@ -71,6 +73,16 @@ export class ConsultasListComponent implements OnInit {
         this.consultas.splice(index,1);
     }; // fim delete
 
+    receita(consulta: Consulta) {
+        this.consultaService.setDados(consulta);
+        this.router.navigate(['/consulta/receita']);
+    }; // fim receita
+
+    atestado(consulta: Consulta) {
+        this.consultaService.setDados(consulta);
+        this.router.navigate(['/consulta/atestado']);
+    }; // fim atestado
+
     procuraData(todos?: boolean) {
         this.consulta = new Consulta();
         this.consulta.dataConsulta = 'Processando ...';
@@ -78,27 +90,15 @@ export class ConsultasListComponent implements OnInit {
             this.consultaService.getConsultas(null, this.idMedico)
                 .subscribe( consultas => this.consultas = consultas );
         } else {
-            let searchDate = this.searchDate.value;
-            if(searchDate)
-                this.consultaService.getConsultasData(searchDate, this.idMedico)
+            let selectedDate = this.searchDate.value;
+            if(selectedDate)
+                this.consultaService.getConsultasData(selectedDate, this.idMedico)
                     .subscribe( consultas => this.consultas = consultas );
             else
                 this.consultaService.getConsultas(null, this.idMedico)
                     .subscribe( consultas => this.consultas = consultas );
         }
 
-        // if(todos) {
-        //     this.consultaService.getConsultas()
-        //         .subscribe( consultas => this.consultas = consultas );
-        // } else {
-        //     let searchDate = this.searchDate.value;
-        //     if(searchDate)
-        //         this.consultaService.getConsultasData(searchDate, this.idMedico)
-        //             .subscribe( consultas => this.consultas = consultas );
-        //     else
-        //         this.consultaService.getConsultas()
-        //             .subscribe( consultas => this.consultas = consultas );
-        // }
     }; // fim procuraData()
 
     setSearchDate() {
@@ -111,9 +111,10 @@ export class ConsultasListComponent implements OnInit {
         let day = now.getDate().toString();
         day = day.length > 1 ? day : '0' + day;
         
-        let searchDate = year + '-' + month + '-' + day; 
-        this.searchDate.setValue( searchDate );
-        this.consultaService.getConsultasData(searchDate, this.idMedico)
+        let date = year + '-' + month + '-' + day; 
+        this.searchDate.setValue( date );
+        this.consultaService.getConsultasData( date, this.idMedico )
             .subscribe( consultas => this.consultas = consultas );
+
       }; // fim setSearchDate()
 }

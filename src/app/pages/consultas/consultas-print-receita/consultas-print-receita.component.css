@@ -1,0 +1,15 @@
+@media print
+{
+    .container {
+        margin: 2 auto;
+        width:100%;
+    }
+    .breadcrumb, .bt-voltar, .bt-print{
+        display:none;
+    }
+    .footer-page {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+    }
+}

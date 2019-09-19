@@ -33,22 +33,22 @@ Usuarios
 		confirmação por email ( ==== P E N D E N T E ==== )
 
 Medicos
-	cadastro de medicos (ok)
-	listagem de medicos (ok)
+	(ok) cadastro de medicos (ok)
+	(ok) listagem de medicos (ok)
 
 Pacientes
-	cadastro de pacientes (ok)
-	listagem de pacientes (ok)
+	(ok) cadastro de pacientes (ok)
+	(ok) listagem de pacientes (ok)
 
 Consultas
-	agendamento (ok)
-	atendimento (ok)
+	(ok) agendamento (ok)
+	(ok) atendimento (ok)
 	remarcação de consulta ( ==== P E N D E N T E ==== )
 	cancelamento de consulta ( ==== P E N D E N T E ==== )
-	listagem de consultas (ok)
-	impressao de receita medica ( ==== P E N D E N T E ==== )
-	impressao de atestado ( ==== P E N D E N T E ==== )
-	Historico de Consultas por Paciente (ok)
+	(ok) listagem de consultas (ok)
+	(ok) impressao de receita medica (ok) (17-09-2019)
+	(ok) impressao de atestado (ok) (17-09-2019)
+	(ok) Historico de Consultas por Paciente (ok)
 
 
 ## Development server

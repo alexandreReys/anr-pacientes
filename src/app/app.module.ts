@@ -20,6 +20,7 @@ import { SharedModule } from './shared/shared.module';
 import { MedicoService } from 'src/app/services/medico.service';
 import { ContatoService } from './services/contato.service';
 import { ConsultaService } from './services/consulta.service';
+import { EmpresaService } from './services/empresa.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ConsultaService } from './services/consulta.service';
     LoggedInGuard,
     ContatoService,
     ConsultaService,
-    MedicoService
+    MedicoService,
+    EmpresaService
   ],
   bootstrap: [AppComponent]
 })

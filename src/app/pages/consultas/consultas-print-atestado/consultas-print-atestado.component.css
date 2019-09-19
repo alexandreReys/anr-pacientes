@@ -1,0 +1,29 @@
+@media screen
+{
+    .breadcrumb, .bt-voltar, .bt-print, .data-print{
+        display: block;
+    }
+    .footer-print, .content-print {
+        display: none;
+    }
+}
+
+@media print
+{
+    .container {
+        margin: 2 auto;
+        width:100%;
+    }
+    .breadcrumb, .bt-voltar, .bt-print, .data-print{
+        display:none;
+    }
+    .content-print {
+        display: block;
+    }
+    .footer-print {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+    }
+}

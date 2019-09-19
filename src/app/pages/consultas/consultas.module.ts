@@ -12,6 +12,8 @@ import { ConsultasListagemComponent } from './consultas-listagem/consultas-lista
 import { ConsultasListagemDetComponent } from './consultas-listagem/consultas-listagem-det/consultas-listagem-det.component';
 import { ConsultasHistoricoComponent } from './consultas-historico/consultas-historico.component';
 import { ConsultasHistoricoListComponent } from './consultas-historico/consultas-historico-list/consultas-historico-list.component';
+import { ConsultasPrintReceitaComponent } from './consultas-print-receita/consultas-print-receita.component';
+import { ConsultasPrintAtestadoComponent } from './consultas-print-atestado/consultas-print-atestado.component';
 
 @NgModule({
     imports: [
@@ -28,7 +30,9 @@ import { ConsultasHistoricoListComponent } from './consultas-historico/consultas
         ConsultasListagemComponent, 
         ConsultasListagemDetComponent, 
         ConsultasHistoricoComponent,
-        ConsultasHistoricoListComponent
+        ConsultasHistoricoListComponent, 
+        ConsultasPrintReceitaComponent,
+        ConsultasPrintAtestadoComponent
     ]
 })
 export class ConsultasModule { }

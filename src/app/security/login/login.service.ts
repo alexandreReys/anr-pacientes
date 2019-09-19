@@ -8,13 +8,14 @@ import { filter } from 'rxjs/internal/operators';
 
 import { APP_API} from "../../app.api";
 import { User } from './user.model';
+
 import { NotificationService } from "src/app/shared/messages/notification.service";
 
 @Injectable()
 export class LoginService{
     
     user: User;
-    lastUrl: string;
+    lastUrl: string  = "";
 
     constructor(
         private http: HttpClient, 
@@ -32,7 +33,11 @@ export class LoginService{
     login(emailUsuario: string, password: string): Observable<User> {
         return this.http
             .post<User>(`${APP_API}/login`, {emailUsuario: emailUsuario, passwordUsuario: password})
-            .pipe( tap(user => this.user = user) );
+            .pipe( 
+                tap(user => {
+                    this.user = user;
+                }) 
+            );
     };
 
     logout(){

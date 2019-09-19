@@ -16,7 +16,7 @@
             </h3>
         </div>
         <div class="col-md-3">
-            <a routerLink="/agenda" class="btn bt-sm btn-success float-right mt-2" style="font-size:12px">
+            <a routerLink="/agenda" class="btn bt-sm btn-success font-size12 float-right mt-2">
                 Agendamento
             </a>
         </div>
@@ -26,24 +26,23 @@
     <div class="row mt-2">  
         <div class="col-md-3">
             <form [formGroup]="searchForm">
-                <div class="form-group mt-2">
+                <div class="form-group font-size10 mt-2">
                     <input type="date" 
                         formControlName="searchDate" 
                         class="form-control" 
-                        placeholder="Data Consulta" 
-                        style="font-size: 10px">
+                        placeholder="Data Consulta">
                 </div>
             </form>
         </div>
         <div class="col-md-9">
-            <button class="btn btn-sm btn-dark mt-2 ml-3"
+            <button class="btn btn-sm btn-12px btn-dark mt-2 ml-3"
                 (click)="procuraData()" 
                 [disabled]="!searchForm.valid">
                 <i class="fa fa-hand-point-left"></i>
                 Mostrar
             </button>
 
-            <button class="btn btn-sm btn-dark mt-2 ml-3"
+            <button class="btn btn-sm btn-12px btn-dark mt-2 ml-3"
                 (click)="procuraData(true)" 
                 [disabled]="!searchForm.valid">
                 Mostrar Todos
@@ -56,8 +55,8 @@
         <thead>
             <tr class="bg-primary text-light">
                 <th>Data / Hora</th>
-                <th>Medico</th>
                 <th>Paciente</th>
+                <th>Medico</th>
                 <th>Queixa Principal</th>
                 <th>Historia Doença Atual</th>
                 <th>Exame Fisico</th>
@@ -70,19 +69,32 @@
         <tbody>
             <tr *ngFor="let consulta of consultas" class="pointer" (click)="edit(consulta)">
                 <td><strong>{{consulta.dataConsultaFrm}} {{consulta.horaConsulta}}</strong></td>
+                <td><strong>{{consulta.nome}}</strong></td>
                 <td>{{consulta.nomeMedico}}</td>
-                <td>{{consulta.nome}}</td>
                 <td>{{consulta.queixaPrincipalConsulta}}</td>
                 <td>{{consulta.historiaDoencaAtualConsulta}}</td>
                 <td>{{consulta.exameFisicoConsulta}}</td>
                 <td>{{consulta.hipoteseDiagnosticaConsulta}}</td>
                 <td>{{consulta.condutaConsulta}}</td>
+
                 <td class="widthAcoes">
-                    <!-- <a class="fa fa-edit pointer text-primary mr-3" style="font-size:16px"
-                        (click)="edit(consulta)"></a>  -->
-                    <a class="fa fa-trash-alt pointer text-danger" style="font-size:16px"
-                        (click)="delete(consulta)"></a>
-                </td>
+                    <div class="font-size20 float-right">
+                        <a  class="fas fa-file-medical pointer text-primary mr-3" 
+                            title="Prescrição / Receita"
+                            (click)="receita(consulta)">
+                        </a>
+    
+                        <a  class="fas fa-file-medical-alt pointer text-primary mr-3"
+                            title="Atestado"
+                            (click)="atestado(consulta)">
+                        </a>
+    
+                        <a  class="fa fa-trash-alt pointer text-danger mr-1" 
+                            title="Excluir Consulta"
+                            (click)="delete(consulta)">
+                        </a>
+                    </div>
+                </td>                
             </tr>
             
         </tbody>

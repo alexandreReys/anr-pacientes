@@ -17,12 +17,11 @@ label, .card-header-input {
 }
 
 input {
-    /* font-size:12px; */
     padding: .375rem .45rem;
 }
 
 input, select, textarea, .validation-error {
-    font-size:10px;
+    font-size:12px;
 }
 
 .icone-size {
