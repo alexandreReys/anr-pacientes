@@ -15,11 +15,13 @@ import { MedicoService } from 'src/app/services/medico.service';
 // import { SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION } from 'constants';   supostamente importado por acidente
 
 @Component({
-    selector: 'app-consultas-list',
-    templateUrl: './consultas-list.component.html',
-    styleUrls: ['./consultas-list.component.css']
+    selector: 'app-agenda-lista-consultas',
+    templateUrl: './agenda-lista-consultas.component.html',
+    styleUrls: ['./agenda-lista-consultas.component.css']
 })
-export class ConsultasListComponent implements OnInit {
+export class AgendaListaConsultasComponent implements OnInit {
+
+    dataReferencia: string = '';
 
     searchBarState = 'hidden';
     searchForm: FormGroup;
@@ -44,7 +46,7 @@ export class ConsultasListComponent implements OnInit {
         this.searchDate = this.formBuilder.control('');
         this.searchForm = this.formBuilder.group({ searchDate: this.searchDate });
         
-        this.setDateHoje();
+        this.setSearchDate();
 
         this.idMedico = `${this.loginService.user.idFuncionarioUsuario}`;
         if(this.idMedico === '0') { this.idMedico = null }
@@ -94,7 +96,7 @@ export class ConsultasListComponent implements OnInit {
             let selectedDate = this.searchDate.value;
             if(selectedDate)
                 this.consultaService.getConsultasData(selectedDate, this.idMedico)
-                    .subscribe( consultas => this.consultas = this.preparaListaConsultas(selectedDate, consultas) );
+                    .subscribe( consultas => this.consultas = this.preparaListaConsultas(consultas) );
             else
                 this.consultaService.getConsultas(null, this.idMedico)
                     .subscribe( consultas => this.consultas = consultas );
@@ -106,7 +108,7 @@ export class ConsultasListComponent implements OnInit {
     // [ngClass]="(consulta.nome=='')?'horarioLivre':'horarioMarcado'" 
 
 
-    setDateHoje() {
+    setSearchDate() {
         let now = new Date;
         let year = now.getFullYear();
       
@@ -117,86 +119,51 @@ export class ConsultasListComponent implements OnInit {
         day = day.length > 1 ? day : '0' + day;
         
         let date = year + '-' + month + '-' + day; 
-
         this.searchDate.setValue( date );
         this.consultaService.getConsultasData( date, this.idMedico )
             .subscribe( 
                 consultas => { 
-                    this.consultas = this.preparaListaConsultas(date, consultas)
+                    this.consultas = this.preparaListaConsultas(consultas)
                 }
             );
 
-    }; // fim setDateHoje()
+    }; // fim setSearchDate()
 
-    // preparaListaConsultas(consultas: Consulta[]) {
-    //     var horasDiarias = [
-    //         '08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30',
-    //         '12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30',
-    //         '16:00','16:30','17:00','17:30','18:00'
-    //     ];
-    //     var i = 0;
-    //     var consultasLength = consultas.length-1;
-        
-    //     var resp: Consulta[] = horasDiarias.map( el => {
-
-    //         var auxHoraConsulta = '';
-    //         if( i > consultasLength )      // acabaram as consultas
-    //             auxHoraConsulta = '00:00'  // acabaram as consultas - Hora 0 marca horario sem consulta
-    //         else
-    //             auxHoraConsulta = consultas[i].horaConsulta;
-            
-    //         if(consultas[i] && !this.dataReferencia) {
-    //             this.dataReferencia = consultas[i].dataConsultaFrm.substr(0,5);  // Pega data de referencia. para usar nos horarios livres
-    //         }
-
-    //         if( i > consultasLength || el != auxHoraConsulta) {     // Horario sem consulta
-    //             let consulta = new Consulta;                        // Retorna Data, Hora, sem demais dados
-    //             consulta.dataConsultaFrm = this.dataReferencia;     
-    //             consulta.horaConsulta = el;
-    //             consulta.nome = '';
-    //             return consulta;
-    //         } else {                                                // Horario com consulta
-    //             var result = consultas[i];                          // Retorna dados da consulta com data abreviada
-    //             result.dataConsultaFrm = result.dataConsultaFrm.substr(0,5);
-    //             i++;
-    //             return result;
-    //         }
-    //         // return resp;
-
-    //     }); //  horasDiarias.map(
-
-    //     return resp;
-    // }; // preparaListaConsultas(
-
-
-
-    preparaListaConsultas(pData: string, consultas: Consulta[]) {
-        const horasDiarias = [
-            '08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00',
-            '13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00' 
+    preparaListaConsultas(consultas: Consulta[]) {
+        var horasDiarias = [
+            '08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30',
+            '12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30',
+            '16:00','16:30','17:00','17:30','18:00'
         ];
         var i = 0;
-        var resp: Consulta[]=[];
+        var l = consultas.length-1;
         
-        horasDiarias.forEach( element => {
-            if( !consultas || i > consultas.length-1 || element != consultas[i].horaConsulta) { // Horario sem consulta
-                let consulta = new Consulta;                                       // Retorna Data, Hora, sem demais dados
-                consulta.dataConsultaFrm = pData.substr(8,2)+'-'+pData.substr(5,2);     
-                consulta.horaConsulta = element;
-                consulta.nome = '';
-                resp.push(consulta);
-            } else {                        // Horario com consulta
-                while (element == consultas[i].horaConsulta) {
-                    var result = consultas[i];  
-                    result.dataConsultaFrm = result.dataConsultaFrm.substr(0,5);
-                    resp.push(result);
-                    i++;
-                    if ( i > consultas.length-1) { break }
-                }
+        var resp = horasDiarias.map( el => {
+            var auxHoraConsulta = '';
+            if( i > l )
+                auxHoraConsulta = '00:00'
+            else
+                auxHoraConsulta = consultas[i].horaConsulta;
+            
+            if(consultas[i] && !this.dataReferencia) {
+                this.dataReferencia = consultas[i].dataConsultaFrm.substr(0,5);
             }
-        });
-        
-        return resp;
-    }; // preparaListaConsultas(
 
+            if( i > l || el != auxHoraConsulta) {
+                let consulta = new Consulta;
+                consulta.dataConsultaFrm = this.dataReferencia;
+                consulta.horaConsulta = el;
+                consulta.nome = '';
+                return consulta;
+            } else {
+                var result = consultas[i];
+                result.dataConsultaFrm = result.dataConsultaFrm.substr(0,5);
+                i++;
+                return result;
+            }
+            return resp;
+        })
+
+        return resp;
+    }
 }

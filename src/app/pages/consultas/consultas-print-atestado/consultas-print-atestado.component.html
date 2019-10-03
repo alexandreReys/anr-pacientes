@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <div class="row title mb-2 mt-3">
+    <div class="row title-buttons mb-2 mt-3">
         <div class="col-md-9">
             <h2><i class="fa fa-laptop-medical text-danger" aria-hidden="true"></i>
                 Atestado
@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    <div class="row data-print mt-4">  
+    <div class="row form-data-print mt-4">  
         <div class="col-md-3 font-size12">
             <form [formGroup]="atestadoForm">
                 <div class="form-group mt-2">
@@ -48,9 +48,9 @@
             </form>
 
             <button class="btn btn-sm btn-12px btn-dark mt-2 ml-3"
-            (click)="confirma()"
-            [disabled]="!atestadoForm.valid">
-            <i class="fa fa-hand-point-left"></i>
+                    (click)="confirma()"
+                    [disabled]="!atestadoForm.valid">
+                <i class="fa fa-hand-point-left"></i>
                 Confirma
             </button>
         </div>
@@ -61,7 +61,7 @@
             Atesto para os devidos fins que {{ consulta.nome }}, 
             portador do documento {{ contato.certidaoNasc }}, 
         </div>
-        esteve sob meus cuidados médicos no dia {{ dataConsulta }},
+        esteve sob meus cuidados médicos no dia {{ dataConsultaFrm }},
         das {{ horaIniConsulta }} às {{ horaFinConsulta }} horas.
     </div>
 

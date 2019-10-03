@@ -24,34 +24,28 @@
 
     <!-- SELEÇÃO DE DATA PARA LISTA DE CONSULTAS -->
     <div class="row mt-2">  
-        <div class="col-sm-4 col-md-3 col-lg-2">
+        <div class="col-md-3">
             <form [formGroup]="searchForm">
-                <div class="form-group mt-2">
+                <div class="form-group font-size10 mt-2">
                     <input type="date" 
                         formControlName="searchDate" 
-                        class="form-control font-size12" 
+                        class="form-control" 
                         placeholder="Data Consulta">
                 </div>
             </form>
-                
         </div>
-        <div class="col-8 mt-1">
-            <button class="btn btn-sm btn-10px btn-primary mt-2 mr-5"
+        <div class="col-md-9">
+            <button class="btn btn-sm btn-12px btn-dark mt-2 ml-3"
                 (click)="procuraData()" 
                 [disabled]="!searchForm.valid">
                 <i class="fa fa-hand-point-left"></i>
+                Mostrar
             </button>
-            
-            <button class="btn btn-sm btn-10px btn-primary mt-2 mr-1"
+
+            <button class="btn btn-sm btn-12px btn-dark mt-2 ml-3"
                 (click)="procuraData(true)" 
                 [disabled]="!searchForm.valid">
-                Todos
-            </button>
-        
-            <button class="btn btn-sm btn-10px btn-primary mt-2"
-                (click)="setDateHoje()" 
-                [disabled]="!searchForm.valid">
-                Hoje
+                Mostrar Todos
             </button>
         </div>
     </div>
@@ -59,7 +53,7 @@
     <!-- LISTA DE CONSULTAS POR DATA/HORA -->
     <table class="table table-hover">
         <thead>
-            <tr class="bg-darkblue text-light">
+            <tr class="bg-primary text-light">
                 <th>Data / Hora</th>
                 <th>Paciente</th>
                 <th>Medico</th>
@@ -91,10 +85,10 @@
                     </div>
                     
                     <div *ngIf="consulta.nomeMedico" class="font-size14 float-right">
-                        <!-- <a  class="fas fa-calendar-alt pointer text-primary mr-3" 
+                        <a  class="fas fa-calendar-alt pointer text-primary mr-3" 
                             title="Remarcar Consulta"
                             (click)="receita(consulta)">
-                        </a> -->
+                        </a>
     
                         <a  class="fas fa-file-medical pointer text-primary mr-3" 
                             title="Prescrição / Receita"

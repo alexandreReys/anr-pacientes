@@ -6,13 +6,14 @@ import {IMaskModule} from 'angular-imask';
 
 import { AgendaRoutingModule } from './agenda-routing.module';
 
-import { AgendaListComponent } from './agenda-list/agenda-list.component';
+import { AgendaListaPacientesComponent } from './agenda-lista-pacientes/agenda-lista-pacientes.component';
+import { AgendaListaConsultasComponent } from './agenda-lista-consultas/agenda-lista-consultas.component';
 import { AgendaFormComponent } from './agenda-form/agenda-form.component';
 
 @NgModule({
   imports: [
     CommonModule, AgendaRoutingModule, ReactiveFormsModule, FormsModule, IMaskModule
   ],
-  declarations: [AgendaListComponent, AgendaFormComponent]
+  declarations: [AgendaListaPacientesComponent, AgendaListaConsultasComponent, AgendaFormComponent]
 })
 export class AgendaModule { }

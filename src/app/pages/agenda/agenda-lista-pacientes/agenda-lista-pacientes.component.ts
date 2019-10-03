@@ -10,9 +10,9 @@ import { Contato } from 'src/app/models/contato.model';
 import { ContatoService } from 'src/app/services/contato.service';
 
 @Component({
-  selector: 'app-agenda-list',
-  templateUrl: './agenda-list.component.html',
-  styleUrls: ['./agenda-list.component.css'],
+  selector: 'app-agenda-lista-pacientes',
+  templateUrl: './agenda-lista-pacientes.component.html',
+  styleUrls: ['./agenda-lista-pacientes.component.css'],
   animations: [
     trigger('toggleSearch', [
       state('hidden', style( {
@@ -29,7 +29,7 @@ import { ContatoService } from 'src/app/services/contato.service';
   ]
 })
 
-export class AgendaListComponent implements OnInit {
+export class AgendaListaPacientesComponent implements OnInit {
   
   searchBarState = 'hidden';
   searchForm: FormGroup;

@@ -26,6 +26,7 @@ export class ConsultasPrintAtestadoComponent implements OnInit {
     fHoraFinConsulta: FormControl;
 
     dataConsulta: string = '';
+    dataConsultaFrm: string = '';
     horaIniConsulta: string = '';
     horaFinConsulta: string = '';
 
@@ -55,7 +56,11 @@ export class ConsultasPrintAtestadoComponent implements OnInit {
             .subscribe( resp => { 
                 this.consulta = resp;
                 
-                this.dataConsulta    = this.consulta.dataConsultaFrm;
+                const data = this.consulta.dataConsulta;
+
+                this.dataConsulta    = this.consulta.dataConsulta;
+                this.dataConsultaFrm = data.substr(8,2)+'/'+data.substr(5,2)+'/'+data.substr(0,4);
+
                 this.horaIniConsulta = this.consulta.horaConsulta.substr(0,5);
                 this.horaFinConsulta = this.retornaHoraFinal(this.horaIniConsulta);
                 
@@ -94,6 +99,7 @@ export class ConsultasPrintAtestadoComponent implements OnInit {
     retornaHoraFinal(pHoraIni: string) {
         var sHora: string = pHoraIni.substr(0,2);
         var iHora: number = parseInt(sHora);
+
         iHora ++;
 
         sHora = iHora.toString()+':'+pHoraIni.substr(3,2);
@@ -104,11 +110,7 @@ export class ConsultasPrintAtestadoComponent implements OnInit {
     }
 
     buildForm() {
-        const dataConsulta: string = 
-            this.dataConsulta.substr(6,4)+'-'+
-            this.dataConsulta.substr(3,2)+'-'+
-            this.dataConsulta.substr(0,2);
-            
+        const dataConsulta: string = this.dataConsulta.substr(0,10);
         this.fDataConsulta     = this.formBuilder.control(dataConsulta);
         this.fHoraIniConsulta  = this.formBuilder.control(this.horaIniConsulta);
         this.fHoraFinConsulta  = this.formBuilder.control(this.horaFinConsulta);
@@ -122,10 +124,9 @@ export class ConsultasPrintAtestadoComponent implements OnInit {
         );
       };
 
-
     confirma() {
         let dateAux: string = this.fDataConsulta.value.toString();
-        this.dataConsulta    = dateAux.substr(8,2) + '/' + dateAux.substr(5,2) + '/' + dateAux.substr(0,4);
+        this.dataConsultaFrm = dateAux.substr(8,2) + '/' + dateAux.substr(5,2) + '/' + dateAux.substr(0,4);
         this.horaIniConsulta = this.fHoraIniConsulta.value;
         this.horaFinConsulta = this.fHoraFinConsulta.value;
 
