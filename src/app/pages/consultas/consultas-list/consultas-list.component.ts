@@ -44,7 +44,7 @@ export class ConsultasListComponent implements OnInit {
         this.searchDate = this.formBuilder.control('');
         this.searchForm = this.formBuilder.group({ searchDate: this.searchDate });
         
-        this.setDateHoje();
+        this.setDateToday();
 
         this.idMedico = `${this.loginService.user.idFuncionarioUsuario}`;
         if(this.idMedico === '0') { this.idMedico = null }
@@ -105,28 +105,48 @@ export class ConsultasListComponent implements OnInit {
     
     // [ngClass]="(consulta.nome=='')?'horarioLivre':'horarioMarcado'" 
 
-
-    setDateHoje() {
-        let now = new Date;
-        let year = now.getFullYear();
+    formatDate(pDate: Date) {
+        let year = pDate.getFullYear();
       
-        let month = (1 + now.getMonth()).toString();
+        let month = (1 + pDate.getMonth()).toString();
         month = month.length > 1 ? month : '0' + month;
       
-        let day = now.getDate().toString();
+        let day = pDate.getDate().toString();
         day = day.length > 1 ? day : '0' + day;
         
-        let date = year + '-' + month + '-' + day; 
+        return year + '-' + month + '-' + day; 
+    }
 
-        this.searchDate.setValue( date );
-        this.consultaService.getConsultasData( date, this.idMedico )
+    getConsultasData(pDate: string) {
+        this.searchDate.setValue( pDate );
+        this.consultaService.getConsultasData( pDate, this.idMedico )
             .subscribe( 
                 consultas => { 
-                    this.consultas = this.preparaListaConsultas(date, consultas)
+                    this.consultas = this.preparaListaConsultas(pDate, consultas)
                 }
             );
+    }
 
+    setDateToday() {
+        let sDate: string = this.formatDate(new Date);
+        this.getConsultasData(sDate);
     }; // fim setDateHoje()
+
+    setDateNext() {
+        let sDate: string = this.searchDate.value.replace(/-/g, "/"); // replace - to /
+        let date = new Date(sDate);
+        date.setDate( date.getDate() + 1);
+        sDate = this.formatDate(date);
+        this.getConsultasData(sDate);
+    }; // fim setDateNext()
+
+    setDatePrior() {
+        let sDate: string = this.searchDate.value.replace(/-/g, "/"); // replace - to /
+        let date = new Date(sDate);
+        date.setDate( date.getDate() - 1);
+        sDate = this.formatDate(date);
+        this.getConsultasData(sDate);
+    }; // fim setDatePrior()
 
     // preparaListaConsultas(consultas: Consulta[]) {
     //     var horasDiarias = [
@@ -167,8 +187,6 @@ export class ConsultasListComponent implements OnInit {
 
     //     return resp;
     // }; // preparaListaConsultas(
-
-
 
     preparaListaConsultas(pData: string, consultas: Consulta[]) {
         const horasDiarias = [

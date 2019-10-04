@@ -36,22 +36,34 @@
                 
         </div>
         <div class="col-8 mt-1">
-            <button class="btn btn-sm btn-10px btn-primary mt-2 mr-5"
+            <button class="btn btn-sm btn-10px btn-primary mt-2 mr-3"
                 (click)="procuraData()" 
                 [disabled]="!searchForm.valid">
                 <i class="fa fa-hand-point-left"></i>
             </button>
-            
-            <button class="btn btn-sm btn-10px btn-primary mt-2 mr-1"
+        
+            <button class="btn btn-sm btn-10px btn-success mt-2 mr-1"
+                (click)="setDatePrior()" 
+                [disabled]="!searchForm.valid">
+                Anterior
+            </button>
+
+            <button class="btn btn-sm btn-10px btn-success mt-2 mr-3"
+                (click)="setDateNext()" 
+                [disabled]="!searchForm.valid">
+                Proximo
+            </button>
+
+            <button class="btn btn-sm btn-10px btn-warning mt-2 mr-3"
+                (click)="setDateToday()" 
+                [disabled]="!searchForm.valid">
+                Hoje
+            </button>
+
+            <button class="btn btn-sm btn-10px btn-info mt-2"
                 (click)="procuraData(true)" 
                 [disabled]="!searchForm.valid">
                 Todos
-            </button>
-        
-            <button class="btn btn-sm btn-10px btn-primary mt-2"
-                (click)="setDateHoje()" 
-                [disabled]="!searchForm.valid">
-                Hoje
             </button>
         </div>
     </div>
