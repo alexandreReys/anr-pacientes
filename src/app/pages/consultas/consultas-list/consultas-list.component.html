@@ -10,71 +10,75 @@
 
     <!-- TITULO E BOTÃO DE AGENDAMENTO -->
     <div class="row mt-3">
-        <div class="col-md-9">
+        <div class="col-6">
             <h3><i class="fa fa-laptop-medical text-danger" aria-hidden="true"></i> 
-                Consultas: {{nomeMedico}}
+                Consultas
             </h3>
         </div>
-        <div class="col-md-3">
+        <div class="col-6">
             <a routerLink="/agenda" class="btn bt-sm btn-success font-size12 float-right mt-2">
                 Agendamento
             </a>
         </div>
     </div>
 
-    <!-- SELEÇÃO DE DATA PARA LISTA DE CONSULTAS -->
-    <div class="row mt-2">  
-        <div class="col-sm-4 col-md-3 col-lg-2">
-            <form [formGroup]="searchForm">
-                <div class="form-group mt-2">
-                    <input type="date" 
-                        formControlName="searchDate" 
-                        class="form-control font-size12" 
-                        placeholder="Data Consulta">
+    <!-- FORM PARA SELEÇÃO DE DATA E MÉDICO -->
+    <form [formGroup]="searchForm">
+        <div class="form-row input-data">  
+            <div class="form-group col-sm-4 col-md-3 col-lg-2 mt-2">
+                <input type="date" class="form-control font-size12 text-bold bg-darkorange" formControlName="searchDate">
+            </div>
+            <div class="col-8 mt-1">
+                <button class="btn btn-sm btn-10px btn-primary mt-2 mr-3"
+                    (click)="procuraData()" 
+                    [disabled]="!searchForm.valid">
+                    <i class="fa fa-hand-point-left"></i>
+                </button>
+            
+                <button class="btn btn-sm btn-10px btn-success mt-2 mr-1"
+                    (click)="setDatePrior()" 
+                    [disabled]="!searchForm.valid">
+                    Anterior
+                </button>
+
+                <button class="btn btn-sm btn-10px btn-success mt-2 mr-3"
+                    (click)="setDateNext()" 
+                    [disabled]="!searchForm.valid">
+                    Proximo
+                </button>
+
+                <button class="btn btn-sm btn-10px btn-warning mt-2 mr-3"
+                    (click)="setDateToday()" 
+                    [disabled]="!searchForm.valid">
+                    Hoje
+                </button>
+
+                <button class="btn btn-sm btn-10px btn-info mt-2"
+                    (click)="procuraData(true)" 
+                    [disabled]="!searchForm.valid">
+                    Todos
+                </button>
+            </div>
+        </div>
+        <div class="form-row select-medico">  
+            <div class="form-group col-sm-8 col-md-7 col-lg-6">
+                <div class="form-group">
+                    <select class="form-control font-size12 text-bold  bg-darkorange" formControlName="searchIdMedico" (change)="medicosChanged($event.target.value)">
+                        <option *ngFor="let medico of medicos" value="{{medico.idMedico}}">
+                            {{medico.nomeMedico}}
+                        </option>
+                    </select>
                 </div>
-            </form>
-                
+            </div>
         </div>
-        <div class="col-8 mt-1">
-            <button class="btn btn-sm btn-10px btn-primary mt-2 mr-3"
-                (click)="procuraData()" 
-                [disabled]="!searchForm.valid">
-                <i class="fa fa-hand-point-left"></i>
-            </button>
-        
-            <button class="btn btn-sm btn-10px btn-success mt-2 mr-1"
-                (click)="setDatePrior()" 
-                [disabled]="!searchForm.valid">
-                Anterior
-            </button>
-
-            <button class="btn btn-sm btn-10px btn-success mt-2 mr-3"
-                (click)="setDateNext()" 
-                [disabled]="!searchForm.valid">
-                Proximo
-            </button>
-
-            <button class="btn btn-sm btn-10px btn-warning mt-2 mr-3"
-                (click)="setDateToday()" 
-                [disabled]="!searchForm.valid">
-                Hoje
-            </button>
-
-            <button class="btn btn-sm btn-10px btn-info mt-2"
-                (click)="procuraData(true)" 
-                [disabled]="!searchForm.valid">
-                Todos
-            </button>
-        </div>
-    </div>
+    </form>
 
     <!-- LISTA DE CONSULTAS POR DATA/HORA -->
-    <table class="table table-hover">
+    <table class="table table-hover" style="max-height: 70px;">
         <thead>
             <tr class="bg-darkblue text-light">
                 <th>Data / Hora</th>
                 <th>Paciente</th>
-                <th>Medico</th>
                 <th>Queixa Principal</th>
                 <th>Historia Doença Atual</th>
 
@@ -90,30 +94,29 @@
                             'horarioMarcado': consulta.nome != ''}"
                 (click)="edit(consulta)">
 
-                <td><strong>{{consulta.dataConsultaFrm}} - {{consulta.horaConsulta}}</strong></td>
-                <td><strong>{{consulta.nome}}</strong></td>
-                <td>{{consulta.nomeMedico}}</td>
-                <td>{{consulta.queixaPrincipalConsulta}}</td>
-                <td>{{consulta.historiaDoencaAtualConsulta}}</td>
+                <td class="text-bold">{{consulta.dataConsultaFrm}} - {{consulta.horaConsulta}}</td>
+                <td class="text-bold">{{consulta.nome}}</td>
+                <td class="text-bold">{{consulta.queixaPrincipalConsulta}}</td>
+                <td class="text-bold">{{consulta.historiaDoencaAtualConsulta}}</td>
 
                 <td class="widthAcoes">
-
+<!-- 
                     <div *ngIf="!consulta.nomeMedico" class="font-size10 float-right">
                         <a class="fas fa-user-md pointer text-dark mr-1" title="Horário Livre"></a>
                     </div>
-                    
-                    <div *ngIf="consulta.nomeMedico" class="font-size14 float-right">
-                        <!-- <a  class="fas fa-calendar-alt pointer text-primary mr-3" 
+-->
+                    <div *ngIf="consulta.nomeMedico" class="font-size16 float-right">
+                        <a  class="fas fa-calendar-alt pointer text-primary mr-3" 
                             title="Remarcar Consulta"
-                            (click)="receita(consulta)">
-                        </a> -->
+                            (click)="remarcacao(consulta)">
+                        </a>
     
                         <a  class="fas fa-file-medical pointer text-primary mr-3" 
                             title="Prescrição / Receita"
                             (click)="receita(consulta)">
                         </a>
     
-                        <a  class="fas fa-file-medical-alt pointer text-primary mr-3"
+                        <a  class="fas fa-file-medical-alt pointer text-success mr-3"
                             title="Atestado"
                             (click)="atestado(consulta)">
                         </a>

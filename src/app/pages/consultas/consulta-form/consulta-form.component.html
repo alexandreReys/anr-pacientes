@@ -2,39 +2,31 @@
     <nav class="mt-3">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-            <li class="breadcrumb-item"><a routerLink="/consulta">Agendamento</a></li>
+            <li class="breadcrumb-item pointer text-primary"><a (click)="btVoltar()">Lista de Consultas</a></li>
             <li class="breadcrumb-item active">Consulta</li>
         </ol>
     </nav>
   
     <div class="row my-3">
-        <div class="col-5">
+        <div class="col-8">
             <h3><i class="fa fa-laptop-medical text-danger" aria-hidden="true"></i> 
                 Consulta
             </h3>
         </div>
-        <div class="col-7">
-            <div class="btn-left float-right">
-                <a routerLink="/consulta" 
-                    class="btn btn-success bt-sm btn-12px">
-                    << Voltar
-                </a>
-    
-                <a href="javascript:window.print()" 
-                    class="fa fa-print text-primary ml-3" 
-                    aria-hidden="true">
-                    <!-- style="font-size:24px; vertical-align: middle;"> -->
-                </a>
+        <div class="col-4">
+            <div class="float-right">
+                <button class="btn btn-10px mt-2 mr-4" onClick="javascript:window.print()">
+                    <i class="fa fa-print text-primary"></i>
+                </button>
+                <button class="btn btn-12px btn-success mt-2 mr-1" (click)="btVoltar()">
+                    V o l t a r
+                </button>
             </div>
         </div>
     </div>
 
-<!--     
-    {{form.valid}}
-    {{form.value | json}}  
--->
+<!--    {{form.valid}}   {{form.value | json}}      -->
     
-
     <form [formGroup]="form">
         <div class="card mb-5">
             <div class="card-header">
@@ -47,17 +39,6 @@
             </div>
 
             <div class="card-body">
-
-<!-- 
-                <input type="hidden" class="form-control" formControlName="idConsulta">
-                <input type="hidden" class="form-control" formControlName="idPacienteConsulta">
-                <input type="hidden" class="form-control" formControlName="idEmpresaConsulta">
-                <input type="hidden" class="form-control" formControlName="idMedicoConsulta">
-                <input type="hidden" class="form-control" formControlName="dataConsulta">
-                <input type="hidden" class="form-control" formControlName="horaConsulta"> 
--->
-
-
 
                 <div class="form-row">
                     <div class="form-group col-md-12">

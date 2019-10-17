@@ -25,6 +25,13 @@ export class AgendaFormComponent implements OnInit {
 
     idPaciente: string;
     nomePaciente: string;
+
+    idMedico: string = '';
+    nomeMedico: string = '';
+
+    dataConsulta: string = '';
+    horaConsulta: string = '';
+
     submittingForm: boolean = false;
 
     contato: Contato;
@@ -55,43 +62,45 @@ export class AgendaFormComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.buildMedicosForm();
+        this.idPaciente   = this.route.snapshot.url[0].toString();
+        this.idMedico     = this.route.snapshot.url[1].toString();
+        this.dataConsulta = this.route.snapshot.url[2].toString();
+        this.horaConsulta = this.route.snapshot.url[3].toString();
+
         this.buildAgendamentoForm();
         this.loadContatos();
         this.loadMedicos();
     };
 
-    buildMedicosForm() {
-        this.formMedico = this.formBuilder.group({
-            idMedico: [null, [ Validators.required ]]
-        });
-    };
-
     buildAgendamentoForm() {
         this.form = this.formBuilder.group({
-            idPacienteConsulta:     [null, [ Validators.required ]],
-            idEmpresaConsulta:      [null, [ Validators.required ]],
-            idMedicoConsulta:       [null, [ Validators.required ]],
-            dataConsulta:           [null, [ Validators.required ]],
-            horaConsulta:           [null, [ Validators.required ]],
             queixaPrincipalConsulta:         [null, [ Validators.required ]]
         });
-        this.form.controls['idEmpresaConsulta'].setValue(`${this.loginService.user.idEmpresaUsuario}`);
+        // this.form.controls['idEmpresaConsulta'].setValue(`${this.loginService.user.idEmpresaUsuario}`);
     };
 
     loadContatos() {
-        this.idPaciente = this.route.snapshot.url[0].toString();
         this.contato = new Contato();
         this.contatoService.getContatosId(this.idPaciente)
             .subscribe( contatos => { 
                 this.contatos = contatos;
                 this.contato = contatos[0];
-                this.form.controls['idPacienteConsulta'].setValue(this.contato.id);
+                // this.form.controls['idPacienteConsulta'].setValue(this.contato.id);
             });
     };
 
     loadMedicos() {
         this.medicoService.getMedicos().subscribe(medicos => this.medicos = medicos);
+
+        this.medicoService.getMedicoById(this.idMedico)
+            .subscribe( medicos => { 
+                this.medico = medicos[0]; 
+                if(this.medico)
+                    this.nomeMedico = this.medico.nomeMedico
+                else
+                    this.nomeMedico = 'Erro #NomeMedico';
+            }
+        );
     };
 
     // ////////////////////////////////////////////////////////////////// //
@@ -103,6 +112,13 @@ export class AgendaFormComponent implements OnInit {
 
     createConsulta() {
         this.consulta = Object.assign( new Consulta(), this.form.value );
+
+        this.consulta.idEmpresaConsulta = Number(`${this.loginService.user.idEmpresaUsuario}`);
+        this.consulta.idPacienteConsulta = Number(this.idPaciente);
+        this.consulta.idMedicoConsulta = Number(this.idMedico);
+        this.consulta.dataConsulta = this.dataConsulta;
+        this.consulta.horaConsulta = this.horaConsulta;
+        
         this.consultaService.setDados(this.consulta);
         this.consultaService.addConsulta(this.consulta);
     };

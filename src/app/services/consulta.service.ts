@@ -97,6 +97,14 @@ export class ConsultaService {
       .pipe( catchError( error => ErrorHandler.handleError(error) ) )
       .subscribe();
   }
+
+  updateConsultaRemarcacao(consulta: Consulta){
+    let url: string = `${APP_API}/consultas/remarcacao`;
+    return this.httpClient
+      .put<Consulta>( url, consulta, this.getHttpOptions() )
+      .pipe( catchError( error => ErrorHandler.handleError(error) ) )
+      .subscribe();
+  }
   
   deleteConsulta(consulta: Consulta){
     let url: string = `${APP_API}/consultas/${consulta.idConsulta}`;

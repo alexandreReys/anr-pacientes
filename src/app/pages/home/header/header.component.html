@@ -1,59 +1,60 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark" id="navbarSite">
-  <div class="container">
+    <div class="container">
 
-    <a class="navbar-brand" [routerLink]="['/']">
-        <a>AtendWeb</a>
-    </a>
+        <a class="navbar-brand" [routerLink]="['/']">
+            <a>AtendWeb</a>
+        </a>
 
-    <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+        <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+        <span class="navbar-toggler-icon"></span>
+        </button>
 
 
-    <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
-      <ul class="navbar-nav mr-auto">
- 
-        <li class="nav-item dropdown">
-          <a class="nav-link menu-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            Cadastros
-          </a>
- 
-          <div class=" dropdown dropdown-menu">
-
-            <p class="ml-3 text-danger font-weight-bold font-italic">CADASTROS :</p>
-            <a class="dropdown-item menu-item" [routerLink]="['/medico']">Médicos </a>
-            <a class="dropdown-item menu-item" [routerLink]="['/paciente']">Pacientes </a>
-            <div class="dropdown-divider"></div>
-
-            <p class="ml-3 text-danger font-weight-bold font-italic">LISTAGENS : </p>
-            <a class="dropdown-item menu-item" [routerLink]="['/medico/listagem']">Listagem de Médicos </a>
-            <a class="dropdown-item menu-item" [routerLink]="['/paciente/listagem']">Listagem de Pacientes </a>
-          </div>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link menu-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            Consultas
-          </a>
- 
-          <div class=" dropdown dropdown-menu">
-            <p class="ml-3 text-danger font-weight-bold font-italic">CONSULTAS : </p>
-            <a class="dropdown-item menu-item" [routerLink]="['/agenda']">Agendamento de Consultas </a>
-            <a class="dropdown-item menu-item" [routerLink]="['/consulta']">Atendimento / Consulta </a>
-            <div class="dropdown-divider"></div>
-
-            <p class="ml-3 text-danger font-weight-bold font-italic">LISTAGENS : </p>
-            <a class="dropdown-item menu-item" [routerLink]="['/consulta/listagem']">Listagem das Consultas Agendadas </a>
-            <a class="dropdown-item menu-item" [routerLink]="['/consulta/historico']">Histórico de Pacientes </a>
-          </div>
-        </li>
+        <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
+            <ul class="navbar-nav mr-auto">
         
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/about']">Sobre </a>
-        </li>
+                <li *ngIf="isLoggedIn(); else notLoggedIn" class="nav-item dropdown">
+                    <a class="nav-link menu-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        Cadastros
+                    </a>
+            
+                    <div class="dropdown dropdown-menu">
 
-      </ul>
-      <app-user-datails></app-user-datails>
+                        <p class="ml-3 text-danger font-weight-bold font-italic font-size14">CADASTROS :</p>
+                        <a class="dropdown-item menu-item" [routerLink]="['/medico']">Médicos </a>
+                        <a class="dropdown-item menu-item" [routerLink]="['/paciente']">Pacientes </a>
+                        <div class="dropdown-divider"></div>
+
+                        <p class="ml-3 text-danger font-weight-bold font-italic font-size14">LISTAGENS : </p>
+                        <a class="dropdown-item menu-item" [routerLink]="['/medico/listagem']">Listagem de Médicos </a>
+                        <a class="dropdown-item menu-item" [routerLink]="['/paciente/listagem']">Listagem de Pacientes </a>
+                    </div>
+                </li>
+
+                <li *ngIf="isLoggedIn(); else notLoggedIn" class="nav-item dropdown">
+                    <a class="nav-link menu-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        Consultas
+                    </a>
+            
+                    <div class=" dropdown dropdown-menu">
+                        <p class="ml-3 text-danger font-weight-bold font-italic font-size14">CONSULTAS : </p>
+                        <a class="dropdown-item menu-item" [routerLink]="['/agenda']">Agendamento de Consultas </a>
+                        <a class="dropdown-item menu-item" [routerLink]="['/consulta/0/lista']">Atendimento / Consulta </a>
+                        <div class="dropdown-divider"></div>
+
+                        <p class="ml-3 text-danger font-weight-bold font-italic font-size14">LISTAGENS : </p>
+                        <a class="dropdown-item menu-item" [routerLink]="['/consulta/listagem']">Listagem das Consultas Agendadas </a>
+                        <a class="dropdown-item menu-item" [routerLink]="['/consulta/historico']">Histórico de Pacientes </a>
+                    </div>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/about']">Sobre </a>
+                </li>
+
+            </ul>
+
+            <app-user-datails></app-user-datails>
+        </div>
     </div>
-  </div>
 </nav>

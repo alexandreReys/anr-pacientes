@@ -10,23 +10,20 @@
     </div>
 
     <div class="row title-buttons mb-2 mt-3">
-        <div class="col-md-9">
+        <div class="col-8">
             <h2><i class="fa fa-laptop-medical text-danger" aria-hidden="true"></i>
                 Atestado
             </h2>
         </div>
-        <div class="col-2">
-            <a routerLink="/consulta" 
-                class="bt-voltar btn btn-success bt-sm btn-12px float-right mt-2">
-                << Voltar
-            </a>
-        </div>
-        <div class="col-1">
-            <h5>
-                <a class="bt-print fa fa-print text-primary mt-3 mr-2 float-right" aria-hidden="true"
-                    href="javascript:window.print()">  <!-- (click)="imprime()"> -->
-                </a>  
-            </h5>
+        <div class="col-4">
+            <div class="float-right">
+                <button class="btn btn-10px mt-2 mr-4" onClick="javascript:window.print()">
+                    <i class="fa fa-print text-primary"></i>
+                </button>
+                <button class="btn btn-12px btn-success mt-2 mr-1" (click)="btVoltar()">
+                    V o l t a r
+                </button>
+            </div>
         </div>
     </div>
 

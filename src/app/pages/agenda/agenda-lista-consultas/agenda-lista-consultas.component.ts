@@ -10,160 +10,182 @@ import { ConsultaService } from 'src/app/services/consulta.service';
 import { Medico } from 'src/app/models/medico.model';
 import { MedicoService } from 'src/app/services/medico.service';
 
-// import { debounceTime } from 'rxjs/internal/operators';
-// import { trigger, state, style, transition, animate } from '@angular/animations';
-// import { SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION } from 'constants';   supostamente importado por acidente
-
 @Component({
     selector: 'app-agenda-lista-consultas',
     templateUrl: './agenda-lista-consultas.component.html',
     styleUrls: ['./agenda-lista-consultas.component.css']
 })
 export class AgendaListaConsultasComponent implements OnInit {
-
-    dataReferencia: string = '';
-
-    searchBarState = 'hidden';
+    // searchBarState = 'hidden';
     searchForm: FormGroup;
+    searchIdMedico: FormControl;
     searchDate: FormControl;
+
+    idPaciente: string = '';
 
     consulta: Consulta;
     consultas: Consulta[]=[];
 
-    medico: Medico;
-    idMedico: string = '';
+    medicos: Medico[]=[];
+    idMedicoSelecionado: number = 0;
     nomeMedico: string = '';
 
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
+        private route: ActivatedRoute,
         private consultaService: ConsultaService,
         private medicoService: MedicoService,
         private loginService: LoginService
     ) {}
 
     ngOnInit() {
-        this.searchDate = this.formBuilder.control('');
-        this.searchForm = this.formBuilder.group({ searchDate: this.searchDate });
-        
-        this.setSearchDate();
+        this.idPaciente = this.route.snapshot.url[0].toString();
+        this.idMedicoSelecionado = Number( this.loginService.user.idFuncionarioUsuario );
 
-        this.idMedico = `${this.loginService.user.idFuncionarioUsuario}`;
-        if(this.idMedico === '0') { this.idMedico = null }
-        this.medicoService.getMedicoById(this.idMedico)
-            .subscribe( medicos => { 
-                this.medico = medicos[0]; 
-                if(this.medico)
-                    this.nomeMedico = this.medico.nomeMedico
-                else
-                    this.nomeMedico = 'Todos';
+        this.searchIdMedico = this.formBuilder.control('');
+        this.searchDate = this.formBuilder.control('');
+        
+        this.searchForm = this.formBuilder.group({
+            searchIdMedico: this.searchIdMedico,
+            searchDate: this.searchDate
+        });
+
+        // this.idMedico = `${this.loginService.user.idFuncionarioUsuario}`;
+        // if(this.idMedico === '0') { this.idMedico = null }
+        //
+        // this.medicoService.getMedicoById(this.idMedico)
+        //     .subscribe( medicos => { 
+        //         this.medico = medicos[0]; 
+        //         if(this.medico)
+        //             this.nomeMedico = this.medico.nomeMedico
+        //         else
+        //             this.nomeMedico = 'Todos';
+        //     }
+        // );
+
+        this.medicoService.getMedicos()
+            .subscribe( medicos => {
+                this.medicos = medicos;
+                if(!this.idMedicoSelecionado) {
+                    this.idMedicoSelecionado = Number( medicos[0].idMedico );
+                };
+                
+                this.searchForm.controls['searchIdMedico'].setValue(this.idMedicoSelecionado);
+                this.setDateToday();
             }
         );
-
-    };  // fim ngOnInit() 
+    
+    }; // ngOnInit() 
         
-    edit(consulta: Consulta) {
-        if(consulta.nome) {
-            this.consultaService.setDados(consulta);
-            this.router.navigate(['/consulta/' + consulta.idConsulta + '/edit']);
-        }
-    }; // fim edit
-
-    delete(consulta: Consulta) {
-        const resp: any = this.consultaService.deleteConsulta(consulta);
-        
-        let index = this.consultas.map( (item) => item.idConsulta).indexOf(consulta.idConsulta);
-        this.consultas.splice(index,1);
-    }; // fim delete
-
-    receita(consulta: Consulta) {
-        this.consultaService.setDados(consulta);
-        this.router.navigate(['/consulta/receita']);
-    }; // fim receita
-
-    atestado(consulta: Consulta) {
-        this.consultaService.setDados(consulta);
-        this.router.navigate(['/consulta/atestado']);
-    }; // fim atestado
-
+    medicosChanged(ev: number) {
+        this.idMedicoSelecionado = ev;
+        this.setDateToday();
+    }
+    
     procuraData(todos?: boolean) {
         this.consulta = new Consulta();
         this.consulta.dataConsulta = 'Processando ...';
         if(todos) {
-            this.consultaService.getConsultas(null, this.idMedico)
+            this.consultaService.getConsultas(null, this.idMedicoSelecionado.toString())
                 .subscribe( consultas => this.consultas = consultas );
         } else {
             let selectedDate = this.searchDate.value;
             if(selectedDate)
-                this.consultaService.getConsultasData(selectedDate, this.idMedico)
-                    .subscribe( consultas => this.consultas = this.preparaListaConsultas(consultas) );
+                this.consultaService.getConsultasData(selectedDate, this.idMedicoSelecionado.toString())
+                    .subscribe( consultas => this.consultas = this.preparaListaConsultas(selectedDate, consultas) );
             else
-                this.consultaService.getConsultas(null, this.idMedico)
+                this.consultaService.getConsultas(null, this.idMedicoSelecionado.toString())
                     .subscribe( consultas => this.consultas = consultas );
         }
 
-    }; // fim procuraData()
-    
-    
-    // [ngClass]="(consulta.nome=='')?'horarioLivre':'horarioMarcado'" 
+    }; // procuraData()
 
+    setDateToday() {
+        let sDate: string = this.formatDate(new Date);
+        this.getConsultasData(sDate);
+    }; // setDateHoje()
 
-    setSearchDate() {
-        let now = new Date;
-        let year = now.getFullYear();
-      
-        let month = (1 + now.getMonth()).toString();
-        month = month.length > 1 ? month : '0' + month;
-      
-        let day = now.getDate().toString();
-        day = day.length > 1 ? day : '0' + day;
-        
-        let date = year + '-' + month + '-' + day; 
-        this.searchDate.setValue( date );
-        this.consultaService.getConsultasData( date, this.idMedico )
-            .subscribe( 
-                consultas => { 
-                    this.consultas = this.preparaListaConsultas(consultas)
-                }
-            );
+    setDateNext() {
+        let sDate: string = this.searchDate.value.replace(/-/g, "/"); // replace - to /
+        let date = new Date(sDate);
+        date.setDate( date.getDate() + 1);
+        sDate = this.formatDate(date);
+        this.getConsultasData(sDate);
+    }; // setDateNext()
 
-    }; // fim setSearchDate()
+    setDatePrior() {
+        let sDate: string = this.searchDate.value.replace(/-/g, "/"); // replace - to /
+        let date = new Date(sDate);
+        date.setDate( date.getDate() - 1);
+        sDate = this.formatDate(date);
+        this.getConsultasData(sDate);
+    }; // setDatePrior()
 
-    preparaListaConsultas(consultas: Consulta[]) {
-        var horasDiarias = [
-            '08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30',
-            '12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30',
-            '16:00','16:30','17:00','17:30','18:00'
+    preparaListaConsultas(pData: string, consultas: Consulta[]) {
+        const horasDiarias = [
+            '08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00',
+            '13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00' 
         ];
         var i = 0;
-        var l = consultas.length-1;
+        var resp: Consulta[]=[];
         
-        var resp = horasDiarias.map( el => {
-            var auxHoraConsulta = '';
-            if( i > l )
-                auxHoraConsulta = '00:00'
-            else
-                auxHoraConsulta = consultas[i].horaConsulta;
-            
-            if(consultas[i] && !this.dataReferencia) {
-                this.dataReferencia = consultas[i].dataConsultaFrm.substr(0,5);
-            }
-
-            if( i > l || el != auxHoraConsulta) {
-                let consulta = new Consulta;
-                consulta.dataConsultaFrm = this.dataReferencia;
-                consulta.horaConsulta = el;
+        horasDiarias.forEach( element => {
+            if( !consultas || i > consultas.length-1 || element != consultas[i].horaConsulta) { // Horario sem consulta
+                let consulta = new Consulta;                                       // Retorna Data, Hora, sem demais dados
+                consulta.dataConsulta = pData;
+                consulta.dataConsultaFrm = pData.substr(8,2)+'-'+pData.substr(5,2);
+                consulta.horaConsulta = element;
                 consulta.nome = '';
-                return consulta;
-            } else {
-                var result = consultas[i];
-                result.dataConsultaFrm = result.dataConsultaFrm.substr(0,5);
-                i++;
-                return result;
+                resp.push(consulta);
+            } else {                        // Horario com consulta
+                while (element == consultas[i].horaConsulta) {
+                    var result = consultas[i];  
+                    result.dataConsultaFrm = result.dataConsultaFrm.substr(0,5);
+                    resp.push(result);
+                    i++;
+                    if ( i > consultas.length-1) { break }
+                }
             }
-            return resp;
-        })
-
+        });
+        
         return resp;
-    }
+    }; // preparaListaConsultas(
+
+    formatDate(pDate: Date) {
+        let year = pDate.getFullYear();
+        
+        let month = (1 + pDate.getMonth()).toString();
+        month = month.length > 1 ? month : '0' + month;
+        
+        let day = pDate.getDate().toString();
+        day = day.length > 1 ? day : '0' + day;
+        
+        return year + '-' + month + '-' + day; 
+    }; // formatDate
+
+    getConsultasData(pDate: string) {
+        this.searchDate.setValue( pDate );
+        if(this.idMedicoSelecionado) {
+            this.consultaService.getConsultasData( pDate, this.idMedicoSelecionado.toString() )
+                .subscribe( 
+                    consultas => { 
+                        this.consultas = this.preparaListaConsultas(pDate, consultas)
+                    }
+                );
+        }
+    }; // getConsultasData
+
+    marcarConsulta(consulta) {
+        if(!consulta.nome) {
+            this.router.navigate([
+                '/agenda' + 
+                '/' + this.idPaciente + 
+                '/' + this.idMedicoSelecionado + 
+                '/' + consulta.dataConsulta + 
+                '/' + consulta.horaConsulta + 
+                '/'+ 'new'
+            ]);
+        };
+    };
 }

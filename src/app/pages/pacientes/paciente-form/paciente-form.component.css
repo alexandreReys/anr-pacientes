@@ -16,31 +16,28 @@ input, select, .validation-error {
     font-size:10px;
 }
 
-.icone-size {
-    font-size: 24px;
-}
-
 .input-group-text {
     font-size: 0.7rem;
     line-height: 1.0;
+}
+
+.icone-size {
+    font-size: 24px;
 }
 
 ::-webkit-input-placeholder {
     color: orange;
     font: 10px verdana, arial, sans-serif;
  }
- 
  :-moz-placeholder {
     color: orange;
     font: 10px verdana, arial, sans-serif;
  }
- 
  ::-moz-placeholder {
     color: orange;  
     font: 10px verdana, arial, sans-serif;
  }
- 
- :-ms-input-placeholder {  
+  :-ms-input-placeholder {  
     color: orange;  
     font: 10px verdana, arial, sans-serif;
  }

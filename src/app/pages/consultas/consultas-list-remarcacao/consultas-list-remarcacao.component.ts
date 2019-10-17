@@ -11,13 +11,14 @@ import { Medico } from 'src/app/models/medico.model';
 import { MedicoService } from 'src/app/services/medico.service';
 
 @Component({
-    selector: 'app-consultas-list',
-    templateUrl: './consultas-list.component.html',
-    styleUrls: ['./consultas-list.component.css']
+    selector: 'app-consultas-list-remarcacao',
+    templateUrl: './consultas-list-remarcacao.component.html',
+    styleUrls: ['./consultas-list-remarcacao.component.css']
 })
-export class ConsultasListComponent implements OnInit {
+export class ConsultasListRemarcacaoComponent implements OnInit {
 
-    // searchBarState = 'hidden';
+    navigateTo: string = '';
+
     searchForm: FormGroup;
     searchIdMedico: FormControl;
     searchDate: FormControl;
@@ -25,9 +26,8 @@ export class ConsultasListComponent implements OnInit {
     consulta: Consulta;
     consultas: Consulta[]=[];
 
-    medico: Medico;
     medicos: Medico[]=[];
-    idMedicoSelecionado: number = 0;
+    idMedicoSelecionado: string = '';
     nomeMedico: string = '';
 
     constructor(
@@ -40,52 +40,45 @@ export class ConsultasListComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.idMedicoSelecionado = Number( this.route.snapshot.url[0] );
-        if(!this.idMedicoSelecionado) {
-            this.idMedicoSelecionado = Number( this.loginService.user.idFuncionarioUsuario );
-        }
+        // this.navigateTo = this.route.snapshot.params['to'] || '/';
+        console.log(this.route.snapshot.params['to']);
+
+
+
+        this.idMedicoSelecionado = this.route.snapshot.url[0].toString();
 
         this.searchDate = this.formBuilder.control('');
         this.searchIdMedico = this.formBuilder.control('');
-
-        this.searchForm = this.formBuilder.group({ 
+        
+        this.searchForm = this.formBuilder.group({
             searchDate: this.searchDate,
             searchIdMedico: this.searchIdMedico
-
         });
-        
-        // this.idMedicoSelecionado = `${this.loginService.user.idFuncionarioUsuario}`;
-        // if(this.idMedicoSelecionado === '0') { this.idMedicoSelecionado = null }
-        // this.medicoService.getMedicoById(this.idMedicoSelecionado)
-        //     .subscribe( medicos => { 
-        //         this.medico = medicos[0]; 
-        //         if(this.medico)
-        //             this.nomeMedico = this.medico.nomeMedico
-        //         else
-        //             this.nomeMedico = 'Todos';
-        //         this.setDateToday();
-        //     }
-        // );
 
         this.medicoService.getMedicos()
             .subscribe( medicos => {
                 this.medicos = medicos;
                 if(!this.idMedicoSelecionado) {
-                    this.idMedicoSelecionado = Number( medicos[0].idMedico );
+                    this.idMedicoSelecionado = medicos[0].idMedico.toString();
                 };
                 
                 this.searchForm.controls['searchIdMedico'].setValue(this.idMedicoSelecionado);
                 this.setDateToday();
             }
-        );        
+        );
+    
+    }; // ngOnInit() 
 
-    };  // fim ngOnInit()
+    btVoltar() {
+        // this.router.navigate(['/consulta/'+ this.idMedicoSelecionado + '/lista']);
+        history.back();
+    }
 
-    medicosChanged(ev: number) {
+    medicosChanged(ev: string) {
         this.idMedicoSelecionado = ev;
         this.setDateToday();
     }
-
+    
     procuraData(todos?: boolean) {
         this.consulta = new Consulta();
         this.consulta.dataConsulta = 'Processando ...';
@@ -101,12 +94,12 @@ export class ConsultasListComponent implements OnInit {
                 this.consultaService.getConsultas(null, this.idMedicoSelecionado.toString())
                     .subscribe( consultas => this.consultas = consultas );
         }
-    }; // fim procuraData()
-    
+    }; // procuraData()
+
     setDateToday() {
         let sDate: string = this.formatDate(new Date);
         this.getConsultasData(sDate);
-    }; // fim setDateHoje()
+    }; // setDateHoje()
 
     setDateNext() {
         let sDate: string = this.searchDate.value.replace(/-/g, "/"); // replace - to /
@@ -114,7 +107,7 @@ export class ConsultasListComponent implements OnInit {
         date.setDate( date.getDate() + 1);
         sDate = this.formatDate(date);
         this.getConsultasData(sDate);
-    }; // fim setDateNext()
+    }; // setDateNext()
 
     setDatePrior() {
         let sDate: string = this.searchDate.value.replace(/-/g, "/"); // replace - to /
@@ -122,8 +115,8 @@ export class ConsultasListComponent implements OnInit {
         date.setDate( date.getDate() - 1);
         sDate = this.formatDate(date);
         this.getConsultasData(sDate);
-    }; // fim setDatePrior()   
-    
+    }; // setDatePrior()
+
     preparaListaConsultas(pData: string, consultas: Consulta[]) {
         const horasDiarias = [
             '08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00',
@@ -136,7 +129,7 @@ export class ConsultasListComponent implements OnInit {
             if( !consultas || i > consultas.length-1 || element != consultas[i].horaConsulta) { // Horario sem consulta
                 let consulta = new Consulta;                                       // Retorna Data, Hora, sem demais dados
                 consulta.dataConsulta = pData;
-                consulta.dataConsultaFrm = pData.substr(8,2)+'-'+pData.substr(5,2);     
+                consulta.dataConsultaFrm = pData.substr(8,2)+'-'+pData.substr(5,2);
                 consulta.horaConsulta = element;
                 consulta.nome = '';
                 resp.push(consulta);
@@ -175,7 +168,7 @@ export class ConsultasListComponent implements OnInit {
                         this.consultas = this.preparaListaConsultas(pDate, consultas)
                     }
                 );
-        };
+        }
     }; // getConsultasData
 
 
@@ -185,37 +178,37 @@ export class ConsultasListComponent implements OnInit {
 
 
 
-    edit(consulta: Consulta) {
-        if(consulta.nome) {
-            this.consultaService.setDados(consulta);
-            this.router.navigate(['/consulta/' + consulta.idConsulta + '/edit']);
-        }
-    }; // fim edit
+    marcarConsulta(consulta) {
+        if(!consulta.nome) {
+            this.router.navigate([
+                '/agenda' + 
+                '/' + consulta.idPaciente + 
+                '/' + this.idMedicoSelecionado + 
+                '/' + consulta.dataConsulta + 
+                '/' + consulta.horaConsulta + 
+                '/'+ 'new'
+            ]);
+        };
+    };
 
-    remarcacao(consulta: Consulta) {
-        if(consulta.nome) {
-            this.consultaService.setDados(consulta);
-            this.router.navigate(['/consulta/' + consulta.idMedicoConsulta + '/remarcacao']);
-        }
-    }; // fim remarcacao    
+    remarcarConsulta(consulta) {
+        if(!consulta.nome) {
+            
+            this.consultaService.subject.subscribe( 
+                consultaOriginal => { 
+                    this.consulta = consultaOriginal; 
+                    this.consulta.idMedicoConsulta = Number(this.idMedicoSelecionado);
+                    this.consulta.dataConsulta = consulta.dataConsulta;
+                    this.consulta.horaConsulta = consulta.horaConsulta;
 
-    delete(consulta: Consulta) {
-        const resp: any = this.consultaService.deleteConsulta(consulta);
-        
-        let index = this.consultas.map( (item) => item.idConsulta).indexOf(consulta.idConsulta);
-        this.consultas.splice(index,1);
-    }; // fim delete
+                    this.consultaService.updateConsultaRemarcacao(this.consulta);
+                }
+            );            
+            
+            // this.router.navigate(['/consulta/'+this.idMedicoSelecionado+'/lista']);
+            // this.router.navigate([this.navigateTo]);
 
-    receita(consulta: Consulta) {
-        this.consultaService.setDados(consulta);
-        this.router.navigate(['/consulta/receita']);
-    }; // fim receita
-
-    atestado(consulta: Consulta) {
-        this.consultaService.setDados(consulta);
-        this.router.navigate(['/consulta/atestado']);
-    }; // fim atestado
-
-    // [ngClass]="(consulta.nome=='')?'horarioLivre':'horarioMarcado'" 
-
+            history.back();
+        };
+    };
 }

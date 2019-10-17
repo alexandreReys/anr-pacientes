@@ -8,7 +8,7 @@ import { AgendaFormComponent } from './agenda-form/agenda-form.component';
 const routes: Routes = [
   {path: '', component: AgendaListaPacientesComponent},
   {path: ':id/consulta', component: AgendaListaConsultasComponent},
-  {path: ':id/new', component: AgendaFormComponent}
+  {path: ':id/:idMedico/:data/:hora/new', component: AgendaFormComponent}
 ];
 
 @NgModule({

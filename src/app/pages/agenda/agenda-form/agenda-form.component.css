@@ -9,14 +9,6 @@ input {
     padding: .375rem .45rem;
 }
 
-input, select, textarea, .validation-error {
-    font-size:10px;
-}
-
-.uppercase {
-    text-transform: uppercase;
-}
-
 .input-group-text {
     font-size: 0.7rem;
     line-height: 1.0;

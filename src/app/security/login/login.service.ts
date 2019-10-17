@@ -23,7 +23,11 @@ export class LoginService{
         private notificationService: NotificationService
     ) {
         this.router.events.pipe( filter(e => e instanceof NavigationEnd) )
-                          .subscribe( (e:NavigationEnd) => this.lastUrl = e.url);
+                            .subscribe( 
+                                (e:NavigationEnd) => {
+                                    this.lastUrl = e.url;
+                                }
+                            );
     };
 
     isLoggedIn(): boolean {
@@ -47,6 +51,7 @@ export class LoginService{
     };
 
     handleLogin(path: string = this.lastUrl) {
+        if(path == '/consulta') {path = '/consulta/0/lista'}; // Não sei de onde vem "/consulta"
         this.router.navigate(['/login', btoa(path)])
     };
 }

@@ -27,66 +27,25 @@
         </div>
     </div>
 
-
-    <!-- SELEÇÃO DE MEDICO PARA O AGENDAMENTO -->
-    <!-- <div class="row mt-4 mb-3">  
-        <div class="col-md-6">
-            <form [formGroup]="formMedico">
-                <h4> Médico(a): </h4>
-                
-                <select class="form-control mt-1 mr-4" formControlName="idMedico" id="idMedico">
-                    <option *ngFor="let medico of medicos" value="{{medico.idMedico}}">{{medico.nomeMedico}}</option>
-                </select>
-                
-                <button class="btn btn-dark mt-3"
-                    (click)="procuraData()" 
-                    [disabled]="!formMedico.valid">
-                    Confirma
-                </button>
-            </form>
-        </div>
-    </div> -->
-
-<!--     
-    {{form.valid}}
-    {{form.value | json}} 
--->    
-
     <form [formGroup]="form">
 
         <div class="card mb-5">
             <div class="card-header"> 
-                <strong class="text-danger">{{contato.nome}}</strong> | Telefone : {{contato.telefone}}
+                <strong>
+                    <span class="text-danger">{{contato.nome}}</span> | Telefone : {{contato.telefone}} <br>
+                    Médico: {{nomeMedico}} <br>
+                    Data / Hora da Consulta: {{dataConsulta}} - {{horaConsulta}}
+                </strong>
             </div>
             <div class="card-body">
-
-<!-- 
+                <!--
                 <input type="hidden" class="form-control" formControlName="idPacienteConsulta" id="idPaciente">
-                <input type="hidden" class="form-control" formControlName="idEmpresaConsulta" id="idPaciente"> 
--->
-
-                <div class="form-row">
-                    <div class="form-group col-md-5">
-                        <label for="idMedicoConsulta">Médico</label>
-                        <select class="form-control mt-1 mr-4" formControlName="idMedicoConsulta" id="idMedicoConsulta">
-                            <option *ngFor="let medico of medicos" value="{{medico.idMedico}}">{{medico.nomeMedico}}</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="dataConsulta">Data</label><br>
-                        <input type="date" class="form-control" formControlName="dataConsulta" id="dataConsulta">
-                    </div>
-
-                    <div class="form-group col-md-3">
-                        <label for="horaConsulta">Hora</label><br>
-                        <input type="time" class="form-control" formControlName="horaConsulta" id="horaConsulta">
-                    </div>
-                </div>
-
+                <input type="hidden" class="form-control" formControlName="idEmpresaConsulta" id="idEmpresa"> 
+                -->
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="queixaPrincipalConsulta">Queixa Principal</label>
-                        <input type="text" class="form-control" formControlName="queixaPrincipalConsulta" id="queixaPrincipalConsulta">
+                        <input type="text" class="form-control font-size12" formControlName="queixaPrincipalConsulta" id="queixaPrincipalConsulta">
                     </div>
                 </div>
 
@@ -99,7 +58,9 @@
                 </button>
             </div>
         </div>
-
-
+        <!--
+        {{form.valid}}
+        {{form.value | json}} 
+        -->
     </form>
 </div>

@@ -12,6 +12,8 @@ import { Medico } from 'src/app/models/medico.model';
 import { Empresa } from 'src/app/models/empresa.model';
 
 import * as utils from "src/app/shared/utils.js";
+import { Router } from '@angular/router';
+
 
 @Component({
     selector: 'app-consultas-print-atestado',
@@ -48,7 +50,8 @@ export class ConsultasPrintAtestadoComponent implements OnInit {
         private consultaService: ConsultaService,
         private contatoService: ContatoService,
         private empresaService: EmpresaService,
-        private medicoService: MedicoService
+        private medicoService: MedicoService,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -96,6 +99,10 @@ export class ConsultasPrintAtestadoComponent implements OnInit {
         );
     }
 
+    btVoltar() {
+        this.router.navigate(['/consulta/'+ this.consulta.idMedicoConsulta + '/lista']);
+    }
+
     retornaHoraFinal(pHoraIni: string) {
         var sHora: string = pHoraIni.substr(0,2);
         var iHora: number = parseInt(sHora);
@@ -141,4 +148,5 @@ export class ConsultasPrintAtestadoComponent implements OnInit {
         // WinPrint.print();
         // WinPrint.close();
     }
+
 }

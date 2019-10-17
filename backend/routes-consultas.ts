@@ -121,7 +121,7 @@ router.get('/paciente/:idPacienteConsulta', (req, res) => {
                     "ON awConsultas.idMedicoConsulta = md.idMedico " +
             "WHERE (idEmpresaConsulta = " + req.query.idEmpresa + ") "+
                     "AND (idPacienteConsulta = " + "'" + idPacienteConsulta + "') " + 
-            "ORDER BY idConsulta";
+            "ORDER BY dataConsulta DESC, horaConsulta DESC";
 
     connection.query(sql, 
         function(err, rows) {
@@ -172,6 +172,20 @@ router.put('/', (req, res) => {
                             c.cabecaConsulta, c.historiaDoencaAtualConsulta, c.exameFisicoConsulta,
                             c.hipoteseDiagnosticaConsulta, c.condutaConsulta, c.prescricaoConsulta, 
                             c.idConsulta ], 
+        function(err, rows, fields) {
+            if (err) throw err;
+            res.json(rows);
+        }
+    );
+});
+
+router.put('/remarcacao', (req, res) => {
+    var c = req.body;
+    var sql =   'update awConsultas set ' + 
+                    'idMedicoConsulta=?, dataConsulta=?, horaConsulta=? ' +
+                'where idConsulta=?';
+
+    connection.query(sql, [ c.idMedicoConsulta, c.dataConsulta, c.horaConsulta, c.idConsulta ], 
         function(err, rows, fields) {
             if (err) throw err;
             res.json(rows);

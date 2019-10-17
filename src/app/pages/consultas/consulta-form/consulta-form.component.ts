@@ -40,6 +40,10 @@ export class ConsultaFormComponent implements OnInit {
     this.loadConsulta();
   }
 
+  btVoltar() {
+    this.router.navigate(['/consulta/'+ this.consulta.idMedicoConsulta + '/lista']);
+  }
+
   buildForm() {
     this.form = this.fb.group({
       idConsulta:                   ['', Validators.required ],
@@ -80,7 +84,7 @@ export class ConsultaFormComponent implements OnInit {
 
   submitForm() {
     this.updateConsulta();
-    this.router.navigate(['/consulta']);
+    this.router.navigate(['/consulta/0/lista']);
   };
 
   updateConsulta() {

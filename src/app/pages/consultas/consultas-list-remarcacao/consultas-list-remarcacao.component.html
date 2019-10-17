@@ -4,32 +4,37 @@
     <nav class="mt-3">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a routerLink="/"> Home </a></li>
-            <li class="breadcrumb-item"><a routerLink="/agenda"> Seleção de paciente </a></li>
-            <li class="breadcrumb-item active"> <strong> Data, médico e horário </strong></li>
+            <li class="breadcrumb-item pointer text-primary"><a (click)="btVoltar()"> Seleção de paciente </a></li>
+            <li class="breadcrumb-item active"> <strong> Data, Médico e Horário para Remarcação de Consulta </strong></li>
         </ol>
     </nav>
 
-    <!-- TITULO E BOTÃO DE AGENDAMENTO -->
+    <!-- TITULO -->
     <div class="row mt-3">
-        <div class="col-md-9">
+        <div class="col-8">
             <h5><i class="fa fa-laptop-medical text-danger" aria-hidden="true"></i> 
                 Selecione a data, medico e clique em um horário livre
             </h5>
         </div>
-        <div class="col-md-3">
-            <a routerLink="/agenda" class="btn bt-sm btn-success font-size12 float-right mt-2">
-                Agendamento
-            </a>
+        <div class="col-4">
+            <div class="float-right">
+                <button class="btn btn-8px mt-2 mr-4" onClick="javascript:window.print()">
+                    <i class="fa fa-print text-primary"></i>
+                </button>
+                <button class="btn btn-10px btn-success mt-2 mr-1" (click)="btVoltar()">
+                    V o l t a r
+                </button>
+            </div>
         </div>
     </div>
 
-    <!-- SELEÇÃO DE DATA PARA LISTA DE CONSULTAS -->
+    <!-- FORM PARA SELEÇÃO DE DATA E MÉDICO -->
     <form [formGroup]="searchForm">
         <div class="form-row input-data">  
             <div class="form-group col-sm-4 col-md-3 col-lg-2 mt-2">
                 <input type="date" class="form-control font-size12 text-bold bg-darkorange" formControlName="searchDate">
             </div>
-            <div class="col-8 mt-1">
+            <div class="col-8 mt-1 botoes-data">
                 <button class="btn btn-sm btn-10px btn-primary mt-2 mr-3"
                     (click)="procuraData()" 
                     [disabled]="!searchForm.valid">
@@ -64,7 +69,9 @@
         <div class="form-row select-medico">  
             <div class="form-group col-sm-8 col-md-7 col-lg-6">
                 <div class="form-group">
-                    <select class="form-control font-size12 text-bold  bg-darkorange" formControlName="searchIdMedico" (change)="medicosChanged($event.target.value)">
+                    <select class="form-control font-size12 text-bold  bg-darkorange" 
+                            formControlName="searchIdMedico" 
+                            (change)="medicosChanged($event.target.value)">
                         <option *ngFor="let medico of medicos" value="{{medico.idMedico}}">
                             {{medico.nomeMedico}}
                         </option>
@@ -80,7 +87,6 @@
             <tr class="bg-darkblue text-light">
                 <th>Data / Hora</th>
                 <th>Paciente</th>
-                <!-- <th>Medico</th> -->
                 <th>Queixa Principal</th>
                 <th>Historia Doença Atual</th>
             </tr>
@@ -92,11 +98,10 @@
                     [ngClass]="{'consultaEfetuada': consulta.nome != '' && consulta.condutaConsulta != null,
                                 'horarioLivre': consulta.nome == '', 
                                 'horarioMarcado': consulta.nome != ''}"
-                    (click)="marcarConsulta(consulta)">
+                    (click)="remarcarConsulta(consulta)">
 
                 <td><strong>{{consulta.dataConsultaFrm}} - {{consulta.horaConsulta}}</strong></td>
                 <td><strong>{{consulta.nome}}</strong></td>
-                <!-- <td>{{consulta.nomeMedico}}</td> -->
                 <td>{{consulta.queixaPrincipalConsulta}}</td>
                 <td>{{consulta.historiaDoencaAtualConsulta}}</td>
             </tr>

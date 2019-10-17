@@ -7,6 +7,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ConsultasRoutingModule } from './consultas-routing.module';
 
 import { ConsultasListComponent } from './consultas-list/consultas-list.component';
+import { ConsultasListRemarcacaoComponent } from './consultas-list-remarcacao/consultas-list-remarcacao.component';
 import { ConsultaFormComponent } from './consulta-form/consulta-form.component';
 import { ConsultasListagemComponent } from './consultas-listagem/consultas-listagem.component';
 import { ConsultasListagemDetComponent } from './consultas-listagem/consultas-listagem-det/consultas-listagem-det.component';
@@ -26,6 +27,7 @@ import { ConsultasPrintAtestadoComponent } from './consultas-print-atestado/cons
     ],
     declarations: [
         ConsultasListComponent, 
+        ConsultasListRemarcacaoComponent, 
         ConsultaFormComponent, 
         ConsultasListagemComponent, 
         ConsultasListagemDetComponent, 

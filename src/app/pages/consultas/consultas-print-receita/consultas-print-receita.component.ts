@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ConsultaService } from 'src/app/services/consulta.service';
 import { ContatoService } from 'src/app/services/contato.service';
@@ -40,7 +41,8 @@ export class ConsultasPrintReceitaComponent implements OnInit {
         private consultaService: ConsultaService,
         private contatoService: ContatoService,
         private empresaService: EmpresaService,
-        private medicoService: MedicoService
+        private medicoService: MedicoService,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -81,6 +83,10 @@ export class ConsultasPrintReceitaComponent implements OnInit {
                         'Telefone: ' + this.empresa.telefoneEmpresa;
                 });
         } );
+    }
+
+    btVoltar() {
+        this.router.navigate(['/consulta/'+ this.consulta.idMedicoConsulta + '/lista']);
     }
 
     imprime() {

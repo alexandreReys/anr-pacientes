@@ -51,7 +51,7 @@
         </thead>
 
         <tbody>
-            <tr *ngFor="let contato of contatos" class="pointer" [routerLink]="[contato.id,'new']">
+            <tr *ngFor="let contato of contatos" class="pointer" [routerLink]="[contato.id,'consulta']">
                 <td><strong>{{contato.nome}}</strong></td>
                 <td>{{contato.telefone}}</td>
                 <td>{{contato.paiNome}}</td>
@@ -59,8 +59,14 @@
                 <td class="widthAcoes">
                     <!-- <a class="fa fa-plus pointer mr-3 text-primary" style="font-size:16px"
                         [routerLink]="[contato.id,'new']"></a> -->
-                    <a class="fa fa-edit pointer text-success" style="font-size:16px"
-                        (click)="editarPaciente(contato)"></a>
+                    <a  class="fas fa-calendar-alt pointer text-primary font-size16 mr-3"
+                        title="Reagendar Consulta"
+                        (click)="abrirHistorico(contato)">
+                    </a>
+                    <a  class="fa fa-edit pointer text-success font-size16"
+                        title="Alterar dados do Paciente"
+                        (click)="editarPaciente(contato)">
+                    </a>
                         <!-- [routerLink]="['/paciente']">  -->
                         <!-- [routerLink]="['/paciente', contato.id, 'edit']">  -->
                 </td>

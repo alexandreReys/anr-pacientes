@@ -15,17 +15,19 @@
                 <th>Medico</th>
                 <th>Queixa Principal</th>
                 <th>História Doença Atual</th>
-                <th>Prescrição</th>
+                <th>Exame Fisico</th>
+                <th>Hipotese Diagnóstica</th>
             </tr>
         </thead>
 
         <tbody>
-            <tr *ngFor="let consulta of consultas">
+            <tr *ngFor="let consulta of consultas" class="pointer" (click)="remarcacao(consulta)">
                 <td><strong>{{consulta.dataConsultaFrm}} {{consulta.horaConsulta}}</strong></td>
                 <td>{{consulta.nomeMedico}}</td>
                 <td>{{consulta.queixaPrincipalConsulta}}</td>
                 <td>{{consulta.historiaDoencaAtualConsulta}}</td>
-                <td>{{consulta.prescricaoConsulta}}</td>
+                <td>{{consulta.exameFisicoConsulta}}</td>
+                <td>{{consulta.hipoteseDiagnosticaConsulta}}</td>
             </tr>
         </tbody>
     </table>
