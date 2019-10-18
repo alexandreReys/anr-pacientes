@@ -41,9 +41,7 @@ export class ConsultasListRemarcacaoComponent implements OnInit {
 
     ngOnInit() {
         // this.navigateTo = this.route.snapshot.params['to'] || '/';
-        console.log(this.route.snapshot.params['to']);
-
-
+        // console.log(this.route.snapshot.params['to']);    undefined ??
 
         this.idMedicoSelecionado = this.route.snapshot.url[0].toString();
 
@@ -117,7 +115,33 @@ export class ConsultasListRemarcacaoComponent implements OnInit {
         this.getConsultasData(sDate);
     }; // setDatePrior()
 
+    formatDate(pDate: Date) {
+        let year = pDate.getFullYear();
+        
+        let month = (1 + pDate.getMonth()).toString();
+        month = month.length > 1 ? month : '0' + month;
+        
+        let day = pDate.getDate().toString();
+        day = day.length > 1 ? day : '0' + day;
+        
+        return year + '-' + month + '-' + day; 
+    }; // formatDate
+
+    getConsultasData(pDate: string) {
+        this.searchDate.setValue( pDate );
+        if(this.idMedicoSelecionado) {
+            this.consultaService.getConsultasData( pDate, this.idMedicoSelecionado.toString() )
+                .subscribe( 
+                    consultas => { 
+                        this.consultas = this.preparaListaConsultas(pDate, consultas)
+                    }
+                );
+        }
+    }; // getConsultasData
+
     preparaListaConsultas(pData: string, consultas: Consulta[]) {
+        console.log('remarcação', consultas);
+
         const horasDiarias = [
             '08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00',
             '13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00' 
@@ -146,31 +170,6 @@ export class ConsultasListRemarcacaoComponent implements OnInit {
         
         return resp;
     }; // preparaListaConsultas(
-
-    formatDate(pDate: Date) {
-        let year = pDate.getFullYear();
-        
-        let month = (1 + pDate.getMonth()).toString();
-        month = month.length > 1 ? month : '0' + month;
-        
-        let day = pDate.getDate().toString();
-        day = day.length > 1 ? day : '0' + day;
-        
-        return year + '-' + month + '-' + day; 
-    }; // formatDate
-
-    getConsultasData(pDate: string) {
-        this.searchDate.setValue( pDate );
-        if(this.idMedicoSelecionado) {
-            this.consultaService.getConsultasData( pDate, this.idMedicoSelecionado.toString() )
-                .subscribe( 
-                    consultas => { 
-                        this.consultas = this.preparaListaConsultas(pDate, consultas)
-                    }
-                );
-        }
-    }; // getConsultasData
-
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

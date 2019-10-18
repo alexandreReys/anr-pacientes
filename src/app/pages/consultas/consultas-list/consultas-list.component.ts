@@ -194,6 +194,8 @@ export class ConsultasListComponent implements OnInit {
 
     remarcacao(consulta: Consulta) {
         if(consulta.nome) {
+            console.log('consultas list', consulta);
+            
             this.consultaService.setDados(consulta);
             this.router.navigate(['/consulta/' + consulta.idMedicoConsulta + '/remarcacao']);
         }
