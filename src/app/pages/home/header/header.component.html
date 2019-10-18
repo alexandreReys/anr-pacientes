@@ -13,7 +13,7 @@
         <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
             <ul class="navbar-nav mr-auto">
         
-                <li *ngIf="isLoggedIn(); else notLoggedIn" class="nav-item dropdown">
+                <li *ngIf="isLoggedIn()" class="nav-item dropdown">
                     <a class="nav-link menu-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         Cadastros
                     </a>
@@ -31,7 +31,7 @@
                     </div>
                 </li>
 
-                <li *ngIf="isLoggedIn(); else notLoggedIn" class="nav-item dropdown">
+                <li *ngIf="isLoggedIn()" class="nav-item dropdown">
                     <a class="nav-link menu-item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         Consultas
                     </a>
