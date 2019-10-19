@@ -39,7 +39,7 @@ export class ConsultasHistoricoComponent implements OnInit {
 
     remarcacao(consulta: Consulta) {
         if(consulta.nome) {
-            this.consultaService.setDados(consulta);
+            this.consultaService.setDados2(consulta);
             this.router.navigate(['/consulta/' + consulta.idMedicoConsulta + '/remarcacao']);
         }
     }; // fim remarcacao  

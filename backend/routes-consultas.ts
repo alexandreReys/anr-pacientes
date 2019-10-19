@@ -76,12 +76,11 @@ router.get('/data/:dataConsulta', (req, res) => {
     };
 
     let sql =   "SELECT " + 
-                    "md.nomeMedico, idConsulta, idPacienteConsulta, idEmpresaConsulta, idMedicoConsulta, " +
-                    "dataConsulta, mid(horaConsulta,1,5) horaConsulta, queixaPrincipalConsulta, pesoConsulta, " + 
-                    "alturaConsulta, cabecaConsulta, historiaDoencaAtualConsulta,prescricaoConsulta, " + 
-                    "exameFisicoConsulta, hipoteseDiagnosticaConsulta, condutaConsulta, " +
-                    "Date_Format(dataConsulta,'%d/%m/%Y') dataConsultaFrm, " +
-                    "ct.nome,  ct.maeNome, ct.paiNome, ct.telefone " +
+                    "Date_Format(dataConsulta,'%d/%m/%Y') dataConsultaFrm, mid(horaConsulta,1,5) horaConsultaFrm, horaConsulta, " +
+                    "dataConsulta, idConsulta, idPacienteConsulta, idEmpresaConsulta, idMedicoConsulta, " +
+                    "queixaPrincipalConsulta, pesoConsulta, alturaConsulta, cabecaConsulta, historiaDoencaAtualConsulta, " + 
+                    "prescricaoConsulta, exameFisicoConsulta, hipoteseDiagnosticaConsulta, condutaConsulta, " + 
+                    "ct.nome,  ct.maeNome, ct.paiNome, ct.telefone, md.nomeMedico " +
                 "FROM awConsultas " +
                     "INNER JOIN awContatos ct " +
                         "ON awConsultas.idPacienteConsulta = ct.id " +

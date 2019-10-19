@@ -28,11 +28,15 @@ export class ConsultaService {
     private httpClient: HttpClient, 
     private loginService: LoginService ) { }
 
-  setDados(consulta: Consulta) {
-    this.subject.next(consulta);
-  }
-
-  getConsultas(search?, idMedico?: string): Observable<Consulta[]> {
+    setDados(consulta: Consulta) {
+      this.subject.next(consulta);
+    }
+  
+    setDados2(consulta: Consulta) {
+      this.consulta = consulta;
+    }
+  
+      getConsultas(search?, idMedico?: string): Observable<Consulta[]> {
     let idEmpresa = this.loginService.user.idEmpresaUsuario;
     let urlGet: string;
     if(search){ 

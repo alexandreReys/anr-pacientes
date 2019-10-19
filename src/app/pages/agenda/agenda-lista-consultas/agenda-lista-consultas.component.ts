@@ -51,19 +51,6 @@ export class AgendaListaConsultasComponent implements OnInit {
             searchDate: this.searchDate
         });
 
-        // this.idMedico = `${this.loginService.user.idFuncionarioUsuario}`;
-        // if(this.idMedico === '0') { this.idMedico = null }
-        //
-        // this.medicoService.getMedicoById(this.idMedico)
-        //     .subscribe( medicos => { 
-        //         this.medico = medicos[0]; 
-        //         if(this.medico)
-        //             this.nomeMedico = this.medico.nomeMedico
-        //         else
-        //             this.nomeMedico = 'Todos';
-        //     }
-        // );
-
         this.medicoService.getMedicos()
             .subscribe( medicos => {
                 this.medicos = medicos;

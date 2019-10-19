@@ -15,6 +15,7 @@ export class Consulta{
     condutaConsulta: string;
     prescricaoConsulta: string;
     dataConsultaFrm: string;
+    horaConsultaFrm: string;
     nome: string;
     nomeMedico: string;
   }
