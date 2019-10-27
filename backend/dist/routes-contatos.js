@@ -3,6 +3,15 @@ exports.__esModule = true;
 var express = require("express");
 var connection = require('./mysql-connection');
 var router = express.Router();
+router.use('/', function (req, res, next) {
+    if (!req.query.idEmpresa) {
+        res.json([]);
+    }
+    else {
+        next();
+    }
+    ;
+});
 router.get('/', function (req, res) {
     var sql = "SELECT " +
         "id, idEmpresa, codigo, nome, telefone, endereco, " +
@@ -14,8 +23,15 @@ router.get('/', function (req, res) {
         "WHERE (idEmpresa = " + req.query.idEmpresa + ") " +
         "ORDER BY nome";
     connection.query(sql, function (err, rows, fields) {
-        if (err)
-            throw err;
+        if (err) {
+            if (err.code == 'ECONNRESET') {
+                console.log('/contatos', err.code);
+                res.status(400).send({ error: "ECONNRESET" });
+            }
+            else {
+                throw err;
+            }
+        }
         res.json(rows);
     });
 });

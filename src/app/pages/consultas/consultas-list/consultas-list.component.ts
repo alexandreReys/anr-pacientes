@@ -76,17 +76,14 @@ export class ConsultasListComponent implements OnInit {
     procuraData(todos?: boolean) {
         this.consulta = new Consulta();
         this.consulta.dataConsulta = 'Processando ...';
-        if(todos) {
+        let selectedDate = this.searchDate.value;
+        if(todos || !selectedDate) {
             this.consultaService.getConsultas(null, this.idMedicoSelecionado.toString())
                 .subscribe( consultas => this.consultas = consultas );
         } else {
-            let selectedDate = this.searchDate.value;
             if(selectedDate)
                 this.consultaService.getConsultasData(selectedDate, this.idMedicoSelecionado.toString())
                     .subscribe( consultas => this.consultas = this.preparaListaConsultas(selectedDate, consultas) );
-            else
-                this.consultaService.getConsultas(null, this.idMedicoSelecionado.toString())
-                    .subscribe( consultas => this.consultas = consultas );
         }
     }; // fim procuraData()
     
@@ -167,11 +164,7 @@ export class ConsultasListComponent implements OnInit {
     }; // formatDate
 
 
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 
     edit(consulta: Consulta) {

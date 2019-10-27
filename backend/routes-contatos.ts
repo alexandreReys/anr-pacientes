@@ -1,27 +1,39 @@
 import * as express from 'express';
+import { nextTick } from 'q';
 
 const connection = require('./mysql-connection');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    let sql =   "SELECT "+
-                    "id, idEmpresa, codigo, nome, telefone, endereco, "+
-                    "numero, complemento, bairro, cidade, estado, cep, "+
-                    "paiNome, paiTelefone, paiProfissao, maeNome, maeTelefone, "+
-                    "maeProfissao, Date_Format(dataNasc,'%d/%m/%Y') dataNasc, "+
-                    "sexo, email, certidaoNasc "+
-                "FROM awContatos "+
-                "WHERE (idEmpresa = " + req.query.idEmpresa + ") "+
-                "ORDER BY nome";
-    connection.query(sql, 
-        function(err, rows, fields) {
-            if (err) throw err;
-            res.json(rows);
-        }
-    );
+router.use('/', (req, res, next) => {
+    if (!req.query.idEmpresa) { res.json([]) } else { next() };
 });
 
+router.get('/', (req, res) => {
+    let sql =
+        "SELECT "+
+            "id, idEmpresa, codigo, nome, telefone, endereco, "+
+            "numero, complemento, bairro, cidade, estado, cep, "+
+            "paiNome, paiTelefone, paiProfissao, maeNome, maeTelefone, "+
+            "maeProfissao, Date_Format(dataNasc,'%d/%m/%Y') dataNasc, "+
+            "sexo, email, certidaoNasc "+
+        "FROM awContatos "+
+        "WHERE (idEmpresa = " + req.query.idEmpresa + ") "+
+        "ORDER BY nome";
+
+    connection.query(sql, function(err, rows, fields) {
+        if (err) {
+            if (err.code == 'ECONNRESET') {
+                console.log('/contatos', err.code);
+                res.status(400).send({error: "ECONNRESET"});
+            } else {
+                throw err;
+            }
+        }
+        res.json(rows);
+    });
+});
+    
 router.get('/:nome', (req, res) => {
     let sql =   "SELECT  "+
                     "id, idEmpresa, codigo, nome, telefone, endereco, "+
@@ -33,7 +45,6 @@ router.get('/:nome', (req, res) => {
                 "WHERE (idEmpresa = " + req.query.idEmpresa + ") "+
                   "AND (nome LIKE " + "'%" + req.params.nome + "%') "+ 
                 "ORDER BY nome";
-
     connection.query(sql, 
       function(err, rows) {
         if (err) throw err;

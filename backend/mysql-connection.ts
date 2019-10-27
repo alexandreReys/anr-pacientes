@@ -5,10 +5,23 @@ const connection = mysql.createPool({
 	connectTimeout : 60 * 60 * 1000, 
 	acquireTimeout : 60 * 60 * 1000, 
 	timeout : 60 * 60 * 1000, 
-	host     : process.env.db_host_anrpac,  // Variavel Ambiental
-	user     : process.env.db_user_anrpac,  // Variavel Ambiental
-	password : process.env.db_pass_anrpac,  // Variavel Ambiental
-	database : process.env.db_datab_anrpac   // Variavel Ambiental
+	host     : process.env.atendweb_db_host,  // Variavel Ambiental
+	port     : process.env.atendweb_db_port,  // Variavel Ambiental
+	user     : process.env.atendweb_db_user,  // Variavel Ambiental
+	password : process.env.atendweb_db_pass,  // Variavel Ambiental
+	database : process.env.atendweb_db_datab  // Variavel Ambiental
+	
+	// host     : '200.170.88.142',
+	// port     : 3306,
+	// user     : 'anrsiste3712',
+	// password : '34ob47DR*',
+	// database : 'anrsistemas4'
+
+	// host     : 'mysql669.umbler.com',
+	// port     : 41890,
+	// user     : 'atendwebumbl-01',
+	// password : '/4nHr4U3vWx.+',
+	// database : 'atendweb-umbl-01'
 });
 
 module.exports = connection;

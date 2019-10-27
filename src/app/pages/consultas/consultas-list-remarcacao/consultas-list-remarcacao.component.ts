@@ -118,22 +118,18 @@ export class ConsultasListRemarcacaoComponent implements OnInit {
     }; // preparaListaConsultas(
 
 
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
  
     btVoltar() {
         // this.router.navigate(['/consulta/'+ this.idMedicoSelecionado + '/lista']);
         history.back();
-    }
+    } // btVoltar
 
     medicosChanged(ev: string) {
         this.idMedicoSelecionado = ev;
         this.setDateToday();
-    }
+    } // medicosChanged
 
     procuraData(todos?: boolean) {
         this.consulta = new Consulta();
@@ -199,27 +195,19 @@ export class ConsultasListRemarcacaoComponent implements OnInit {
 
     remarcarConsulta(consulta) {
         if(!consulta.nome) {
-            
-            // this.consultaService.subject.subscribe(                      Alterado para setDados2 em 18-10-2019
-            //     consultaOriginal => { 
-            //         this.consulta = consultaOriginal; 
-            //         this.consulta.idMedicoConsulta = Number(this.idMedicoSelecionado);
-            //         this.consulta.dataConsulta = consulta.dataConsulta;
-            //         this.consulta.horaConsulta = consulta.horaConsulta;
-            //         this.consultaService.updateConsultaRemarcacao(this.consulta);
-            //     }
-            // );
+            // this.consultaService.subject.subscribe( r => { this.consulta = r); Alterado para setDados2 em 18-10-2019
 
-            this.consulta = this.consultaService.consulta; // Hora antes de remarcar
+            this.consulta = this.consultaService.consulta; // consulta/hora antes de remarcar
+
             this.consulta.idMedicoConsulta = Number(this.idMedicoSelecionado);
             this.consulta.dataConsulta = consulta.dataConsulta;
             this.consulta.horaConsulta = consulta.horaConsulta;
             this.consultaService.updateConsultaRemarcacao(this.consulta);
 
+            history.back();
+
             // this.router.navigate(['/consulta/'+this.idMedicoSelecionado+'/lista']);
             // this.router.navigate([this.navigateTo]);
-
-            history.back();
         };
     };
 }
