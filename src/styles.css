@@ -39,7 +39,6 @@ body {
 
 .text-lineBreak { white-space: pre-wrap }
 .text-bold { font-weight: bold }
-.font-bold { font-weight: bold }
 .uppercase { text-transform: uppercase }
 
 .font-size36 { font-size: 36px; }
