@@ -29,7 +29,7 @@
     "angular-imask": "^5.1.1",
     "core-js": "^2.5.4",
     "currency-formatter": "^1.5.3",
-    "lodash": "^4.17.14",
+    "lodash": "^4.17.21",
     "mysql": "^2.17.1",
     "normalize-port": "^1.0.0",
     "primeicons": "^1.0.0",
